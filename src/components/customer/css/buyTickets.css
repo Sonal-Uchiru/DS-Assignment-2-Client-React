@@ -32,10 +32,16 @@
     text-transform: none;
     border-radius: 5px;
     font-size: 20px;
-
     width: 150px;
     display: inline-block;
     text-align: center;
+    border: none;
+    height: 48px;
+}
+
+.buyTicket .btn5:hover {
+    background-color: #ECB365;
+    color: #04293A;
 }
 
 .buyTicket .btn6 {
@@ -47,9 +53,17 @@
     font-size: 20px;
     margin-right: 50px;
     width: 150px;
+    height: 48px;
     display: inline-block;
     text-align: center;
+    border: none;
 }
+
+.buyTicket .btn6:hover {
+    background-color: #ECB365;
+    color: #04293A;
+}
+
 
 .buyTicket .closebtn {
     border: none;
