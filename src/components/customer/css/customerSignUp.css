@@ -1,0 +1,190 @@
+.CusRegister .container {
+
+    border: 2px solid #041C32;
+    margin-top: 40px;
+    width: 600px;
+    padding: 30px 60px 20px;
+    border-radius: 5px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.CusRegister .sign {
+
+    color: #04293A;
+    font-weight: bold;
+}
+
+.CusRegister select {
+    width: 477px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #041C32;
+}
+
+.CusRegister input {
+
+    border: 1px solid #041C32;
+}
+
+.CusRegister label {
+
+    color: #064663;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.CusRegister .signUp {
+    background-color: #04293A;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    font-size: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 68%;
+    margin-top: 40px;
+}
+
+.CusRegister .signUp:hover {
+    color: #041C32;
+    background-color: #ECB365;
+}
+
+.CusRegister #acc {
+
+    color: #064663;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.CusRegister #clickme {
+    color: #ECB365;
+    text-decoration: underline;
+}
+
+.CusRegister #clickme:hover {
+    color: #041C32;
+}
+
+@media screen and (max-width: 768px) {
+    .CusRegister select {
+        width: 415px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .CusRegister select {
+        width: 477px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+
+    .CusRegister .container {
+        width: 520px;
+        padding-left: 40px;
+        padding-right: 40px;
+
+    }
+
+    .CusRegister select {
+        width: 435px;
+    }
+}
+
+@media screen and (max-width: 525px) {
+
+    .CusRegister .container {
+        width: 480px;
+        padding-left: 30px;
+        padding-right: 30px;
+
+    }
+
+    .CusRegister select {
+        width: 415px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .CusRegister .container {
+        width: 400px;
+        padding-left: 20px;
+        padding-right: 20px;
+
+    }
+
+    .CusRegister select {
+        width: 355px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .CusRegister .container {
+        width: 350px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+    .CusRegister select {
+        width: 325px;
+    }
+
+}
+
+
+@media screen and (max-width: 351px) {
+
+    .CusRegister .container {
+        width: 330px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+    .CusRegister select {
+        width: 305px;
+    }
+
+}
+
+
+@media screen and (max-width: 351px) {
+
+    .CusRegister .container {
+        width: 290px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+    .CusRegister select {
+        width: 265px;
+    }
+
+}
+
+@media screen and (max-width: 292px) {
+
+    .CusRegister .container {
+        width: 260px;
+        padding-left: 10px;
+        padding-right: 10px;
+
+    }
+
+    .CusRegister select {
+        width: 235px;
+    }
+
+}
