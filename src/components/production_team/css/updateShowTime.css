@@ -94,8 +94,16 @@
 .updateShow .rating {
 
     font-weight: bold;
-    color: #ECB365;
+    color: #04293A;
     margin-top: -15px;
+}
+.updateShow .closebtn{
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 28px;
+    color: gray;
 }
 
 .updateShow .btn5 {
@@ -214,8 +222,8 @@
 
         font-size: 12px;
         margin-top: -9px;
-    }
 
+    }
 
 }
 

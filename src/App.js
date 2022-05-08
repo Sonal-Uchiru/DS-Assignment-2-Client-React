@@ -5,6 +5,7 @@ import CustomerSignUp from "./components/customer/pages/customerSignUp";
 import AddNewShowTime from "./components/production_team/modals/addNewShowTime";
 import UpdateShowTime from "./components/production_team/modals/updateShowTime";
 import AddMovie from "./components/production_team/modals/addMovie";
+import UpdateMovie from "./components/production_team/modals/updateMovie";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <Route exact path="/addNewShowTime" element={<AddNewShowTime/>}/>
                 <Route exact path="/updateShowTime" element={<UpdateShowTime/>}/>
                 <Route exact path="/addMovie" element={<AddMovie/>}/>
+                <Route exact path="/updateMovie" element={<UpdateMovie/>}/>
             </Routes>
         </Router>
     );

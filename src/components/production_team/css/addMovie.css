@@ -43,6 +43,15 @@
 
 }
 
+.addMov .closebtn{
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 28px;
+    color: gray;
+}
+
 .addMov .box {
     width: 150px;
     height: 150px;

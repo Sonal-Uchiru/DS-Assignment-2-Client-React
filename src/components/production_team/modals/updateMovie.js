@@ -1,20 +1,23 @@
 import React, {useState} from "react";
 import axios from "axios";
-import "./../css/addMovie.css"
+import "./../css/updateMovie.css"
 
-export default function AddMovie() {
+export default function UpdateMovie() {
 
     return (
-        <div className="addMov">
+        <div className="UpdateMov">
+
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 Launch demo modal
             </button>
+
+
             <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered" role="document">
                     <div className="modal-content">
                         <div className="modal-header border-0">
-                            <h2 className="modal-title" id="exampleModalLabel">Add Movie</h2>
+                            <h2 className="modal-title" id="exampleModalLabel">Update Movie</h2>
                             <button type="button" className="closebtn" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -26,17 +29,19 @@ export default function AddMovie() {
                                 <form>
 
                                     <span>
+
                                         <center>
                                         <div className="box">
                                             <img className="z-depth-2 Img1" alt="100x100" src="./../images/avatar.webp"
                                                  data-holder-rendered="true"/>
                                         </div>
                                         </center>
+
                                         <div className="image-upload">
-                                        <label for="file-input">
-                                       <img src="./../images/editing.png" className="Img2" id="btn4"/>
-                                        </label>
-                                        <input id="file-input" type="file"/>
+                                            <label for="file-input">
+                                                <img src="./../images/editing.png" className="Img2" id="btn4"/>
+                                            </label>
+                                            <input id="file-input" type="file"/>
                                         </div>
                                     </span>
                                     <br/>
@@ -53,7 +58,7 @@ export default function AddMovie() {
 
                                     <div className="mb-3">
                                         <label for="rating" className="form-label allselect">Ratings</label><br/>
-                                        <select className="form-select" name="rating" id="rating">
+                                        <select name="rating" id="rating" className="form-select allselect">
                                             <option value="">Select the Movie from IMDB</option>
                                             <option value="batman">The Batman</option>
                                             <option value="sonic">Sonic the Hedgehog 2</option>
@@ -63,7 +68,7 @@ export default function AddMovie() {
 
                                     <div className="mb-3">
                                         <label for="language" className="form-label allselect">Language</label><br/>
-                                        <select className="form-select" name="language" id="language">
+                                        <select name="language" className="form-select allselect" id="language">
                                             <option value="">Select Language</option>
                                             <option value="English">English</option>
                                             <option value="Hindi">Hindi</option>
@@ -73,8 +78,8 @@ export default function AddMovie() {
 
                                     <div className="mb-3">
                                         <label for="genre" className="form-label allselect">Genre</label><br/>
-                                        <select className="form-select" name="genre" id="genre">
-                                            <option value="">Select Genre</option>
+                                        <select name="genre" className="form-select allselect" id="genere">
+                                            <option value="" selected>Select Genre</option>
                                             <option value="English">Action</option>
                                             <option value="Hindi">Comedy</option>
                                             <option value="Telugu">Horror</option>
@@ -83,8 +88,8 @@ export default function AddMovie() {
 
                                     <div className="mb-3">
                                         <label for="status" className="form-label allselect">Status</label><br/>
-                                        <select className="form-select" name="status" id="status">
-                                            <option value="">Select Status</option>
+                                        <select name="status" className="form-select allselect" id="status">
+                                            <option value="" selected>Select Status</option>
                                             <option value="Now">Now Showing</option>
                                             <option value="Soon">Coming Soon</option>
                                         </select>
@@ -93,17 +98,20 @@ export default function AddMovie() {
 
                                     <div className="mb-3">
                                         <label for="storyLine" className="form-label">Story Line</label>
-                                        <textarea className="form-control" placeholder="Story Line"
-                                                  id="storyLine"/>
+                                        <textarea className="form-control" placeholder="Story Line" id="storyLine"/>
                                     </div>
+
                                 </form>
                             </div>
+
+
                             <br/>
+
 
                         </div>
                         <div className="modal-footer border-0">
-
-                            <button type="button" className="btn5">Add</button>
+                            <button type="button" className="btn5">Delete</button>
+                            <button type="button" className="btn6">Update</button>
                         </div>
                     </div>
                 </div>

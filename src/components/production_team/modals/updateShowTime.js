@@ -20,7 +20,7 @@ export default function UpdateShowTime() {
                     <div className="modal-content">
                         <div className="modal-header border-0">
                             <h2 className="modal-title" id="exampleModalLabel">Update Show Time</h2>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" className="closebtn" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -39,7 +39,7 @@ export default function UpdateShowTime() {
 
                                     <div className="mb-3">
                                         <label for="movie" className="form-label movie">Movie</label><br/>
-                                        <select name="movie" id="movie" value="Select Movie">
+                                        <select name="movie" id="movie" className="form-select">
                                             <option value="sonic">Sonic the Hedgehog 2</option>
                                             <option value="kfg">K.G.F Chapter 2</option>
                                         </select>
