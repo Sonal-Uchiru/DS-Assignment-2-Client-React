@@ -1,0 +1,164 @@
+.addMov .modal-title {
+
+    font-weight: bold;
+    color: #04293A;
+}
+
+.addMov input {
+
+    border: 1px solid #041C32;
+}
+
+.addMov textarea {
+
+    border: 1px solid #041C32;
+}
+
+.addMov label {
+
+    color: #064663;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+
+.addMov .allselect {
+    /* wrapper style */
+    position: relative;
+    display: block;
+    max-width: 438px;
+    min-width: 180px;
+    margin: 0 auto;
+
+}
+
+.addMov select {
+    margin-top: -15px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid #041C32;
+
+}
+
+.addMov .box {
+    width: 150px;
+    height: 150px;
+}
+
+
+.addMov .Img1 {
+    width: 100%;
+    height: 100%;
+}
+
+.addMov .Img2 {
+
+    width: 30px;
+    height: 30px;
+}
+
+.addMov #btn4 {
+    background-color: transparent;
+    /* Blue background */
+    border: none;
+    /* Remove borders */
+    margin-left: 300px;
+    margin-top: -17px;
+    position: relative;
+    font-size: 16px;
+    /* Set a font size */
+    float: right;
+    cursor: pointer;
+    /* Mouse pointer on hover */
+}
+
+.addMov .btn5 {
+    background-color: #04293A;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-right: 25px;
+    width: 90px;
+    border: none;
+    height: 50px;
+}
+
+.addMov .btn5:hover {
+    background-color: #ECB365;
+    color: #041C32;
+
+}
+
+
+.addMov .image-upload > input {
+    display: none;
+}
+
+@media screen and (max-width: 577px) {
+    .addMov #btn4 {
+
+        margin-left: 300px;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+    .addMov #btn4 {
+
+        margin-left: 320px;
+    }
+
+}
+
+@media screen and (max-width: 504px) {
+    .addMov #btn4 {
+
+        margin-left: 290px;
+    }
+
+}
+
+@media screen and (max-width: 470px) {
+    .addMov #btn4 {
+
+        margin-left: 280px;
+    }
+
+}
+
+@media screen and (max-width: 422px) {
+    .addMov #btn4 {
+
+        margin-left: 240px;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+    .addMov #btn4 {
+
+        margin-left: 230px;
+    }
+
+}
+
+@media screen and (max-width: 340px) {
+    .addMov #btn4 {
+
+        margin-left: 200px;
+    }
+
+}
+
+@media screen and (max-width: 310px) {
+    .addMov #btn4 {
+
+        margin-left: 180px;
+    }
+
+}
