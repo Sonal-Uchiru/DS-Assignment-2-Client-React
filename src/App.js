@@ -37,6 +37,7 @@ function App() {
                 <Route exact path="/allMoviesProduction" element={<AllMovies/>}/>
                 <Route exact path="/customerHeader" element={<CustomerHeader/>}/>
 
+
             </Routes>
         </Router>
     );
