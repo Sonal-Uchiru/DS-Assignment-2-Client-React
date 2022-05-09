@@ -1,14 +1,14 @@
-.AllMovies {
+.AllMoviesCustomer{
     overflow-x: hidden;
 }
 
-.AllMovies .Nowshow{
+.AllMoviesCustomer .Nowshowing{
     font-weight: bold;
     color: #04293A;
     margin: 30px;
 }
 
-.AllMovies .dropdown{
+.AllMoviesCustomer .dropdown{
     float: right;
     margin-right: 20px;
     background-color: transparent;
@@ -16,38 +16,20 @@
 
 }
 
-.AllMovies #btngenre{
+.AllMoviesCustomer #btngenre{
     font-weight: bold;
     width: 160px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
 }
 
-.AllMovies .ADD {
-
-    color: white;
-    text-transform: capitalize;
-    font-size: 18px;
-    float: right;
-    margin-right: 20px;
-    background-color: #04293A;
-    border-radius: 5px;
-    margin-top: -30px;
-}
-
-.AllMovies .ADD:hover {
-    background-color: #ECB365;
-    color: #04293A;
-    font-weight: bold;
-}
-
-.AllMovies .main {
+.AllMoviesCustomer .main {
     width: 70%;
     margin: 50px auto;
     margin-top: -5px;
 }
 
 
-.AllMovies .searchbtn{
+.AllMoviesCustomer .searchbtn{
     background-color: transparent !important;
     border: 2px solid #04293A;
     border-left: none;
@@ -55,52 +37,33 @@
 
 }
 
-.AllMovies input{
+.AllMoviesCustomer input{
     border: 2px solid #04293A;
     border-right: none;
     border-radius: 10px;
 }
 
-.AllMovies input:focus{
+.AllMoviesCustomer input:focus{
     border: 2px solid #04293A;
     border-right: none;
     border-radius: 10px;
 }
 
-.AllMovies .icon:hover{
+.AllMoviesCustomer .icon:hover{
     transform: scale(1.2);
 }
 
-.AllMovies .icon {
-    width: 25px;
-    height: 25px;
+.AllMoviesCustomer.containerrrr {
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
-.AllMovies .grp1 {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    box-shadow: none;
-    display: inline-block;
-
-}
-
-.AllMovies .grp1:hover {
-    transform: scale(1.5);
-}
-
-.AllMovies .containerrrr {
-    margin-left: 40px;
-    margin-right: 40px;
-}
-
-
-.AllMovies .parent {
+.AllMoviesCustomer.parent {
     display: flex;
     flex-wrap: wrap;
 }
 
-.AllMovies  .columns{
+.AllMoviesCustomer .columns{
     flex: 25%;
     padding: 20px;
     margin-bottom: 50px;
@@ -108,7 +71,7 @@
 
 @media screen and (max-width: 992px) {
 
-    .AllMovies  .columns{
+    .AllMoviesCustomer .columns{
         flex: 50%;
         margin: auto;
     }
@@ -116,7 +79,7 @@
 
 
 @media screen and (max-width: 600px) {
-    .AllMovies .parent {
+    .AllMoviesCustomer.parent {
         flex-direction: column;
         margin: auto;
     }
