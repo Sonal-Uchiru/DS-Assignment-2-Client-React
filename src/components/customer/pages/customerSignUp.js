@@ -58,6 +58,11 @@ export default function CustomerSignUp() {
                     </div>
 
                     <div className="mb-3">
+                        <label htmlFor="username" className="form-label">Username</label>
+                        <input type="text" className="form-control" id="username" placeholder="Username"/>
+                    </div>
+
+                    <div className="mb-3">
                         <label for="Password" className="form-label">Password</label>
                         <input type="password" className="form-control" id="Password" placeholder="Password"/>
                     </div>

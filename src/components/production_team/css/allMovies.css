@@ -1,0 +1,212 @@
+.AllMovies {
+    overflow-x: hidden;
+}
+
+.AllMovies .Nowshow{
+    font-weight: bold;
+    color: #04293A;
+    margin: 30px;
+}
+
+.AllMovies .dropdown{
+    float: right;
+    margin-right: 20px;
+    background-color: transparent;
+    margin-top: -40px;
+
+}
+
+.AllMovies #btngenre{
+    font-weight: bold;
+    width: 160px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.AllMovies .ADD {
+
+    color: white;
+    text-transform: capitalize;
+    font-size: 18px;
+    float: right;
+    margin-right: 20px;
+    background-color: #04293A;
+    border-radius: 5px;
+    margin-top: -30px;
+}
+
+.AllMovies .ADD:hover {
+    background-color: #ECB365;
+    color: #04293A;
+    font-weight: bold;
+}
+
+.AllMovies .main {
+    width: 70%;
+    margin: 50px auto;
+    margin-top: -5px;
+}
+
+
+.AllMovies .searchbtn{
+    background-color: transparent !important;
+    border: 2px solid #04293A;
+    border-left: none;
+    border-radius: 0px 10px 10px 0px;
+
+}
+
+.AllMovies input{
+    border: 2px solid #04293A;
+    border-right: none;
+    border-radius: 10px;
+}
+
+.AllMovies input:focus{
+    border: 2px solid #04293A;
+    border-right: none;
+    border-radius: 10px;
+}
+
+.AllMovies .icon:hover{
+    transform: scale(1.2);
+}
+
+.AllMovies .card-img-top {
+    height: 400px;
+}
+
+.AllMovies .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #041C32;
+    border-radius: 5px;
+}
+
+.AllMovies .card:hover{
+    transform: scale(1.01);
+}
+
+.AllMovies .card2 {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.AllMovies .card2:hover{
+    transform: scale(1.01);
+}
+
+.AllMovies .card-title {
+    font-weight: bold !important;
+    color: white;
+}
+
+.AllMovies .card2-title {
+    font-weight: bold !important;
+    color: #041C32;
+}
+
+.AllMovies .text {
+    color: white;
+    font-weight: bold;
+}
+
+.AllMovies .status {
+    color: #ECB365;
+    font-weight: bold;
+}
+
+.AllMovies .icon {
+    width: 25px;
+    height: 25px;
+}
+
+.AllMovies .grp1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-block;
+
+}
+
+.AllMovies .grp1:hover {
+    transform: scale(1.5);
+}
+
+.AllMovies .containerrrr {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.AllMovies .time {
+    font-weight: bold;
+    color: white;
+    margin-top: 5px;
+}
+
+.AllMovies .imdb{
+
+    width: 80px;
+    height: 60px;
+    margin-top: -18px;
+}
+
+
+.AllMovies .rating{
+    font-weight: bold;
+    float: left;
+    color: white !important;
+    margin-top: -16px;
+    margin-left: 22px;
+}
+
+
+.AllMovies .rating2{
+    font-weight: bold;
+    color: #064663;
+    float: left;
+    margin-top: -16px;
+    margin-left: 22px;
+}
+
+.AllMovies .star{
+    width:15px;
+    height: 15px;
+    float: left;
+
+}
+
+.AllMovies .soon{
+    background-color: white;
+}
+
+.AllMovies .csoon{
+    color: #041C32;
+}
+
+.AllMovies .parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.AllMovies  .columns{
+    flex: 25%;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 992px) {
+
+    .AllMovies  .columns{
+        flex: 50%;
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .AllMovies .parent {
+        flex-direction: column;
+        margin: auto;
+    }
+}

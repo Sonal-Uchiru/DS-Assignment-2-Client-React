@@ -1,0 +1,29 @@
+.TheaterCard .card-img-top {
+    height: 400px;
+}
+
+.TheaterCard .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    max-width: 21rem;
+
+}
+
+.TheaterCard .card:hover{
+    transform: scale(1.01);
+}
+
+.TheaterCard .card-body{
+    background-color: #041C32;
+}
+
+.TheaterCard .card-title {
+    font-weight: bold !important;
+    color: white;
+}
+
+.TheaterCard .text {
+    color: #ECB365;
+    font-weight: bold;
+}

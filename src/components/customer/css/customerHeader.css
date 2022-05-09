@@ -1,0 +1,75 @@
+.CustomerHeader .navl {
+    height: 150px;
+    width: 300px;
+    margin-left: 20px;
+}
+
+.CustomerHeader .navbar {
+    background-color: #041C32;
+    width: 95%;
+    margin: 50px auto;
+    margin-top: -1px;
+
+}
+
+.CustomerHeader .navbar-brand {
+    color: white;
+    font-weight: bold;
+}
+
+.CustomerHeader .navbar-brand:hover {
+    color: white;
+    font-weight: bold;
+}
+
+.CustomerHeader .nav-link {
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.CustomerHeader .nav-link:hover {
+    color: #ECB365 !important;
+    font-weight: bold !important;
+    text-decoration: underline;
+}
+
+
+.CustomerHeader .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.CustomerHeader .navbar-toggler {
+    border-color: rgb(255,255,255);
+}
+.CustomerHeader .cart{
+    width: 30px;
+    height: 30px;
+    float: right;
+    margin-right: 20px;
+}
+
+.CustomerHeader .cart:hover{
+ transform: scale(1.1);
+}
+
+
+.CustomerHeader .cartb{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+@media screen and (max-width: 992px) {
+    .CustomerHeader .navl{
+        width: 200px;
+        height: 100px;
+        margin-left: 5px;
+    }
+
+}
+
+@media screen and (max-width: 920px) {
+    .CustomerHeader .cart{
+        margin-left: 5px;
+
+    }
+}
