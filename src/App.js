@@ -34,7 +34,6 @@ function App() {
 
 
                 {/*Production Team*/}
-
                 <Route exact path="/addNewShowTime" element={<AddNewShowTime/>}/>
                 <Route exact path="/updateShowTime" element={<UpdateShowTime/>}/>
                 <Route exact path="/addMovie" element={<AddMovie/>}/>
@@ -43,7 +42,6 @@ function App() {
                 <Route exact path="/oneTheater" element={<OneTheater/>}/>
                 <Route exact path="/allMoviesProduction" element={<AllMovies/>}/>
                 <Route exact path="/productionHeader" element={<ProductionTeamHeader/>}/>
-
             </Routes>
         </Router>
     );
