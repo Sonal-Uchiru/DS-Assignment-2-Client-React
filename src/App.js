@@ -29,6 +29,8 @@ function App() {
                 <Route exact path="/buyTickets" element={<BuyTicket/>}/>
                 <Route exact path="/theaterCard" element={<TheaterCard/>}/>
                 <Route exact path="/allTheaters" element={<AllTheaters/>}/>
+
+
                 <Route exact path="/movieCardTheater" element={<MovieCardTheater/>}/>
                 <Route exact path="/movieCardTheater2" element={<MovieCardTheater2/>}/>
                 <Route exact path="/oneTheater" element={<OneTheater/>}/>
@@ -36,8 +38,6 @@ function App() {
                 <Route exact path="/movieCardProduction2" element={<MovieCardProduction2/>}/>
                 <Route exact path="/allMoviesProduction" element={<AllMovies/>}/>
                 <Route exact path="/customerHeader" element={<CustomerHeader/>}/>
-
-
             </Routes>
         </Router>
     );
