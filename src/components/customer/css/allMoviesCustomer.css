@@ -69,18 +69,33 @@
     margin-bottom: 50px;
 }
 
+@media screen and (max-width: 1200px) {
+
+    .AllMoviesCustomer .columns {
+        flex: 33%;
+        margin: auto;
+    }
+
+}
+
 @media screen and (max-width: 992px) {
 
     .AllMoviesCustomer .columns{
         flex: 50%;
         margin: auto;
     }
+
+    .AllMoviesCustomer .containerrrr{
+        margin-left: 2px;
+        margin-right: 2px;
+    }
 }
 
 
 @media screen and (max-width: 600px) {
-    .AllMoviesCustomer.parent {
+    .AllMoviesCustomer .parent {
         flex-direction: column;
         margin: auto;
     }
 }
+

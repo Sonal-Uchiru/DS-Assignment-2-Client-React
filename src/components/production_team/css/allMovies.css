@@ -105,6 +105,15 @@
     padding: 20px;
     margin-bottom: 50px;
 }
+@media screen and (max-width: 1200px) {
+
+    .AllMovies  .columns{
+        flex: 33%;
+        margin: auto;
+    }
+}
+
+
 
 @media screen and (max-width: 992px) {
 

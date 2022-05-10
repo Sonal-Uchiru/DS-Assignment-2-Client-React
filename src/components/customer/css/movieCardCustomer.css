@@ -77,3 +77,15 @@
     float: left;
 
 }
+
+@media screen and (max-width: 290px) {
+
+    .MovieCardCustomer .imdb{
+        width: 60px;
+        height: 60px;
+    }
+
+    .MovieCardCustomer .rating{
+       font-size: 12px;
+    }
+}

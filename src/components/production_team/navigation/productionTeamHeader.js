@@ -9,7 +9,7 @@ export default function ProductionTeamHeader() {
 
             <div className="Header">
                 <img src="./../images/bitmap.svg" className="navl" alt=""/>
-                <div className="userr"><p className="uname">Derek10905<img src="./../images/user.png" className="user" alt=""/></p>
+                <div className="userr"><p className="uname">Derek10905<img src="./../images/user (2).png" className="user" alt=""/></p>
                 </div>
                 <br/>
 

@@ -24,6 +24,8 @@ import CustomerLogin from "./components/customer/pages/customerSignIn";
 import ProductionTeamLogin from "./components/production_team/pages/productionSignIn";
 import MovieCartCard from "./components/customer/cards/movieCartCard";
 import MovieCart from "./components/customer/pages/movieCart";
+import ReservationCard from "./components/customer/cards/reservationCard";
+import Reservation from "./components/customer/pages/reservation";
 
 function App() {
     return (
@@ -37,6 +39,8 @@ function App() {
                 <Route exact path="/customerHeader" element={<CustomerHeader/>}/>
                 <Route exact path="/customerSignIn" element={<CustomerLogin/>}/>
                 <Route exact path="/movieCart" element={<MovieCart/>}/>
+                <Route exact path="/reservation" element={<Reservation/>}/>
+
 
 
                 {/*Production Team*/}
