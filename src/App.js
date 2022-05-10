@@ -20,12 +20,14 @@ import ProductionTeamHeader from "./components/production_team/navigation/produc
 import AllMoviesCustomer from "./components/customer/pages/allMoviesCustomer";
 import MovieCardCustomer1 from "./components/customer/cards/movieCardCustomer";
 import MovieCardCustomer2 from "./components/customer/cards/movieCardCustomer2";
+import Test from "./components/Test";
 
 function App() {
     return (
         <Router>
             <Routes>
 
+                <Route exact path="/te" element={<Test/>}/>
                 {/*Customer*/}
                 <Route exact path="/customerSignUp" element={<CustomerSignUp/>}/>
                 <Route exact path="/buyTickets" element={<BuyTicket/>}/>
