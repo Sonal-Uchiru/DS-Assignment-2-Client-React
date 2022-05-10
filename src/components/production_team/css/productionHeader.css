@@ -43,12 +43,43 @@
 }
 
 
+.ProductionHeader .user {
+    height: 60px;
+    width: 60px;
+}
+
+.ProductionHeader .uname {
+    font-weight: bold;
+    color: #064663;
+    text-decoration: underline;
+}
+
+
+.ProductionHeader .userr {
+    float: right;
+    margin-top: 70px;
+    margin-right: 40px;
+}
+
+
+.ProductionHeader .cartb {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 992px) {
     .ProductionHeader .navl {
         width: 200px;
         height: 100px;
-        margin-left: 5px;
+        margin-left: 15px;
+        margin-top: 40px;
     }
+
+    .ProductionHeader .userr {
+        margin-right: 20px;
+    }
+
 
 }
 
@@ -57,4 +88,66 @@
         margin-left: 5px;
 
     }
+}
+
+@media screen and (max-width: 400px) {
+
+    .ProductionHeader .navl {
+        width: 180px;
+        height: 100px;
+        margin-left: 15px;
+        margin-top: 40px;
+    }
+
+    .ProductionHeader .user {
+        height: 50px;
+        width: 50px;
+    }
+
+}
+
+@media screen and (max-width: 368px) {
+
+    .ProductionHeader .navl {
+        width: 150px;
+        height: 100px;
+        margin-left: 15px;
+        margin-top: 40px;
+    }
+
+    .ProductionHeader .user {
+        height: 40px;
+        width: 40px;
+    }
+
+    .ProductionHeader .userr {
+        margin-top: 80px;
+    }
+
+}
+
+@media screen and (max-width: 335px) {
+
+    .ProductionHeader .navl {
+        margin-top: 5px;
+    }
+
+    .ProductionHeader .user {
+        height: 30px;
+        width: 30px;
+    }
+
+    .ProductionHeader .userr {
+        float: right;
+        margin-top: 55px;
+        margin-right: 10px;
+    }
+
+    .ProductionHeader .navl {
+        height: 120px;
+        width: 120px;
+        margin-left: 5px;
+    }
+
+
 }

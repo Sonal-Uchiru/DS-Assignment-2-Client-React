@@ -9,6 +9,12 @@
     border: 1px solid #041C32;
 }
 
+input,
+input::placeholder {
+    font-size: 15px;
+    line-height: 3;
+}
+
 .addMov textarea {
 
     border: 1px solid #041C32;

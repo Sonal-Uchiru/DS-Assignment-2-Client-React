@@ -35,7 +35,6 @@ function App() {
                 <Route exact path="/customerHeader" element={<CustomerHeader/>}/>
                 <Route exact path="/customerSignIn" element={<CustomerLogin/>}/>
 
-
                 {/*Production Team*/}
 
                 <Route exact path="/addNewShowTime" element={<AddNewShowTime/>}/>

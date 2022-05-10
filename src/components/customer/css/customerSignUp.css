@@ -15,15 +15,20 @@
 }
 
 .CusRegister select {
-    width: 477px;
-    height: 40px;
+    margin-top: 2px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
     border-radius: 5px;
+    height: 50px;
     border: 1px solid #041C32;
+
 }
 
 .CusRegister input {
 
     border: 1px solid #041C32;
+    height: 50px;
 }
 
 .CusRegister label {
@@ -39,6 +44,7 @@
     font-Weight: bold;
     text-transform: none;
     font-size: 20px;
+    height: 50px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -49,6 +55,38 @@
 .CusRegister .signUp:hover {
     color: #041C32;
     background-color: #ECB365;
+}
+
+.CusRegister .divider:after,
+.CusRegister .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+
+.CusRegister .Img {
+
+    height: 710px;
+
+}
+
+.CusRegister .rightSide {
+
+    border: 2px solid #041C32;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 40px 50px 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.CusRegister #check {
+
+    color: #064663;
+    height: 17px;
+
 }
 
 .CusRegister #acc {
@@ -72,119 +110,92 @@
     color: #041C32;
 }
 
-@media screen and (max-width: 768px) {
-    .CusRegister select {
-        width: 415px;
-    }
+
+.CusRegister .p-viewer{
+
+    float: right;
+    margin-top: -35px;
+    position: relative;
+    margin-right: 15px;
+    z-index: 1;
+    cursor:pointer;
+}
+
+.CusRegister #eyeIcon{
+    color: #041C32;
 }
 
 
-@media screen and (min-width: 768px) {
-    .CusRegister select {
-        width: 477px;
+@media (min-width: 997px) {
+    .CusRegister .rightSide{
+        margin-right: 1px;
+        margin-bottom: 10px;
     }
 }
 
-@media screen and (max-width: 576px) {
-
-    .CusRegister .container {
-        width: 520px;
-        padding-left: 40px;
-        padding-right: 40px;
-
+@media (max-width: 1200px) {
+    .CusRegister .Img {
+        display: none;
     }
 
-    .CusRegister select {
-        width: 435px;
-    }
-}
-
-@media screen and (max-width: 525px) {
-
-    .CusRegister .container {
-        width: 480px;
-        padding-left: 30px;
-        padding-right: 30px;
-
+    .CusRegister {
+        margin: 20px;
+        overflow-y: hidden;
     }
 
-    .CusRegister select {
-        width: 415px;
-    }
-}
+    .CusRegister .col-md-8 {
 
-@media screen and (max-width: 500px) {
-
-    .CusRegister .container {
-        width: 400px;
-        padding-left: 20px;
-        padding-right: 20px;
-
-    }
-
-    .CusRegister select {
-        width: 355px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-
-    .CusRegister .container {
-        width: 350px;
-        padding-left: 10px;
-        padding-right: 10px;
-
-    }
-
-    .CusRegister select {
-        width: 325px;
+        width: 100%;
     }
 
 }
 
+@media (max-width: 600px) {
+    .CusRegister .rightSide {
 
-@media screen and (max-width: 351px) {
-
-    .CusRegister .container {
-        width: 330px;
-        padding-left: 10px;
-        padding-right: 10px;
-
-    }
-
-    .CusRegister select {
-        width: 305px;
+        padding: 30px 40px 20px;
     }
 
 }
 
+@media (max-width: 400px) {
+    .CusRegister .rightSide {
 
-@media screen and (max-width: 351px) {
-
-    .CusRegister .container {
-        width: 290px;
-        padding-left: 10px;
-        padding-right: 10px;
-
+        padding: 20px 30px 10px;
     }
 
-    .CusRegister select {
-        width: 265px;
+    .CusRegister #acc {
+        font-size: 14px;
     }
+
 
 }
 
-@media screen and (max-width: 292px) {
+@media (max-width: 320px) {
 
-    .CusRegister .container {
-        width: 260px;
-        padding-left: 10px;
-        padding-right: 10px;
-
+    .CusRegister .forgot {
+        font-size: 10px;
     }
 
-    .CusRegister select {
-        width: 235px;
+    .CusRegister #remember {
+        font-size: 10px;
     }
+    .CusRegister label{
+        font-size: 15px;
+    }
+
+    .CusRegister .sign {
+        font-size: 35px;
+    }
+
+    .CusRegister .rightSide {
+        padding: 10px 20px 10px;
+    }
+
+    .CusRegister #acc {
+        font-size: 12px;
+    }
+
 
 }
+

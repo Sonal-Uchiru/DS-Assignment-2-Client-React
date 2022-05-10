@@ -144,6 +144,20 @@
     border: 1px solid #041C32;
 }
 
+.ProductionLogin .p-viewer{
+
+    float: right;
+    margin-top: -35px;
+    position: relative;
+    margin-right: 15px;
+    z-index: 1;
+    cursor:pointer;
+}
+
+.ProductionLogin #eyeIcon{
+    color: #041C32;
+}
+
 @media (min-width: 997px) {
     .ProductionLogin .rightSide{
         margin-right: 1px;

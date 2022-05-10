@@ -1,9 +1,23 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
+import {faEyeSlash} from "@fortawesome/free-solid-svg-icons";
 
 import "./../css/customerSignIn.css"
 
+const eye = <FontAwesomeIcon icon={faEye}/>;
+const sleye = <FontAwesomeIcon icon={faEyeSlash}/>;
+
 export default function CustomerLogin() {
+
+
+    const [passwordShown, setPasswordShown] = useState(false);
+    let [Password, setPassword] = useState("");
+    // Password toggle handler
+    const togglePasswordVisibility = () => {
+        setPasswordShown(!passwordShown);
+    };
 
 
     return (
@@ -33,8 +47,19 @@ export default function CustomerLogin() {
 
                                 <div className="form-outline mb-3">
                                     <label className="form-label" for="form3Example4" id="password">Password</label>
-                                    <input type="password" id="form3Example4" className="form-control form-control-lg"
-                                           placeholder="Password"/>
+                                    <input id="form3Example4" className="form-control form-control-lg"
+                                           placeholder="Password" type={passwordShown ? "text" : "password"}
+                                           onChange={(e) => {
+                                               setPassword(e.target.value);
+                                           }}/>
+                                    <span className="p-viewer">
+                        <i id="eyeIcon"
+                           className={`fa ${passwordShown ? "fa-eye" : "fa-eye-slash"} password-icon`}
+                           onClick={togglePasswordVisibility}
+                        >
+                          {" "}
+                        </i>
+                      </span>
                                 </div>
 
                                 <div className="d-flex justify-content-between align-items-center">

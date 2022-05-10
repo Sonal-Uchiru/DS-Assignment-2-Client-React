@@ -144,6 +144,19 @@
     border: 1px solid #041C32;
 }
 
+.CusLogin .p-viewer{
+
+    float: right;
+    margin-top: -35px;
+    position: relative;
+    margin-right: 15px;
+    z-index: 1;
+    cursor:pointer;
+}
+
+.CusLogin #eyeIcon{
+    color: #041C32;
+}
 @media (min-width: 997px) {
     .CusLogin .rightSide{
         margin-right: 1px;
