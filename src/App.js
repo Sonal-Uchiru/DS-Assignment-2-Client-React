@@ -26,12 +26,14 @@ import MovieCartCard from "./components/customer/cards/movieCartCard";
 import MovieCart from "./components/customer/pages/movieCart";
 import ReservationCard from "./components/customer/cards/reservationCard";
 import Reservation from "./components/customer/pages/reservation";
+import Test from "./components/Test";
 
 function App() {
     return (
         <Router>
             <Routes>
 
+                <Route exact path="/te" element={<Test/>}/>
                 {/*Customer*/}
                 <Route exact path="/customerSignUp" element={<CustomerSignUp/>}/>
                 <Route exact path="/buyTickets" element={<BuyTicket/>}/>
@@ -44,7 +46,6 @@ function App() {
 
 
                 {/*Production Team*/}
-
                 <Route exact path="/addNewShowTime" element={<AddNewShowTime/>}/>
                 <Route exact path="/updateShowTime" element={<UpdateShowTime/>}/>
                 <Route exact path="/addMovie" element={<AddMovie/>}/>
