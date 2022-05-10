@@ -77,7 +77,7 @@ export default function OneTheater() {
                     </div>
 
                     <div className="colmn">
-                        <MovieCardTheater2/>
+                        <MovieCardTheater/>
                     </div>
 
                     <div className="colmn">

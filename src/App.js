@@ -20,6 +20,8 @@ import ProductionTeamHeader from "./components/production_team/navigation/produc
 import AllMoviesCustomer from "./components/customer/pages/allMoviesCustomer";
 import MovieCardCustomer1 from "./components/customer/cards/movieCardCustomer";
 import MovieCardCustomer2 from "./components/customer/cards/movieCardCustomer2";
+import CustomerLogin from "./components/customer/pages/customerSignIn";
+import ProductionTeamLogin from "./components/production_team/pages/productionSignIn";
 
 function App() {
     return (
@@ -31,6 +33,7 @@ function App() {
                 <Route exact path="/buyTickets" element={<BuyTicket/>}/>
                 <Route exact path="/allMoviesCustomer" element={<AllMoviesCustomer/>}/>
                 <Route exact path="/customerHeader" element={<CustomerHeader/>}/>
+                <Route exact path="/customerSignIn" element={<CustomerLogin/>}/>
 
 
                 {/*Production Team*/}
@@ -43,6 +46,7 @@ function App() {
                 <Route exact path="/oneTheater" element={<OneTheater/>}/>
                 <Route exact path="/allMoviesProduction" element={<AllMovies/>}/>
                 <Route exact path="/productionHeader" element={<ProductionTeamHeader/>}/>
+                <Route exact path="/productionSignIn" element={<ProductionTeamLogin/>}/>
 
             </Routes>
         </Router>

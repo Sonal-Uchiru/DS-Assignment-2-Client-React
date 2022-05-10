@@ -38,12 +38,15 @@ export default function AllMovies() {
             <div className="dropdown">
                 <button className="btn dropdown-toggle" type="button" id="btngenre" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Genre
+                    Genres
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a className="dropdown-item" href="#">English</a></li>
-                    <li><a className="dropdown-item" href="#">Hindi</a></li>
-                    <li><a className="dropdown-item" href="#">Telugu</a></li>
+                    <li><a className="dropdown-item" href="#">Action</a></li>
+                    <li><a className="dropdown-item" href="#">Drama</a></li>
+                    <li><a className="dropdown-item" href="#">Horror</a></li>
+                    <li><a className="dropdown-item" href="#">Thriller</a></li>
+                    <li><a className="dropdown-item" href="#">Comedy</a></li>
+                    <li><a className="dropdown-item" href="#">Romance</a></li>
                 </ul>
             </div>
 
@@ -100,12 +103,15 @@ export default function AllMovies() {
             <div className="dropdown">
                 <button className="btn dropdown-toggle" type="button" id="btngenre" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                    Genre
+                    Genres
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a className="dropdown-item" href="#">English</a></li>
-                    <li><a className="dropdown-item" href="#">Hindi</a></li>
-                    <li><a className="dropdown-item" href="#">Telugu</a></li>
+                    <li><a className="dropdown-item" href="#">Action</a></li>
+                    <li><a className="dropdown-item" href="#">Drama</a></li>
+                    <li><a className="dropdown-item" href="#">Horror</a></li>
+                    <li><a className="dropdown-item" href="#">Thriller</a></li>
+                    <li><a className="dropdown-item" href="#">Comedy</a></li>
+                    <li><a className="dropdown-item" href="#">Romance</a></li>
                 </ul>
             </div>
 

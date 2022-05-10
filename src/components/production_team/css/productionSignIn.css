@@ -1,0 +1,261 @@
+.ProductionLogin {
+    overflow: auto;
+}
+
+.ProductionLogin .divider:after,
+.ProductionLogin .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+
+.ProductionLogin .Img {
+
+    height: 710px;
+
+}
+
+.ProductionLogin .rightSide {
+
+    border: 2px solid #041C32;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 40px 50px 30px;
+}
+
+.ProductionLogin #googlebtn {
+
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 48%;
+    margin-top: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: grey;
+    text-transform: none;
+}
+
+.ProductionLogin #gicon {
+    width: 10%;
+    margin-left: -20px;
+    margin-right: 10px;
+}
+
+.ProductionLogin .sign {
+
+    font-weight: bold;
+    color: #04293A;
+    font-size: 45px;
+}
+
+.ProductionLogin .signIn {
+    background-color: #04293A;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    font-size: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 68%;
+    margin-top: 40px;
+}
+
+.ProductionLogin .signIn:hover {
+    background-color: #ECB365;
+    color: #04293A;
+    font-weight: bold;
+
+}
+
+
+.ProductionLogin #username {
+    font-weight: bold;
+    color: #064663;
+    font-size: 20px;
+}
+
+.ProductionLogin #password {
+    font-weight: bold;
+    color: #064663;
+    font-size: 20px;
+}
+
+.ProductionLogin #remember {
+    font-weight: bold;
+    color: #064663;
+
+}
+
+.ProductionLogin #check {
+
+    color: #064663;
+
+}
+
+.ProductionLogin .forgot {
+
+    color: #ECB365;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.ProductionLogin .forgot:hover {
+    color: #041C32;
+}
+
+.ProductionLogin #dont {
+
+    text-decoration: underline;
+    color: #064663;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+.ProductionLogin #acc {
+
+    color: #064663;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.ProductionLogin #clickme {
+    color: #ECB365;
+    text-decoration: underline;
+}
+
+.ProductionLogin #clickme:hover {
+    color: #041C32;
+}
+
+.ProductionLogin input {
+    border: 1px solid #041C32;
+}
+
+@media (min-width: 997px) {
+    .ProductionLogin .rightSide{
+        margin-right: 1px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 996px) {
+    .ProductionLogin .Img {
+        display: none;
+    }
+
+    .ProductionLogin {
+        margin: 20px;
+        overflow-y: hidden;
+    }
+
+    .ProductionLogin .col-md-8 {
+
+        width: 100%;
+    }
+
+    .ProductionLogin #gicon {
+        width: 10%;
+        margin-left: -10px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ProductionLogin .rightSide {
+
+        padding: 30px 40px 20px;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .ProductionLogin .rightSide {
+
+        padding: 20px 30px 10px;
+    }
+
+    .ProductionLogin #acc {
+        font-size: 14px;
+    }
+
+
+}
+
+@media (max-width: 390px) {
+    .ProductionLogin #remember {
+        font-weight: bold;
+        font-size: 12px;
+
+    }
+
+    .ProductionLogin .forgot {
+        font-size: 12px;
+    }
+
+    .ProductionLogin #googlebtn {
+        font-size: 10px;
+        width: 68%;
+    }
+    .ProductionLogin #gicon {
+        width: 10%;
+        margin-left: -5px;
+        margin-right: 10px;
+
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    .ProductionLogin .forgot {
+        font-size: 10px;
+    }
+
+    .ProductionLogin #remember {
+        font-size: 10px;
+    }
+    .ProductionLogin #password {
+        font-size: 15px;
+    }
+
+    .ProductionLogin #username {
+        font-size: 15px;
+    }
+
+    .ProductionLogin .sign {
+        font-size: 35px;
+    }
+
+    .ProductionLogin .rightSide {
+        padding: 10px 20px 10px;
+    }
+
+    .ProductionLogin #acc {
+        font-size: 12px;
+    }
+
+    .ProductionLogin #googlebtn {
+        font-size: 10px;
+        width: 68%;
+    }
+    .ProductionLogin #gicon {
+        width: 10%;
+        margin-left: -5px;
+        margin-right: 10px;
+
+    }
+}
+

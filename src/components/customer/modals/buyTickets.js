@@ -38,13 +38,13 @@ export default function BuyTicket() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="Ctickets" className="form-label">Child-tickets</label>
+                                        <label for="Ctickets" className="form-label">Child-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR 850.00)</b></label>
                                         <input type="text" className="form-control" id="Ctickets" placeholder="2"/>
                                     </div>
 
 
                                     <div className="mb-3">
-                                        <label for="Atickets" className="form-label">Adult-tickets</label>
+                                        <label for="Atickets" className="form-label">Adult-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR 1300.00)</b></label>
                                         <input type="text" className="form-control" id="Atickets" placeholder="2"/>
                                     </div>
 

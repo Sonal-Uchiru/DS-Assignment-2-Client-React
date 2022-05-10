@@ -33,13 +33,21 @@ export default function MovieCardTheater() {
                                                                             className="icon"
                                                                             alt="..."/></button>
                             <button type="button" className="btn  grp1"><img src="./../images/edit (1).png"
-                                                                             className="icon"
-                                                                             alt="..."/></button>
-                            <button type="button" className="btn  grp1"><img src="./../images/check (1).png"
                                                                              className="icon" alt="..."/></button>
+
                         </div>
+
                     </div>
                 </div>
+                <div className="text-center">
+                    <label className="switch">
+                        <input
+                            type="checkbox"
+                        />
+                        <span className="slider round"/>
+                    </label>
+                </div>
+                <br/>
             </div>
         </div>
 
