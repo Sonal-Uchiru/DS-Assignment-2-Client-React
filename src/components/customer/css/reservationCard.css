@@ -1,5 +1,5 @@
 .ReservationCard .card{
-    max-width: 1000px;
+    max-width: 1200px;
     border: 2px solid #041C32;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
@@ -44,4 +44,19 @@
     background-color: #ECB365;
     color: #041C32;
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .ReservationCard .Img{
+        width: 100%;
+        object-fit: fill;
+    }
+
+    .ReservationCard .btnCancel{
+        margin-bottom: 10px;
+    }
+
+    .ReservationCard .status{
+        margin-top: 26px;
+    }
 }

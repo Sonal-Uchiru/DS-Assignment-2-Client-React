@@ -4,20 +4,20 @@
 }
 
 
-.Reservation .searchbtn{
+.Reservation .searchbtn {
     background-color: transparent !important;
     border: 2px solid #04293A;
     border-left: none;
     border-radius: 0px 10px 10px 0px;
 }
 
-.Reservation input{
+.Reservation input {
     border: 2px solid #04293A;
     border-right: none;
     border-radius: 10px;
 }
 
-.Reservation input:focus{
+.Reservation input:focus {
     border: 2px solid #04293A;
     border-right: none;
     border-radius: 10px;
@@ -28,7 +28,7 @@
     height: 25px;
 }
 
-.Reservation .icon:hover{
+.Reservation .icon:hover {
     transform: scale(1.2);
 }
 
@@ -61,8 +61,48 @@
     margin-top: 34px;
 }
 
-.Reservation .containerrrr{
+.Reservation .containerrrr {
 
-margin-right: 250px;
+    margin-right: 250px;
     margin-left: 250px;
+}
+
+@media (max-width: 1220px) {
+    .Reservation .containerrrr {
+
+        margin-right: 100px;
+        margin-left: 100px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .Reservation .containerrrr {
+
+        margin-right: 150px;
+        margin-left: 150px;
+    }
+}
+
+@media (max-width: 900px) {
+    .Reservation .containerrrr {
+
+        margin-right: 100px;
+        margin-left: 100px;
+    }
+}
+
+@media (max-width: 780px) {
+    .Reservation .containerrrr {
+
+        margin-right: 70px;
+        margin-left: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .Reservation .containerrrr {
+
+        margin-right: 10px;
+        margin-left: 10px;
+    }
 }
