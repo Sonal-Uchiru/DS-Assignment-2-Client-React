@@ -1,0 +1,197 @@
+.MovieCart .main {
+    width: 70%;
+    margin: 50px auto;
+}
+
+
+.MovieCart .searchbtn{
+    background-color: transparent !important;
+    border: 2px solid #04293A;
+    border-left: none;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.MovieCart input{
+    border: 2px solid #04293A;
+    border-right: none;
+    border-radius: 10px;
+}
+
+.MovieCart input:focus{
+    border: 2px solid #04293A;
+    border-right: none;
+    border-radius: 10px;
+}
+
+.MovieCart .icon {
+    width: 25px;
+    height: 25px;
+}
+
+.MovieCart .icon:hover{
+    transform: scale(1.2);
+}
+
+.MovieCart .box {
+    width: 80px;
+    height: 80px;
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+
+}
+
+.MovieCart .logo {
+
+    width: 100%;
+    height: 100%;
+}
+
+.MovieCart .CartName {
+    float: left;
+    width: calc(100% - 350px - 10px);
+}
+
+.MovieCart .cartN {
+
+    font-weight: bold;
+    color: #04293A;
+    font-size: 50px;
+    margin-top: 34px;
+}
+
+.MovieCart .containerrrr {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.MovieCart .parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.MovieCart .columns{
+    flex: 25%;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+.MovieCart .clear{
+
+    color: white;
+    text-transform: capitalize;
+    font-size: 18px;
+    float: right;
+    margin-right: 20px;
+    background-color: #04293A;
+    border-radius: 5px;
+    margin-top: -30px;
+}
+
+.MovieCart .clear:hover {
+    background-color: #ECB365;
+    color: #04293A;
+    font-weight: bold;
+}
+
+.MovieCart .buy{
+    color: white;
+    text-transform: capitalize;
+    font-size: 18px;
+    background-color: #04293A;
+    border-radius: 5px;
+}
+
+.MovieCart .buy:hover {
+    background-color: #ECB365;
+    color: #04293A;
+    font-weight: bold;
+}
+
+
+
+@media screen and (max-width: 1100px) {
+
+    .MovieCart  .columns{
+        flex: 33%;
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+
+    .MovieCart  .columns{
+        flex: 50%;
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .MovieCart .parent {
+        flex-direction: column;
+        margin: auto;
+    }
+
+    .MovieCart .cartN{
+        font-size: 45px;
+    }
+    .MovieCart .box {
+        width: 80px;
+        height: 80px;
+    }
+    .MovieCart .CartName {
+        float: left;
+        width: calc(100% - 150px - 10px);
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+    .MovieCart .cartN{
+        font-size: 40px;
+    }
+    .MovieCart .CartName {
+        float: left;
+        width: calc(100% - 120px - 10px);
+    }
+
+}
+
+
+@media screen and (max-width: 290px) {
+    .MovieCart .cartN{
+        font-size: 30px;
+    }
+    .MovieCart .CartName {
+        float: left;
+        width: calc(100% - 110px - 10px);
+    }
+
+    .MovieCart .box {
+        width: 60px;
+        height: 60px;
+    }
+
+    .MovieCart .main {
+        width: 70%;
+        margin: 40px auto;
+
+    }
+
+    .MovieCart .containerrrr {
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .MovieCart .clear{
+
+        font-size: 15px;
+        margin-right: 10px;
+        margin-top: -30px;
+        height: 38px;
+    }
+
+}
+

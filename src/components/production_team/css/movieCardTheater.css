@@ -1,0 +1,88 @@
+.MovieCardTheater .card-img-top {
+    height: 400px;
+}
+
+.MovieCardTheater .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #041C32;
+    border-radius: 5px;
+    max-width: 21rem;
+}
+
+.MovieCardTheater .card:hover{
+    transform: scale(1.01);
+}
+
+.MovieCardTheater .card-title {
+    font-weight: bold !important;
+    color: white;
+}
+
+.MovieCardTheater .text {
+    color: white;
+    font-weight: bold;
+    margin-top: -10px;
+}
+
+.MovieCardTheater .status {
+    color: #ECB365;
+    font-weight: bold;
+}
+
+.MovieCardTheater .icon {
+    width: 30px;
+    height: 30px;
+}
+
+.MovieCardTheater .grp1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-block;
+    text-align: center;
+    margin-left: 40px;
+    margin-right: 40px;
+
+}
+
+.MovieCardTheater .grp1:hover {
+    transform: scale(1.5);
+}
+
+.MovieCardTheater .containerrrr {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 50px;
+}
+
+.MovieCardTheater .time {
+    font-weight: bold;
+    color: white;
+    margin-top: 5px;
+}
+
+.MovieCardTheater .imdb{
+
+    width: 90px;
+    height: 70px;
+    object-fit: contain;
+    margin-top: -18px;
+    margin-left: -5px;
+}
+
+
+.MovieCardTheater .rating{
+    font-weight: bold;
+    float: left;
+    color: white;
+    margin-top: -16px;
+    margin-left: 22px;
+}
+
+.MovieCardTheater .star{
+    width:15px;
+    height: 15px;
+    float: left;
+
+}

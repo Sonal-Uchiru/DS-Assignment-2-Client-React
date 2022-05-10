@@ -1,0 +1,59 @@
+.MovieCartCard .card-img-top {
+    height: 400px;
+}
+
+.MovieCartCard .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    max-width: 21rem;
+
+}
+
+.MovieCartCard .card:hover{
+    transform: scale(1.01);
+}
+
+.MovieCartCard .card-title {
+    font-weight: bold !important;
+    color: #041C32;
+    font-size: 26px !important;
+}
+
+.MovieCartCard .btnRemove{
+    float: right;
+    background-color: #041C32;
+    color: white;
+    border: none;
+    height: 40px;
+    width: 90px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.MovieCartCard .btnRemove:hover{
+    color: #041C32;
+   background-color: #ECB365;
+}
+
+.MovieCartCard .dName{
+    font-weight: bold;
+}
+
+.MovieCartCard .btnPm1{
+    border: none;
+    background-color: transparent;
+}
+
+
+.MovieCartCard .btnPm2{
+    border: none;
+    background-color: transparent;
+    margin-left: 20px;
+}
+
+
+.MovieCartCard .plusMinus{
+ box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 87px;
+}

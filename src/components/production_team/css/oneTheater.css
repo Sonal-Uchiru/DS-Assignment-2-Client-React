@@ -1,0 +1,192 @@
+.OneTheater {
+    overflow-x: hidden;
+}
+
+.OneTheater .box {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin: 20px;
+
+}
+
+
+.OneTheater .logo {
+
+    width: 100%;
+    height: 100%;
+}
+
+.OneTheater .theaterName {
+    float: left;
+    width: calc(100% - 350px - 10px);
+
+}
+
+.OneTheater .Tname {
+
+    font-weight: bold;
+    color: #04293A;
+    font-size: 50px;
+    margin-top: 40px;
+}
+
+
+.OneTheater .box2 {
+
+    max-width: 1500px;
+    height: 550px;
+    margin-top: 20px;
+    margin-right: 40px;
+    margin-left: 40px;
+
+}
+
+.OneTheater .TheaterImage {
+
+    width: 100%;
+    height: 100%;
+}
+
+
+.OneTheater .containerrr {
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 50px;
+
+}
+
+
+.OneTheater .location {
+
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 5px;
+}
+
+
+.OneTheater .locationN {
+    font-weight: bold;
+    color: #064663;
+    float: left;
+    margin-top: 10px;
+}
+
+.OneTheater .address {
+    font-weight: bold;
+    text-align: left;
+    font-size: 18px;
+
+}
+
+
+.OneTheater .capacity {
+
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 5px;
+}
+
+
+.OneTheater .capacityY {
+    font-weight: bold;
+    color: #064663;
+    float: left;
+    margin-top: 10px;
+}
+
+
+.OneTheater .seats {
+    font-weight: bold;
+    text-align: left;
+    font-size: 18px;
+
+}
+
+.OneTheater .child {
+    width: 40px;
+    height: 40px;
+    float: left;
+    margin: 5px;
+}
+
+.OneTheater .childT {
+    font-weight: bold;
+    color: #064663;
+    margin-top: 10px;
+    float: left;
+}
+
+.OneTheater .childP {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+.OneTheater .adultT {
+    font-weight: bold;
+    color: #064663;
+    margin-top: 10px;
+    float: left;
+}
+
+.OneTheater .adultP {
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+.OneTheater .show {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 40px;
+    color: #04293A;
+}
+
+.OneTheater .ADD {
+
+    color: white;
+    text-transform: capitalize;
+    font-size: 18px;
+    float: right;
+    margin-right: 20px;
+    background-color: #04293A;
+    border-radius: 5px;
+}
+
+.OneTheater .ADD:hover {
+    background-color: #ECB365;
+    color: #04293A;
+    font-weight: bold;
+}
+
+
+.OneTheater .parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.OneTheater  .colmn{
+    flex: 25%;
+    margin-bottom: 50px !important;
+}
+
+@media screen and (max-width: 992px) {
+
+    .OneTheater  .colmn{
+        flex: 50%;
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .OneTheater .parent {
+        flex-direction: column;
+        margin: auto;
+    }
+}
