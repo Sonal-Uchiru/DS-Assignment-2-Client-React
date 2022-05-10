@@ -27,6 +27,7 @@ import MovieCart from "./components/customer/pages/movieCart";
 import ReservationCard from "./components/customer/cards/reservationCard";
 import Reservation from "./components/customer/pages/reservation";
 import Test from "./components/Test";
+import Footer from "./components/navigation/footer";
 
 function App() {
     return (
@@ -43,6 +44,8 @@ function App() {
                 <Route exact path="/movieCart" element={<MovieCart/>}/>
                 <Route exact path="/reservation" element={<Reservation/>}/>
 
+                {/*Both*/}
+                <Route exact path="/footer" element={<Footer/>}/>
 
 
                 {/*Production Team*/}
@@ -57,6 +60,7 @@ function App() {
                 <Route exact path="/productionSignIn" element={<ProductionTeamLogin/>}/>
 
             </Routes>
+            {/*<Footer/>*/}
         </Router>
     );
 }
