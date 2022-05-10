@@ -147,6 +147,54 @@
     height: 100%;
 }
 
+.updateShow .btn5 {
+    background-color: #04293A;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    border-radius: 5px;
+    font-size: 20px;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    height: 48px;
+}
+
+.updateShow .btn5:hover {
+    background-color: #ECB365;
+    color: #04293A;
+}
+
+.updateShow .btn6 {
+    background-color: #E15141;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    border-radius: 5px;
+    font-size: 20px;
+    margin-right: 50px;
+    width: 150px;
+    height: 48px;
+    display: inline-block;
+    text-align: center;
+    border: none;
+}
+
+.updateShow .btn6:hover {
+    background-color: #d4301d;
+    color: #ffffff;
+}
+
+
+@media screen and (max-width: 510px) {
+
+
+    .updateShow .btn6 {
+        margin-right: 35px;
+    }
+}
+
 @media screen and (max-width: 501px) {
 
     .updateShow .box {
@@ -180,6 +228,45 @@
         font-size: 12px;
     }
 
+}
+
+@media screen and (max-width: 490px) {
+
+
+    .updateShow .btn6 {
+        margin-right: 30px;
+    }
+}
+
+@media screen and (max-width: 470px) {
+    .updateShow .btn6 {
+        margin-right: 20px;
+    }
+}
+
+
+@media screen and (max-width: 455px) {
+
+
+    .updateShow .btn6 {
+        margin-right: 15px;
+    }
+}
+
+@media screen and (max-width: 440px) {
+
+
+    .updateShow .btn6 {
+        margin-right: 35px;
+        width: 120px;
+        font-size: 14px;
+    }
+
+    .updateShow .btn5 {
+
+        width: 120px;
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 422px) {
@@ -216,6 +303,10 @@
         width: 12px;
         height: 12px;
 
+    }
+
+    .updateShow .btn6 {
+        margin-right: 20px;
     }
 
     .updateShow .rating {
@@ -256,6 +347,9 @@
         font-size: 11px;
     }
 
+    .updateShow .btn6 {
+        margin-right: 10px;
+    }
 
 }
 
@@ -268,6 +362,18 @@
 
     .updateShow .story {
 
+        font-size: 12px;
+    }
+
+    .updateShow .btn6 {
+        margin-right: 24px;
+        width: 110px;
+        font-size: 12px;
+    }
+
+    .updateShow .btn5 {
+
+        width: 110px;
         font-size: 12px;
     }
 
@@ -322,6 +428,23 @@
     }
 
 
+}
+
+
+@media screen and (max-width: 343px) {
+
+    .updateShow .btn6 {
+        margin-right: -1px;
+        width: 120px;
+        font-size: 14px;
+    }
+
+    .updateShow .btn5 {
+
+        width: 120px;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
 }
 
 @media screen and (max-width: 325px) {
@@ -395,9 +518,18 @@
         font-size: 10px;
     }
 
+    .updateShow .btn6 {
+        margin-right: -1px;
+        width: 120px;
+        font-size: 12px;
+
+    }
+
     .updateShow .btn5 {
 
-        width: 130px;
+        width: 120px;
+        font-size: 12px;
+        margin-bottom: 10px;
     }
 
 

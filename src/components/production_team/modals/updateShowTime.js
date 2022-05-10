@@ -76,9 +76,14 @@ export default function UpdateShowTime() {
 
                         </div>
                         <div className="modal-footer border-0">
-
-                            <button type="button" className="btn-lg btn5">Update</button>
-
+                            <div className="row text-center">
+                                <div className="col">
+                                    <button type="button" className="btn5 btn-lg">Update</button>
+                                </div>
+                                <div className="col">
+                                    <button type="button" className="btn6 btn-lg">Delete</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
