@@ -27,7 +27,8 @@ export default function AllMovies() {
 
         const movies = await axios({
             url: 'http://localhost:8093/api/movies',
-            method: 'GET'
+            method: 'GET',
+            header: userToken
         }).catch((err) => {
             alert(err);
         })
@@ -121,17 +122,11 @@ export default function AllMovies() {
     }
 
     async function deleteMovie(movieId){
-        // const movies = await axios({
-        //     url: 'http://localhost:8093/api/movies/6277d5705e0fe31ac28f8940',
-        //     method: 'DELETE',
-        // }).catch((err) => {
-        //     alert(err);
-        // })
         let url = `http://localhost:8093/api/movies/${movieId}`;
         console.log(url)
         const movies = await axios({
             url: url,
-            method: 'GET',
+            method: 'DELETE',
             header: userToken
         }).catch((err) => {
             alert(err);

@@ -27,7 +27,8 @@ export default function AllMoviesCustomer() {
 
          const movies = await axios({
              url: 'http://localhost:8093/api/movies',
-             method: 'GET'
+             method: 'GET',
+             header: userToken
          }).catch((err) => {
              alert(err);
          })
