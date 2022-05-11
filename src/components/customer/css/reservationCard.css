@@ -49,7 +49,7 @@
 @media (max-width: 768px) {
     .ReservationCard .Img{
         width: 100%;
-        object-fit: fill;
+        object-fit: contain;
     }
 
     .ReservationCard .btnCancel{
