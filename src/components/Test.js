@@ -59,9 +59,9 @@ export default function Test() {
         })
     }
 
-    function click4(){
-        sendSms();
-    }
+  function click4(){
+
+  }
     return (
         <div className="addMov">
 
