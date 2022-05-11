@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import axios from "axios";
+import {uploadFile} from "../firebase/uploadFile";
 
 
 export default function Test() {
@@ -11,6 +12,13 @@ export default function Test() {
         }).catch((err)=>{
 
         })
+
+        // axios(
+        //     url: 'https://httpbin.org/post',
+        //     method: 'post',
+        //     headers:
+        //     params
+        // )
 
 
     //     let user = {
@@ -25,10 +33,21 @@ export default function Test() {
     // })
 
     }
+
+    const [file,setFile] = useState([]);
+    async function click2(){
+       // console.log(file)
+       await uploadFile(file).then((res)=>{
+           console.log(res);
+       }).catch((err)=>{
+           console.log(err);
+       })
+    }
     return (
         <div className="addMov">
 
-        <button onClick={()=> click()}>add</button>
+        <button onClick={()=> click2()}>add</button>
+            <input type="file" onChange={(e)=> setFile(e.target.files)}/>
         </div>
     );
 }
