@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
 import {uploadFile} from "../firebase/uploadFile";
+import {codeGenerator} from "../generators/codeGenerator";
+import {forgotPasswordEmail} from "../emailjs/forgotPasswordEmail";
 
 
 export default function Test() {
@@ -43,10 +45,22 @@ export default function Test() {
            console.log(err);
        })
     }
+
+    async function click3(){
+        const emailContent = {
+            email : "sonal123326@gmail.com",
+            code: codeGenerator(10)
+        }
+        await forgotPasswordEmail(emailContent).then((res)=>{
+            console.log(res)
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
     return (
         <div className="addMov">
 
-        <button onClick={()=> click2()}>add</button>
+        <button onClick={()=> click3()}>add</button>
             <input type="file" onChange={(e)=> setFile(e.target.files)}/>
         </div>
     );
