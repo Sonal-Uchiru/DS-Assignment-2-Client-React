@@ -4,23 +4,62 @@ import './forgotPassword.css'
 import {send} from "emailjs-com";
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2'
+import {codeGenerator} from "../../generators/codeGenerator";
+import {forgotPasswordEmail} from "../../email_service/forgotPasswordEmail";
 
 export default function ForgotPassword() {
 
-    const [stage1,setStage1] = useState(false);
-    const [stage2,setStage2] = useState(true);
+    const [stage1,setStage1] = useState(true);
+    const [stage2,setStage2] = useState(false);
     const [stage3,setStage3] = useState(true);
-
-    function sendEmail(e) {
+    const [invalidTxt,setInvalidTxt] = useState(true)
+    const [email,setEmail] = useState("");
+    const [inputCode,setInputCode] = useState("")
+    let code = ""
+    async function sendEmail(e) {
         e.preventDefault()
-        setStage2(false);
-        setStage1(true);
+        setInvalidTxt(true);
+        code = codeGenerator(5);
+        const emailContent = {
+            email,
+            code
+        }
+
+        await forgotPasswordEmail(emailContent).then((res) =>{
+            Swal.fire(
+                'Email has been sent!',
+                'Check your emails',
+                'success'
+            )
+            setStage2(false);
+            setStage1(true);
+        }).catch((err)=>{
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            })
+        })
+
+
     }
 
     function validateCode(e){
         e.preventDefault();
-        setStage3(false);
-        setStage2(true);
+        setInvalidTxt(false)
+        if(code === inputCode){
+            Swal.fire(
+                'Code Valid!',
+                'Now you can change your password',
+                'success'
+            )
+            setStage3(false);
+            setStage2(true);
+        }else{
+            setInvalidTxt(false)
+        }
+
     }
 
     function changePassword(e) {
@@ -73,6 +112,7 @@ export default function ForgotPassword() {
                                         type="email"
                                         id="userEmail"
                                         placeholder="Enter Email"
+                                        onChange={(e)=>{setEmail(e.target.value)}}
                                         required
                                     />
                                 </div>
@@ -95,6 +135,7 @@ export default function ForgotPassword() {
 
                         <div hidden={stage2}>
                             <form onSubmit={validateCode}>
+                                <h5 className= "text-center text-danger" hidden={invalidTxt}>Invalid Code!</h5>
                                 <div className="input-group">
                                     {' '}
                                     <span className="input-group-append bg-transparent">
@@ -108,8 +149,9 @@ export default function ForgotPassword() {
                                     <input
                                         className="form-control inp"
                                         type="text"
-                                        id="userEmail"
+                                        id="userCode"
                                         placeholder="Enter Code"
+                                        onChange={(e) => setInputCode(e.target.value)}
                                         required
                                     />
                                 </div>
