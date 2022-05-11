@@ -98,8 +98,8 @@ export default function ForgotPassword() {
                                     <span className="input-group-append bg-transparent">
                                         <span className="input-group-text bg-transparent icon">
                                             <img
-                                                src={"./../images/email (4).png"}
-                                                className="Imgs" alt= "email icon"
+                                                src={"./../images/settings.png"}
+                                                className="Imgs" alt= "settigns icon"
                                             />
                                         </span>
                                     </span>
@@ -128,13 +128,33 @@ export default function ForgotPassword() {
                         {/*Stage 3 */}
                         <div hidden={stage3}>
                             <form onSubmit={changePassword}>
+                                {/*password*/}
                                 <div className="input-group">
                                     {' '}
                                     <span className="input-group-append bg-transparent">
                                         <span className="input-group-text bg-transparent icon">
                                             <img
-                                                src={"./../images/email (4).png"}
-                                                className="Imgs" alt= "email icon"
+                                                src={"./../images/lock.png"}
+                                                className="Imgs" alt= "lock icon"
+                                            />
+                                        </span>
+                                    </span>
+                                    <input
+                                        className="form-control inp"
+                                        type="password"
+                                        id="userEmail"
+                                        placeholder="Create New Password"
+                                        required
+                                    />
+                                </div><br/>
+                                {/*confirm password*/}
+                                <div className="input-group">
+                                    {' '}
+                                    <span className="input-group-append bg-transparent">
+                                        <span className="input-group-text bg-transparent icon">
+                                            <img
+                                                src={"./../images/lock.png"}
+                                                className="Imgs" alt= "lock icon"
                                             />
                                         </span>
                                     </span>
@@ -142,7 +162,7 @@ export default function ForgotPassword() {
                                         className="form-control inp"
                                         type="text"
                                         id="userEmail"
-                                        placeholder="Enter Code"
+                                        placeholder="Confirm Password"
                                         required
                                     />
                                 </div>
