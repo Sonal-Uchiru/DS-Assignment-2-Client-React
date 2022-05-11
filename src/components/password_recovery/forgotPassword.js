@@ -6,16 +6,29 @@ import {send} from "emailjs-com";
 import Swal from 'sweetalert2'
 import {codeGenerator} from "../../generators/codeGenerator";
 import {forgotPasswordEmail} from "../../email_service/forgotPasswordEmail";
+import PasswordStrengthIndicator from "../external_components/passwordStrengthIndicator";
 
 export default function ForgotPassword() {
 
     const [stage1,setStage1] = useState(true);
-    const [stage2,setStage2] = useState(false);
-    const [stage3,setStage3] = useState(true);
+    const [stage2,setStage2] = useState(true);
+    const [stage3,setStage3] = useState(false);
     const [invalidTxt,setInvalidTxt] = useState(true)
     const [email,setEmail] = useState("");
     const [inputCode,setInputCode] = useState("")
+    const [inputPassword,setInputPassword] = useState("")
+    const [inputConfirmPassword,setInputConfirmPassword] = useState("")
     let code = ""
+
+    const [passwordValidity, setPasswordValidity] = useState({
+        minChar: null,
+        number: null,
+        specialChar: null,
+    });
+    const isNumberRegx = /\d/;
+    const specialCharacterRegx = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+
+
     async function sendEmail(e) {
         e.preventDefault()
         setInvalidTxt(true);
@@ -186,11 +199,20 @@ export default function ForgotPassword() {
                                     <input
                                         className="form-control inp"
                                         type="password"
-                                        id="userEmail"
+                                        id="userPassword"
                                         placeholder="Create New Password"
+                                        onChange={(e) => {
+                                            setPasswordValidity({
+                                                minChar: e.target.value.length >= 8,
+                                                number: isNumberRegx.test(e.target.value),
+                                                specialChar: specialCharacterRegx.test(e.target.value),
+                                            })}}
                                         required
                                     />
-                                </div><br/>
+                                </div>
+                                <br/>
+                                <PasswordStrengthIndicator validity={passwordValidity}/>
+                                <br/>
                                 {/*confirm password*/}
                                 <div className="input-group">
                                     {' '}
@@ -204,12 +226,13 @@ export default function ForgotPassword() {
                                     </span>
                                     <input
                                         className="form-control inp"
-                                        type="text"
-                                        id="userEmail"
+                                        type="password"
+                                        id="userConfirmPassword"
                                         placeholder="Confirm Password"
                                         required
                                     />
                                 </div>
+
                                 <br />
 
                                 <div className="text-center">
