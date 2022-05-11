@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import './forgotPassword.css'
 import {send} from "emailjs-com";
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2'
 
 export default function ForgotPassword() {
 
