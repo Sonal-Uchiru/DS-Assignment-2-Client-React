@@ -7,21 +7,29 @@ import MovieCardCustomer2 from "../cards/movieCardCustomer2";
 export default function AllMoviesCustomer() {
 
     var [movieData, setMovieData] = useState([]);
-    var [noNowShowingText, setNoNowShowingText] = useState("");
+    let [noNowShowingText, setNoNowShowingText] = useState("");
     var [noComingSoonText, setNoComingSoonText] = useState("");
 
 
     var [nowShowing, setNowShowing] = useState([]);
+    var [nowShowingDataHolder, setNowShowingDataHolder] = useState([]);
+
     var [comingSoon, setComingSoon] = useState([]);
+    var [comingSoonDataHolder, setComingSoonDataHolder] = useState([]);
+
 
     useEffect(() => {
         getAllMovies();
-    })
+
+    }, [])
 
      async function getAllMovies() {
+
          const movies = await axios({
              url: 'http://localhost:8093/api/movies',
              method: 'GET'
+         }).catch((err) => {
+             alert(err);
          })
 
          if(!movies){
@@ -36,7 +44,6 @@ export default function AllMoviesCustomer() {
      function filterMovies(data){
          var nowShowing = [];
          var comingSoon = [];
-    console.log(data)
          data.map((post) => {
              if(post.showing){
                  nowShowing.push(post)
@@ -46,8 +53,69 @@ export default function AllMoviesCustomer() {
              }
         })
          setNowShowing(nowShowing)
-
+         setNowShowingDataHolder(nowShowing)
          setComingSoon(comingSoon)
+         setComingSoonDataHolder(comingSoon)
+
+     }
+     function filterByGenre(e, type){
+        let genreText = e;
+        if(type == 1){
+            let filteredContent = nowShowingDataHolder.filter((post) =>
+                post.genre.toLowerCase().includes(genreText)
+            )
+            if(!genreText){
+                setNowShowing(nowShowingDataHolder);
+                setNoNowShowingText("");
+            }else{
+                if(filteredContent.length > 0){
+                    setNoNowShowingText("");
+
+                }else{
+                    setNoNowShowingText("No movies by genre "+ genreText);
+                }
+                setNowShowing(filteredContent);
+            }
+        }
+
+     }
+
+     function searchMovie(e, type){
+        let searchText = e;
+
+        if(type == 1){
+            let filteredContent = nowShowingDataHolder.filter((post) =>
+                post.name.toLowerCase().includes(searchText)
+            )
+            if(!searchText){
+                setNowShowing(nowShowingDataHolder);
+                setNoNowShowingText("");
+            }else{
+                if(filteredContent.length > 0){
+                    setNoNowShowingText("");
+
+                }else{
+                    setNoNowShowingText("No movies by name "+ searchText);
+                }
+                setNowShowing(filteredContent);
+            }
+        }else{
+            let filteredContent = comingSoonDataHolder.filter((post) =>
+                post.name.toLowerCase().includes(searchText)
+            )
+            if(!searchText){
+                setComingSoon(comingSoonDataHolder);
+                setNoComingSoonText("");
+            }else{
+                if(filteredContent.length > 0){
+                    setNoComingSoonText("");
+
+                }else{
+                    setNoComingSoonText("No coming soon movies by name "+ searchText);
+                }
+                setComingSoon(filteredContent);
+            }
+        }
 
      }
     return (
@@ -57,7 +125,7 @@ export default function AllMoviesCustomer() {
 
             <div className="main">
                 <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search Movies..."/>
+                    <input type="text" onKeyUp={(e) => searchMovie(e.target.value, 1)} className="form-control" placeholder="Search Movies..."/>
                     <div className="input-group-append">
                         <button className="btn searchbtn" type="button">
                             <svg
@@ -83,12 +151,14 @@ export default function AllMoviesCustomer() {
                     Genres
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a className="dropdown-item" href="#">Action</a></li>
-                    <li><a className="dropdown-item" href="#">Drama</a></li>
-                    <li><a className="dropdown-item" href="#">Horror</a></li>
-                    <li><a className="dropdown-item" href="#">Thriller</a></li>
-                    <li><a className="dropdown-item" href="#">Comedy</a></li>
-                    <li><a className="dropdown-item" href="#">Romance</a></li>
+                    <li onClick={() => filterByGenre("Action", 1)}><a className="dropdown-item" href="#">Action</a></li>
+                    <li onClick={() => filterByGenre("Drama", 1)}><a className="dropdown-item" href="#">Drama</a></li>
+                    <li onClick={() => filterByGenre("Horror", 1)}><a className="dropdown-item" href="#">Horror</a></li>
+                    <li onClick={() => filterByGenre("Thriller", 1)}><a className="dropdown-item" href="#">Thriller</a></li>
+                    <li onClick={() => filterByGenre("Comedy", 1)}><a className="dropdown-item" href="#">Comedy</a></li>
+                    <li onClick={() => filterByGenre("Romance", 1)}><a className="dropdown-item" href="#">Romance</a></li>
+                    <li onClick={() => filterByGenre("", 1)}><a className="dropdown-item" href="#">All</a></li>
+
                 </ul>
             </div>
 
@@ -96,6 +166,7 @@ export default function AllMoviesCustomer() {
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
+                    <h4 className = "text text-danger text-center">{noNowShowingText}</h4>
                     {nowShowing.map((post) => {
                         return (
                             <div key = {post.id} className="columns">
@@ -113,7 +184,7 @@ export default function AllMoviesCustomer() {
 
             <div className="main">
                 <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search Movies..."/>
+                    <input onKeyUp={(e) => searchMovie(e.target.value, 2)}  type="text" className="form-control" placeholder="Search Movies..."/>
                     <div className="input-group-append">
                         <button className="btn searchbtn" type="button">
                             <svg
@@ -140,12 +211,12 @@ export default function AllMoviesCustomer() {
                     Genres
                 </button>
                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a className="dropdown-item" href="#">Action</a></li>
-                    <li><a className="dropdown-item" href="#">Drama</a></li>
-                    <li><a className="dropdown-item" href="#">Horror</a></li>
-                    <li><a className="dropdown-item" href="#">Thriller</a></li>
-                    <li><a className="dropdown-item" href="#">Comedy</a></li>
-                    <li><a className="dropdown-item" href="#">Romance</a></li>
+                    <li onClick={() => filterByGenre("Action", 2)} ><a className="dropdown-item" href="#">Action</a></li>
+                    <li onClick={() => filterByGenre("Drama", 2)}><a className="dropdown-item" href="#">Drama</a></li>
+                    <li onClick={() => filterByGenre("Horror", 2)}><a className="dropdown-item" href="#">Horror</a></li>
+                    <li onClick={() => filterByGenre("Thriller", 2)}><a className="dropdown-item" href="#">Thriller</a></li>
+                    <li onClick={() => filterByGenre("Comedy", 2)}><a className="dropdown-item" href="#">Comedy</a></li>
+                    <li onClick={() => filterByGenre("Romance", 2)}><a className="dropdown-item" href="#">Romance</a></li>
                 </ul>
             </div>
 
@@ -154,6 +225,7 @@ export default function AllMoviesCustomer() {
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
+                    <h4 className = "text text-danger text-center">{noComingSoonText}</h4>
                     {comingSoon.map((post) => {
                         return (
                             <div key = {post.id} className="columns">
