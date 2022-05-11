@@ -46,6 +46,7 @@ export default function AllMoviesCustomer() {
              }
         })
          setNowShowing(nowShowing)
+
          setComingSoon(comingSoon)
 
      }
