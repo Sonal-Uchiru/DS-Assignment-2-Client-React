@@ -6,16 +6,16 @@ import MovieCardCustomer2 from "../cards/movieCardCustomer2";
 
 export default function AllMoviesCustomer() {
 
-    var [movieData, setMovieData] = useState([]);
+    let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTI1MDQ5MzU2ODYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImRheU9mWWVhciI6MTMxLCJkYXlPZldlZWsiOiJXRURORVNEQVkiLCJtb250aCI6Ik1BWSIsImRheU9mTW9udGgiOjExLCJ5ZWFyIjoyMDIyLCJtb250aFZhbHVlIjo1LCJob3VyIjoyMiwibWludXRlIjozOCwic2Vjb25kIjo1NSwibmFubyI6Njg1MDAwMDAwLCJjaHJvbm9sb2d5Ijp7ImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEiLCJpZCI6IklTTyJ9fX0.xDzxVpPzvzwi7SjrW1UUazAjGdfEOgtvlEilX5eZjnjGYPkWWdLqnkInzpQVnOxYn9zdfwcXc8z7NRIjSYxDDw";
+    let [movieData, setMovieData] = useState([]);
     let [noNowShowingText, setNoNowShowingText] = useState("");
-    var [noComingSoonText, setNoComingSoonText] = useState("");
+    let [noComingSoonText, setNoComingSoonText] = useState("");
 
+    let [nowShowing, setNowShowing] = useState([]);
+    let [nowShowingDataHolder, setNowShowingDataHolder] = useState([]);
 
-    var [nowShowing, setNowShowing] = useState([]);
-    var [nowShowingDataHolder, setNowShowingDataHolder] = useState([]);
-
-    var [comingSoon, setComingSoon] = useState([]);
-    var [comingSoonDataHolder, setComingSoonDataHolder] = useState([]);
+    let [comingSoon, setComingSoon] = useState([]);
+    let [comingSoonDataHolder, setComingSoonDataHolder] = useState([]);
 
 
     useEffect(() => {

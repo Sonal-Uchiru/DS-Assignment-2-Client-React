@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import "./../css/movieCardProduction2.css"
 
-export default function MovieCardProduction2() {
+export default function MovieCardProduction2(props) {
 
     return (
         <div className="MovieCardProduction2">
@@ -12,11 +12,12 @@ export default function MovieCardProduction2() {
                 <div className="card-body">
                     <div className="row">
                         <div className="col">
-                            <h4 className="card-title">SONIC THE HEDGEHOG 2</h4>
+                            <h4 className="card-title">{props.details.name}</h4>
                         </div>
                     </div>
 
-                    <p className="status">Coming Soon</p><br/>
+                    {props.details.showing? <p className="status">Now Showing</p> : <p className="status">Coming Soon</p>}
+                    <br/>
 
                 </div>
                 <div className="text-center">
