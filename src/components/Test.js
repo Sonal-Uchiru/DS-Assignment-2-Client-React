@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import axios from "axios";
 import {uploadFile} from "../firebase/uploadFile";
 import {codeGenerator} from "../generators/codeGenerator";
-import {forgotPasswordEmail} from "../emailjs/forgotPasswordEmail";
+import {forgotPasswordEmail} from "../email_service/forgotPasswordEmail";
+import {sendSms} from "../sms_service/sendSms";
 
 
 export default function Test() {
@@ -57,10 +58,14 @@ export default function Test() {
             console.log(err)
         })
     }
+
+    function click4(){
+        sendSms();
+    }
     return (
         <div className="addMov">
 
-        <button onClick={()=> click3()}>add</button>
+        <button onClick={()=> click4()}>add</button>
             <input type="file" onChange={(e)=> setFile(e.target.files)}/>
         </div>
     );
