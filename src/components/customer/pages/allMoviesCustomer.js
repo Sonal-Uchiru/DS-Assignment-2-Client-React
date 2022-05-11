@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import "./../css/allMoviesCustomer.css"
 import MovieCardCustomer1 from "../cards/movieCardCustomer";
@@ -6,6 +6,49 @@ import MovieCardCustomer2 from "../cards/movieCardCustomer2";
 
 export default function AllMoviesCustomer() {
 
+    var [movieData, setMovieData] = useState([]);
+    var [noNowShowingText, setNoNowShowingText] = useState("");
+    var [noComingSoonText, setNoComingSoonText] = useState("");
+
+
+    var [nowShowing, setNowShowing] = useState([]);
+    var [comingSoon, setComingSoon] = useState([]);
+
+    useEffect(() => {
+        getAllMovies();
+    })
+
+     async function getAllMovies() {
+         const movies = await axios({
+             url: 'http://localhost:8093/api/movies',
+             method: 'GET'
+         })
+
+         if(!movies){
+             setNoNowShowingText("There are no showing movies at the moment");
+             setNoComingSoonText("There are no coming soon movies at the moment");
+
+         }else{
+             filterMovies(movies.data);
+         }
+     }
+
+     function filterMovies(data){
+         var nowShowing = [];
+         var comingSoon = [];
+    console.log(data)
+         data.map((post) => {
+             if(post.showing){
+                 nowShowing.push(post)
+
+             }else{
+                 comingSoon.push(post)
+             }
+        })
+         setNowShowing(nowShowing)
+         setComingSoon(comingSoon)
+
+     }
     return (
         <div className="AllMoviesCustomer">
             <h1 className="Nowshowing">NOW SHOWING</h1>
@@ -52,21 +95,14 @@ export default function AllMoviesCustomer() {
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
-                    <div className="columns">
-                        <MovieCardCustomer1/>
-                    </div>
+                    {nowShowing.map((post) => {
+                        return (
+                            <div key = {post.id} className="columns">
+                                <MovieCardCustomer1 details = {post}/>
+                            </div>
+                        )
+                    })}
 
-                    <div className="columns">
-                        <MovieCardCustomer1/>
-                    </div>
-
-                    <div className="columns">
-                        <MovieCardCustomer1/>
-                    </div>
-
-                    <div className="columns">
-                        <MovieCardCustomer1/>
-                    </div>
                 </div>
             </div>
             <br/>
@@ -117,21 +153,13 @@ export default function AllMoviesCustomer() {
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
-                    <div className="columns">
-                        <MovieCardCustomer2/>
-                    </div>
-
-                    <div className="columns">
-                        <MovieCardCustomer2/>
-                    </div>
-
-                    <div className="columns">
-                        <MovieCardCustomer2/>
-                    </div>
-
-                    <div className="columns">
-                        <MovieCardCustomer2/>
-                    </div>
+                    {comingSoon.map((post) => {
+                        return (
+                            <div key = {post.id} className="columns">
+                                <MovieCardCustomer2 details = {post}/>
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
 
