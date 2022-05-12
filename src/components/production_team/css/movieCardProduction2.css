@@ -1,0 +1,79 @@
+.MovieCardProduction2 .card-img-top {
+    height: 400px;
+}
+
+.MovieCardProduction2 .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    max-width: 21rem;
+}
+
+.MovieCardProduction2 .card:hover{
+    transform: scale(1.01);
+}
+
+.MovieCardProduction2 .card-title {
+    font-weight: bold !important;
+    color: #041C32;
+}
+
+.MovieCardProduction2 .text {
+    color: white;
+    font-weight: bold;
+}
+
+.MovieCardProduction2 .status {
+    color: #ECB365;
+    font-weight: bold;
+}
+
+.MovieCardProduction2 .icon {
+    width: 25px;
+    height: 25px;
+}
+
+.MovieCardProduction2 .grp1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-block;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+.MovieCardProduction2 .grp1:hover {
+    transform: scale(1.5);
+}
+
+.MovieCardProduction2 .time {
+    font-weight: bold;
+    color: white;
+    margin-top: 5px;
+}
+
+.MovieCardProduction2 .imdb{
+
+    width: 70px;
+    height: 60px;
+    margin-top: -18px;
+}
+
+
+.MovieCardProduction2 .rating2{
+    font-weight: bold;
+    color: #064663;
+    float: left;
+    margin-top: -16px;
+    margin-left: 22px;
+}
+
+.MovieCardProduction2 .star{
+    width:15px;
+    height: 15px;
+    float: left;
+
+}

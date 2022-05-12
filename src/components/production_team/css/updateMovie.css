@@ -1,0 +1,219 @@
+.UpdateMov .modal-title {
+
+    font-weight: bold;
+    color: #04293A;
+}
+
+.UpdateMov input {
+
+    border: 1px solid #041C32;
+}
+
+.UpdateMov textarea {
+
+    border: 1px solid #041C32;
+}
+
+.UpdateMov label {
+
+    color: #064663;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.UpdateMov .allselect {
+
+    position: relative;
+    display: block;
+    max-width: 438px;
+    min-width: 180px;
+    margin: 0 auto;
+
+}
+
+.UpdateMov .closebtn {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 30px;
+    color: gray;
+}
+
+
+.UpdateMov select {
+    margin-top: -15px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid #041C32;
+
+}
+
+
+.UpdateMov .box {
+    width: 150px;
+    height: 150px;
+}
+
+
+.UpdateMov .Img1 {
+    width: 100%;
+    height: 100%;
+}
+
+.UpdateMov .Img2 {
+
+    width: 30px;
+    height: 30px;
+}
+
+
+.UpdateMov .btn5 {
+    background-color: #E15141;
+    color: #ffffff;
+    font-Weight: bold;
+    border: #E15141;
+    text-transform: none;
+    font-size: 20px;
+    margin-right: 25px;
+    height: 40px;
+    border-radius: 5px;
+    width: 90px;
+}
+
+.UpdateMov .btn5:hover {
+    color: #ffffff;
+    background-color: #d4301d;
+}
+
+.UpdateMov #btn4 {
+    background-color: transparent;
+    border: none;
+    margin-left: 310px;
+    margin-top: -35px;
+    position: relative;
+    font-size: 16px;
+    float: right;
+    cursor: pointer;
+
+}
+
+
+.UpdateMov .btn6 {
+    background-color: #04293A;
+    border: #04293A;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    font-size: 20px;
+    margin-right: 25px;
+    border-radius: 5px;
+    height: 40px;
+    width: 90px;
+}
+
+.UpdateMov .btn6:hover {
+    color: #04293A;
+    background-color: #ECB365;
+}
+
+
+.UpdateMov .image-upload > input {
+    display: none;
+}
+
+
+@media screen and (max-width: 577px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 300px;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 320px;
+    }
+
+}
+
+@media screen and (max-width: 504px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 290px;
+    }
+
+}
+
+@media screen and (max-width: 470px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 280px;
+    }
+
+}
+
+@media screen and (max-width: 422px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 260px;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 230px;
+    }
+
+}
+
+@media screen and (max-width: 340px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 220px;
+    }
+
+}
+
+@media screen and (max-width: 310px) {
+    .UpdateMov #btn4 {
+
+        margin-left: 195px;
+
+    }
+
+}
+
+@media screen and (max-width: 296px) {
+
+    .UpdateMov #btn4 {
+
+        margin-left: 190px;
+
+    }
+
+    .UpdateMov .btn5 {
+
+        width: 70px;
+        font-size: 15px;
+    }
+
+    .UpdateMov .btn6 {
+
+        width: 70px;
+        font-size: 15px;
+    }
+
+    .UpdateMov .modal-title {
+        font-size: 26px !important;
+    }
+
+
+}

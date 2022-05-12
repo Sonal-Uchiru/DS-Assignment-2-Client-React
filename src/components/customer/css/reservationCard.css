@@ -1,0 +1,62 @@
+.ReservationCard .card{
+    max-width: 1200px;
+    border: 2px solid #041C32;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.ReservationCard .card:hover{
+    transform: scale(1.01);
+}
+
+.ReservationCard .Img{
+    height: 400px;
+    padding: 10px;
+}
+
+.ReservationCard .card-title{
+    color: #041C32;
+    font-weight: bold !important;
+}
+
+.ReservationCard .status{
+    float: right !important;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #ECB365;
+}
+
+.ReservationCard .dName{
+    font-weight: bold;
+}
+
+.ReservationCard .btnCancel{
+    float:right;
+    margin-right: 20px;
+    background-color: #041C32;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.ReservationCard .btnCancel:hover{
+
+    background-color: #ECB365;
+    color: #041C32;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .ReservationCard .Img{
+        width: 100%;
+        object-fit: contain;
+    }
+
+    .ReservationCard .btnCancel{
+        margin-bottom: 10px;
+    }
+
+    .ReservationCard .status{
+        margin-top: 26px;
+    }
+}

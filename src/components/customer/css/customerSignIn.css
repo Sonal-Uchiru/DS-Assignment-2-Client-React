@@ -1,0 +1,274 @@
+.CusLogin {
+    overflow: auto;
+}
+
+.CusLogin .divider:after,
+.CusLogin .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+
+.CusLogin .Img {
+
+    height: 710px;
+
+}
+
+.CusLogin .rightSide {
+
+    border: 2px solid #041C32;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 40px 50px 30px;
+}
+
+.CusLogin #googlebtn {
+
+    background-color: white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 48%;
+    margin-top: 40px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: grey;
+    text-transform: none;
+}
+
+.CusLogin #gicon {
+    width: 10%;
+    margin-left: -20px;
+    margin-right: 10px;
+}
+
+.CusLogin .sign {
+
+    font-weight: bold;
+    color: #04293A;
+    font-size: 45px;
+}
+
+.CusLogin .signIn {
+    background-color: #04293A;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    font-size: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 68%;
+    margin-top: 40px;
+}
+
+.CusLogin .signIn:hover {
+    background-color: #ECB365;
+    color: #04293A;
+    font-weight: bold;
+
+}
+
+
+.CusLogin #username {
+    font-weight: bold;
+    color: #064663;
+    font-size: 20px;
+}
+
+.CusLogin #password {
+    font-weight: bold;
+    color: #064663;
+    font-size: 20px;
+}
+
+.CusLogin #remember {
+    font-weight: bold;
+    color: #064663;
+
+}
+
+.CusLogin #check {
+
+    color: #064663;
+
+}
+
+.CusLogin .forgot {
+
+    color: #ECB365;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.CusLogin .forgot:hover {
+    color: #041C32;
+}
+
+.CusLogin #dont {
+
+    text-decoration: underline;
+    color: #064663;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+
+.CusLogin #acc {
+
+    color: #064663;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.CusLogin #clickme {
+    color: #ECB365;
+    text-decoration: underline;
+}
+
+.CusLogin #clickme:hover {
+    color: #041C32;
+}
+
+.CusLogin input {
+    border: 1px solid #041C32;
+}
+
+.CusLogin .p-viewer{
+
+    float: right;
+    margin-top: -35px;
+    position: relative;
+    margin-right: 15px;
+    z-index: 1;
+    cursor:pointer;
+}
+
+.CusLogin #eyeIcon{
+    color: #041C32;
+}
+@media (min-width: 997px) {
+    .CusLogin .rightSide{
+        margin-right: 1px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 996px) {
+    .CusLogin .Img {
+        display: none;
+    }
+
+    .CusLogin {
+        margin: 20px;
+        overflow-y: hidden;
+    }
+
+    .CusLogin .col-md-8 {
+
+        width: 100%;
+    }
+
+    .CusLogin #gicon {
+        width: 10%;
+        margin-left: -10px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .CusLogin .rightSide {
+
+        padding: 30px 40px 20px;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .CusLogin .rightSide {
+
+        padding: 20px 30px 10px;
+    }
+
+    .CusLogin #acc {
+        font-size: 14px;
+    }
+
+
+}
+
+@media (max-width: 390px) {
+    .CusLogin #remember {
+        font-weight: bold;
+     font-size: 12px;
+
+    }
+
+    .CusLogin .forgot {
+        font-size: 12px;
+    }
+
+    .CusLogin #googlebtn {
+        font-size: 10px;
+        width: 68%;
+    }
+    .CusLogin #gicon {
+        width: 10%;
+        margin-left: -5px;
+        margin-right: 10px;
+
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    .CusLogin .forgot {
+        font-size: 10px;
+    }
+
+    .CusLogin #remember {
+        font-size: 10px;
+    }
+    .CusLogin #password {
+        font-size: 15px;
+    }
+
+    .CusLogin #username {
+        font-size: 15px;
+    }
+
+    .CusLogin .sign {
+        font-size: 35px;
+    }
+
+    .CusLogin .rightSide {
+        padding: 10px 20px 10px;
+    }
+
+    .CusLogin #acc {
+        font-size: 12px;
+    }
+
+    .CusLogin #googlebtn {
+        font-size: 10px;
+        width: 68%;
+    }
+    .CusLogin #gicon {
+        width: 10%;
+        margin-left: -5px;
+        margin-right: 10px;
+
+    }
+}
+

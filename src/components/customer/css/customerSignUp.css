@@ -1,0 +1,201 @@
+.CusRegister .container {
+
+    border: 2px solid #041C32;
+    margin-top: 40px;
+    width: 600px;
+    padding: 30px 60px 20px;
+    border-radius: 5px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.CusRegister .sign {
+
+    color: #04293A;
+    font-weight: bold;
+}
+
+.CusRegister select {
+    margin-top: 2px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 50px;
+    border: 1px solid #041C32;
+
+}
+
+.CusRegister input {
+
+    border: 1px solid #041C32;
+    height: 50px;
+}
+
+.CusRegister label {
+
+    color: #064663;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.CusRegister .signUp {
+    background-color: #04293A;
+    color: #ffffff;
+    font-Weight: bold;
+    text-transform: none;
+    font-size: 20px;
+    height: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 68%;
+    margin-top: 40px;
+}
+
+.CusRegister .signUp:hover {
+    color: #041C32;
+    background-color: #ECB365;
+}
+
+.CusRegister .divider:after,
+.CusRegister .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+
+.CusRegister .Img {
+
+    height: 710px;
+
+}
+
+.CusRegister .rightSide {
+
+    border: 2px solid #041C32;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 40px 50px 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.CusRegister #check {
+
+    color: #064663;
+    height: 17px;
+
+}
+
+.CusRegister #acc {
+
+    color: #064663;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.CusRegister #clickme {
+    color: #ECB365;
+    text-decoration: underline;
+}
+
+.CusRegister #clickme:hover {
+    color: #041C32;
+}
+
+
+.CusRegister .p-viewer{
+
+    float: right;
+    margin-top: -35px;
+    position: relative;
+    margin-right: 15px;
+    z-index: 1;
+    cursor:pointer;
+}
+
+.CusRegister #eyeIcon{
+    color: #041C32;
+}
+
+
+@media (min-width: 997px) {
+    .CusRegister .rightSide{
+        margin-right: 1px;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .CusRegister .Img {
+        display: none;
+    }
+
+    .CusRegister {
+        margin: 20px;
+        overflow-y: hidden;
+    }
+
+    .CusRegister .col-md-8 {
+
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .CusRegister .rightSide {
+
+        padding: 30px 40px 20px;
+    }
+
+}
+
+@media (max-width: 400px) {
+    .CusRegister .rightSide {
+
+        padding: 20px 30px 10px;
+    }
+
+    .CusRegister #acc {
+        font-size: 14px;
+    }
+
+
+}
+
+@media (max-width: 320px) {
+
+    .CusRegister .forgot {
+        font-size: 10px;
+    }
+
+    .CusRegister #remember {
+        font-size: 10px;
+    }
+    .CusRegister label{
+        font-size: 15px;
+    }
+
+    .CusRegister .sign {
+        font-size: 35px;
+    }
+
+    .CusRegister .rightSide {
+        padding: 10px 20px 10px;
+    }
+
+    .CusRegister #acc {
+        font-size: 12px;
+    }
+
+
+}
+

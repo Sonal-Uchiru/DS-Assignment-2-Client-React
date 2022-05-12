@@ -1,0 +1,57 @@
+.MovieCardCustomer2 .card-img-top {
+    height: 400px;
+}
+
+.MovieCardCustomer2 .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    max-width: 21rem;
+}
+
+.MovieCardCustomer2 .card:hover{
+    transform: scale(1.01);
+}
+
+.MovieCardCustomer2 .card-title {
+    font-weight: bold !important;
+    color: #041C32;
+}
+
+.MovieCardCustomer2 .text {
+    color: white;
+    font-weight: bold;
+}
+
+.MovieCardCustomer2 .status {
+    color: #ECB365;
+    font-weight: bold;
+}
+
+.MovieCardCustomer2 .icon {
+    width: 25px;
+    height: 25px;
+}
+
+.MovieCardCustomer2 .grp1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-block;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+.MovieCardCustomer2 .grp1:hover {
+    transform: scale(1.5);
+}
+
+.MovieCardCustomer2 .time {
+    font-weight: bold;
+    color: white;
+    margin-top: 5px;
+}
+
