@@ -9,8 +9,8 @@ import PasswordStrengthIndicator from '../external_components/passwordStrengthIn
 import { Link } from 'react-router-dom'
 
 export default function ForgotPassword() {
-    const [stage1, setStage1] = useState(true)
-    const [stage2, setStage2] = useState(false)
+    const [stage1, setStage1] = useState(false)
+    const [stage2, setStage2] = useState(true)
     const [stage3, setStage3] = useState(true)
     const [invalidTxt, setInvalidTxt] = useState(true)
     const [email, setEmail] = useState('')
@@ -18,6 +18,7 @@ export default function ForgotPassword() {
     const [inputPassword, setInputPassword] = useState('')
     const [inputConfirmPassword, setInputConfirmPassword] = useState('')
     const [misMatchTextStatus, setMisMatchTextStatus] = useState(true)
+    const [genCode, setGenCode] = useState('')
     let code = ''
 
     const [passwordValidity, setPasswordValidity] = useState({
@@ -32,7 +33,7 @@ export default function ForgotPassword() {
         return new Promise(async (resolve, reject) => {
             await axios({
                 url: 'http://localhost:8093/api/users/' + email + '/email',
-                method: 'Get',
+                method: 'GET',
             })
                 .then((res) => {
                     resolve(res.data)
@@ -48,6 +49,7 @@ export default function ForgotPassword() {
             if (res !== '') {
                 setInvalidTxt(true)
                 code = codeGenerator(5)
+                setGenCode(code)
                 const emailContent = {
                     email,
                     code,
@@ -81,8 +83,8 @@ export default function ForgotPassword() {
 
     async function validateCode(e) {
         e.preventDefault()
-        setInvalidTxt(false)
-        if (code === inputCode) {
+        setInvalidTxt(true)
+        if (genCode === inputCode) {
             await Swal.fire(
                 'Code Valid!',
                 'Now you can change your password',
@@ -112,12 +114,13 @@ export default function ForgotPassword() {
             return false
         }
         if (inputPassword === inputConfirmPassword) {
+            const content = {
+                password: inputPassword,
+            }
             await axios({
-                url: 'https://',
-                method: 'POST',
-                headers: {
-                    'x-auth-token': '',
-                },
+                url: 'http://localhost:8093/api/users/' + email + '/password',
+                method: 'PATCH',
+                data: content,
             })
                 .then((res) => {
                     Swal.fire(
@@ -229,7 +232,7 @@ export default function ForgotPassword() {
                                             <img
                                                 src={'./../images/settings.png'}
                                                 className="Imgs"
-                                                alt="settigns icon"
+                                                alt="settings icon"
                                             />
                                         </span>
                                     </span>
@@ -257,10 +260,7 @@ export default function ForgotPassword() {
                             </form>
                             <br />
                             <div className="text-center">
-                                <a
-                                    onClick={() => back()}
-                                    className="text-warning"
-                                >
+                                <a onClick={back} className="text-warning">
                                     Back
                                 </a>
                             </div>
