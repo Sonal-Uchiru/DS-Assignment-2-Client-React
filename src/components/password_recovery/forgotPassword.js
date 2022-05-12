@@ -6,11 +6,17 @@ import Swal from 'sweetalert2'
 import { codeGenerator } from '../../generators/codeGenerator'
 import { forgotPasswordEmail } from '../../email_service/forgotPasswordEmail'
 import PasswordStrengthIndicator from '../external_components/passwordStrengthIndicator'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 export default function ForgotPassword() {
-    const [stage1, setStage1] = useState(false)
+    const eye = <FontAwesomeIcon icon={faEye} />
+    const sleye = <FontAwesomeIcon icon={faEyeSlash} />
+
+    const [stage1, setStage1] = useState(true)
     const [stage2, setStage2] = useState(true)
-    const [stage3, setStage3] = useState(true)
+    const [stage3, setStage3] = useState(false)
     const [invalidTxt, setInvalidTxt] = useState(true)
     const [email, setEmail] = useState('')
     const [inputCode, setInputCode] = useState('')
@@ -27,6 +33,11 @@ export default function ForgotPassword() {
     })
     const isNumberRegx = /\d/
     const specialCharacterRegx = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
+    const [passwordShown, setPasswordShown] = useState(false)
+    // Password toggle handler
+    const togglePasswordVisibility = () => {
+        setPasswordShown(!passwordShown)
+    }
 
     function getUserByEmail() {
         return new Promise(async (resolve, reject) => {
@@ -288,7 +299,9 @@ export default function ForgotPassword() {
                                     </span>
                                     <input
                                         className="form-control inp"
-                                        type="password"
+                                        type={
+                                            passwordShown ? 'text' : 'password'
+                                        }
                                         id="userPassword"
                                         placeholder="Create New Password"
                                         onChange={(e) => {
@@ -307,6 +320,19 @@ export default function ForgotPassword() {
                                         }}
                                         required
                                     />
+                                    {/*<span className="p-viewer">*/}
+                                    {/*    <i*/}
+                                    {/*        id="eyeIcon"*/}
+                                    {/*        className={`fa ${*/}
+                                    {/*            passwordShown*/}
+                                    {/*                ? 'fa-eye'*/}
+                                    {/*                : 'fa-eye-slash'*/}
+                                    {/*        } password-icon`}*/}
+                                    {/*        onClick={togglePasswordVisibility}*/}
+                                    {/*    >*/}
+                                    {/*        {' '}*/}
+                                    {/*    </i>*/}
+                                    {/*</span>*/}
                                 </div>
                                 <br />
                                 <PasswordStrengthIndicator
