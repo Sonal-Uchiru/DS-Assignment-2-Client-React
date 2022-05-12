@@ -27,7 +27,7 @@ export default function AllMovies() {
         const movies = await axios({
             url: 'http://localhost:8093/api/movies',
             method: 'GET',
-            header: userToken
+            headers: {"x-auth-token":userToken}
         }).catch((err) => {
             showAlerts(2, "Something went wrong!")
         })
@@ -56,7 +56,6 @@ export default function AllMovies() {
         setNowShowingDataHolder(nowShowing)
         setComingSoon(comingSoon)
         setComingSoonDataHolder(comingSoon)
-
     }
 
     function filterByGenre(e, type){
@@ -71,7 +70,6 @@ export default function AllMovies() {
             }else{
                 if(filteredContent.length > 0){
                     setNoNowShowingText("");
-
                 }else{
                     setNoNowShowingText("No movies by genre "+ genreText);
                 }
@@ -135,7 +133,7 @@ export default function AllMovies() {
                const movies = await axios({
                    url: `http://localhost:8093/api/movies/${movieId}`,
                    method: 'DELETE',
-                   header: userToken
+                   headers: {"x-auth-token":userToken}
                }).catch((err) => {
                    alert(err);
                })
