@@ -6,7 +6,6 @@ import Swal from 'sweetalert2'
 import { codeGenerator } from '../../generators/codeGenerator'
 import { forgotPasswordEmail } from '../../email_service/forgotPasswordEmail'
 import PasswordStrengthIndicator from '../external_components/passwordStrengthIndicator'
-import { Link } from 'react-router-dom'
 
 export default function ForgotPassword() {
     const [stage1, setStage1] = useState(false)
