@@ -5,6 +5,7 @@ import MovieCardTheater from "../cards/movieCardTheater";
 import MovieCardTheater2 from "../cards/movieCardTheater2";
 import ShowTimeModal from "./../modals/addNewShowTime";
 
+
 export default function OneTheater() {
     let theaterId = "6277e51007fed789651bd99e";
 
@@ -68,7 +69,7 @@ export default function OneTheater() {
             </div>
 
             <h1 className="show">Show Times</h1>
-            <ShowTimeModal theaterID = {theaterId} />
+            <ShowTimeModal theaterID = {theaterId} movieID = ""/>
             <br/><br/><br/><br/>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">

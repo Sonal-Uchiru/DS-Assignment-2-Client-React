@@ -62,7 +62,7 @@ export default function AllMovies() {
         let genreText = e;
         if(type == 1){
             let filteredContent = nowShowingDataHolder.filter((post) =>
-                post.genre.toLowerCase().includes(genreText)
+                post.genre.toLowerCase().includes(genreText.toLowerCase())
             )
             if(!genreText){
                 setNowShowing(nowShowingDataHolder);
@@ -75,6 +75,22 @@ export default function AllMovies() {
                 }
                 setNowShowing(filteredContent);
             }
+        }else{
+            let filteredContent = comingSoonDataHolder.filter((post) =>
+                post.genre.toLowerCase().includes(genreText.toLowerCase())
+            )
+            if(!genreText){
+                setComingSoon(comingSoonDataHolder);
+                setNoComingSoonText("");
+            }else{
+                if(filteredContent.length > 0){
+                    setNoComingSoonText("");
+
+                }else{
+                    setNoComingSoonText("No movies by genre "+ genreText);
+                }
+                setComingSoon(filteredContent);
+            }
         }
 
     }
@@ -84,7 +100,7 @@ export default function AllMovies() {
 
         if(type == 1){
             let filteredContent = nowShowingDataHolder.filter((post) =>
-                post.name.toLowerCase().includes(searchText)
+                post.name.toLowerCase().includes(searchText.toLowerCase())
             )
             if(!searchText){
                 setNowShowing(nowShowingDataHolder);
@@ -100,7 +116,7 @@ export default function AllMovies() {
             }
         }else{
             let filteredContent = comingSoonDataHolder.filter((post) =>
-                post.name.toLowerCase().includes(searchText)
+                post.name.toLowerCase().includes(searchText.toLowerCase())
             )
             if(!searchText){
                 setComingSoon(comingSoonDataHolder);

@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/addNewShowTime.css"
+import Swal from "sweetalert2";
 
 export default function AddNewShowTime(props) {
     let theaterID = props.theaterID;
+    const passedMovieID = props.movieID;
+
+
     let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng";
     let [movieData, setMovieData] = useState([]);
     let [selectedMovie, setSelectedMovie] = useState("");
@@ -15,6 +19,7 @@ export default function AddNewShowTime(props) {
 
 
     useEffect(() => {
+        console.log(passedMovieID)
         getAllMovies()
     }, [])
 
@@ -35,7 +40,6 @@ export default function AddNewShowTime(props) {
     }
 
     async function addShowTime(){
-        console.log(selectShowTime)
         if(selectShowTime != "" && selectedMovie != ""){
 
             let showTimeObj = {
@@ -50,9 +54,10 @@ export default function AddNewShowTime(props) {
                 method: "POST",
                 headers: {"x-auth-token":userToken},
                 data: showTimeObj
+            }).then((res)=> {
+                showAlerts(1, "Show time added successfully")
             }).catch((err)=> {
-                alert(err)
-                // console.log(err)
+                showAlerts(2, err)
             })
             console.log(result)
 
@@ -104,11 +109,34 @@ export default function AddNewShowTime(props) {
 
 
     }
+
+    function showAlerts(type, text){
+        // type 1 = success, type 2 = error, type 3 = update success
+        if(type == 1){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: text,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }else if(type == 2){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: text,
+                footer: '<p style = "color : #D0193A">Currently unavailable!',
+            });
+        }
+    }
+
     return (
         <div className="addShow">
-            <button type="button" className="btn btn-lg ADD" data-toggle="modal" data-target="#exampleModal">
-                Add new Showtime
-            </button>
+            {passedMovieID != "" ?
+                <button type="button" data-toggle="modal" data-target="#exampleModal" className="btn  grp1"><img src="./../images/edit (1).png"  className="icon" alt="..."/></button>
+                :
+                <button type="button" className="btn btn-lg ADD" data-toggle="modal" data-target="#exampleModal">Add new Showtime</button> }
+
 
             <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -173,7 +201,12 @@ export default function AddNewShowTime(props) {
                                     </div>
 
                                     <div className="modal-footer border-0">
-                                        <button onClick={()=> addShowTime()} type="button" className="btn-lg btn5">Add</button>
+
+                                        {
+                                            passedMovieID != "" ?
+                                            <button onClick={()=> addShowTime()} type="button" className="btn-lg btn5">{passedMovieID}</button>
+                                            :
+                                            <button onClick={()=> addShowTime()} type="button" className="btn-lg btn5">{passedMovieID}</button> }
                                     </div>
                                 </form>
                             </div>
