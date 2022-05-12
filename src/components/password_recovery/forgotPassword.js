@@ -18,6 +18,7 @@ export default function ForgotPassword() {
     const [inputCode,setInputCode] = useState("")
     const [inputPassword,setInputPassword] = useState("")
     const [inputConfirmPassword,setInputConfirmPassword] = useState("")
+    const [misMatchTextStatus,setMisMatchTextStatus] = useState(true);
     let code = ""
 
     const [passwordValidity, setPasswordValidity] = useState({
@@ -75,8 +76,23 @@ export default function ForgotPassword() {
 
     }
 
+    function validatePassword(){
+        if(passwordValidity.minChar && passwordValidity.number && passwordValidity.specialChar){
+            return true;
+        }
+    }
+
     function changePassword(e) {
         e.preventDefault();
+        setMisMatchTextStatus(true)
+        if(!validatePassword()){
+            return false;
+        }
+        if(inputPassword === inputConfirmPassword){
+            alert("d")
+        }else{
+            setMisMatchTextStatus(false);
+        }
 
     }
 
@@ -184,7 +200,9 @@ export default function ForgotPassword() {
 
                         {/*Stage 3 */}
                         <div hidden={stage3}>
+                            <h5 className= "text-center text-danger" hidden={misMatchTextStatus}>Password Mismatch!</h5>
                             <form onSubmit={changePassword}>
+
                                 {/*password*/}
                                 <div className="input-group">
                                     {' '}
@@ -202,6 +220,7 @@ export default function ForgotPassword() {
                                         id="userPassword"
                                         placeholder="Create New Password"
                                         onChange={(e) => {
+                                            setInputPassword(e.target.value)
                                             setPasswordValidity({
                                                 minChar: e.target.value.length >= 8,
                                                 number: isNumberRegx.test(e.target.value),
@@ -212,7 +231,7 @@ export default function ForgotPassword() {
                                 </div>
                                 <br/>
                                 <PasswordStrengthIndicator validity={passwordValidity}/>
-                                <br/>
+
                                 {/*confirm password*/}
                                 <div className="input-group">
                                     {' '}
@@ -229,6 +248,7 @@ export default function ForgotPassword() {
                                         type="password"
                                         id="userConfirmPassword"
                                         placeholder="Confirm Password"
+                                        onChange={(e)=>setInputConfirmPassword(e.target.value)}
                                         required
                                     />
                                 </div>
