@@ -10,6 +10,8 @@ export default function AddNewShowTime(props) {
     let [selectShowTime, setSelectShowTime] = useState("");
 
     let [selectedMovieObj, setSelectedMovieObj] = useState({});
+    let [showTimeError, setShowTimeError] = useState("");
+    let [movieError, setMovieError] = useState("");
 
 
     useEffect(() => {
@@ -32,45 +34,72 @@ export default function AddNewShowTime(props) {
         }
     }
 
-    async function addShowTime(e){
-        e.preventDefault();
+    async function addShowTime(){
+        console.log(selectShowTime)
+        if(selectShowTime != "" && selectedMovie != ""){
+            let showTimeObj = {
+                theater_id: theaterID,
+                movie_id: selectedMovie,
+                show_time: selectShowTime
+            }
+            // console.log(showTimeObj)
+            //
+            //
+            // let result = await axios({
+            //     url: "http://localhost:8093/api/showtimes",
+            //     method: "POST",
+            //     header: userToken,
+            //     body: showTimeObj
+            // }).catch((err)=> {
+            //     alert(err)
+            // })
+            document.getElementById('closeModalbtn').click()
 
-        let showTimeObj = {
-            theater_id: theaterID,
-            movie_id: selectedMovie,
-            show_time: selectShowTime
         }
-        console.log(showTimeObj)
+        if(selectShowTime == ""){
+            setShowTimeError("Please select a showtime")
+        }else{
+            setShowTimeError("")
+        }
+        if(selectedMovie == ""){
+            setMovieError("Please select a movie")
+        }else{
+            setMovieError("")
+        }
 
 
-        // let result = await axios({
-        //     url: "http://localhost:8093/api/showtimes",
-        //     method: "POST",
-        //     header: userToken,
-        //     data: showTimeObj
-        // }).catch((err)=> {
-        //             alert(err)
-        //         })
     }
 
     async function fillMovieData(e){
-        let movieID = e.target.value
+        let movieID = e
+        let movieObj = {}
         setSelectedMovie(movieID);
 
-        let result = await axios({
-            url: `http://localhost:8093/api/showtimes/${movieID}`,
-            method: "POST",
-            header: userToken,
-        }).catch((err)=> {
-            alert(err)
-        })
-
-        let movieObj = {
-            image: result.data.image,
-            storyline: result.data.story_line,
-            duration: result.data.duration
+        if(e == ""){
+            movieObj = {
+                image: "",
+                storyline: "",
+                duration: ""
+            }
+        }else{
+            let result = await axios({
+                url: `http://localhost:8093/api/movies/${movieID}`,
+                method: "GET",
+                header: userToken,
+            }).catch((err)=> {
+                alert(err)
+            })
+            movieObj = {
+                image: result.data.image,
+                storyline: result.data.story_line,
+                duration: result.data.duration
+            }
         }
+
         setSelectedMovieObj(movieObj);
+
+
+
     }
     return (
         <div className="addShow">
@@ -84,13 +113,13 @@ export default function AddNewShowTime(props) {
                     <div className="modal-content">
                         <div className="modal-header border-0">
                             <h2 className="modal-title" id="exampleModalLabel">Add Show Time</h2>
-                            <button type="button" className="closebtn" data-dismiss="modal" aria-label="Close">
+                            <button type="button" id = "closeModalbtn" className="closebtn" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div className="modal-body">
                             <div className="container">
-                                <form onSubmit={addShowTime}>
+                                <form>
 
                                     <div className="mb-3">
                                         <label for="showTime" className="form-label">Show Time</label>
@@ -98,6 +127,8 @@ export default function AddNewShowTime(props) {
                                                onChange={(e)=> {
                                                    setSelectShowTime(e.target.value)
                                                 }}/>
+                                        <label htmlFor="showTime" className="form-label text-danger">{showTimeError}</label>
+
                                     </div>
 
                                     <div className="mb-3">
@@ -114,6 +145,8 @@ export default function AddNewShowTime(props) {
                                             })}
 
                                         </select>
+                                        <label htmlFor="showTime" className="form-label text-danger">{movieError}</label>
+
                                     </div>
 
 
@@ -137,7 +170,7 @@ export default function AddNewShowTime(props) {
                                     </div>
 
                                     <div className="modal-footer border-0">
-                                        <button type="submit" className="btn-lg btn5">Add</button>
+                                        <button onClick={()=> addShowTime()} type="button" className="btn-lg btn5">Add</button>
                                     </div>
                                 </form>
                             </div>

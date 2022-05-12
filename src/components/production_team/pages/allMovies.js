@@ -3,8 +3,7 @@ import axios from "axios";
 import "./../css/allMovies.css"
 import MovieCardProduction1 from "../cards/movieCardProduction1";
 import MovieCardProduction2 from "../cards/movieCardProduction2";
-import MovieCardCustomer1 from "../../customer/cards/movieCardCustomer";
-import MovieCardCustomer2 from "../../customer/cards/movieCardCustomer2";
+import Swal from "sweetalert2";
 
 export default function AllMovies() {
     let [movieData, setMovieData] = useState([]);
@@ -30,7 +29,7 @@ export default function AllMovies() {
             method: 'GET',
             header: userToken
         }).catch((err) => {
-            alert(err);
+            showAlerts(2, "Something went wrong!")
         })
 
         if(!movies){
@@ -121,17 +120,55 @@ export default function AllMovies() {
 
     }
 
-    async function deleteMovie(movieId){
-        let url = `http://localhost:8093/api/movies/${movieId}`;
-        console.log(url)
-        const movies = await axios({
-            url: url,
-            method: 'DELETE',
-            header: userToken
-        }).catch((err) => {
-            alert(err);
-        })
-        console.log(movies)
+    function deleteMovie(movieId){
+
+       Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then(async (result) => {
+           if (result.isConfirmed) {
+               const movies = await axios({
+                   url: `http://localhost:8093/api/movies/${movieId}`,
+                   method: 'DELETE',
+                   header: userToken
+               }).catch((err) => {
+                   alert(err);
+               })
+
+               if(movies.status == 200){
+                   showAlerts(1, "Movie Deleted successfully")
+                   getAllMovies()
+               }else{
+                   throw new Error(movies.status)
+               }
+           }
+
+       })
+
+    }
+    function showAlerts(type, text){
+        // type 1 = success, type 2 = error, type 3 = update success
+        if(type == 1){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: text,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }else if(type == 2){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: text,
+                footer: '<p style = "color : #D0193A">Currently unavailable!',
+            });
+        }
     }
 
     return (
@@ -175,6 +212,8 @@ export default function AllMovies() {
                     <li onClick={() => filterByGenre("Thriller", 1)}><a className="dropdown-item" href="#">Thriller</a></li>
                     <li onClick={() => filterByGenre("Comedy", 1)}><a className="dropdown-item" href="#">Comedy</a></li>
                     <li onClick={() => filterByGenre("Romance", 1)}><a className="dropdown-item" href="#">Romance</a></li>
+                    <li onClick={() => filterByGenre("", 1)}><a className="dropdown-item" href="#">All</a></li>
+
                 </ul>
             </div>
 
@@ -233,6 +272,8 @@ export default function AllMovies() {
                     <li onClick={() => filterByGenre("Thriller", 2)}><a className="dropdown-item" href="#">Thriller</a></li>
                     <li onClick={() => filterByGenre("Comedy", 2)}><a className="dropdown-item" href="#">Comedy</a></li>
                     <li onClick={() => filterByGenre("Romance", 2)}><a className="dropdown-item" href="#">Romance</a></li>
+                    <li onClick={() => filterByGenre("", 2)}><a className="dropdown-item" href="#">All</a></li>
+
                 </ul>
             </div>
 
@@ -246,7 +287,7 @@ export default function AllMovies() {
                     {comingSoon.map((post) => {
                         return (
                             <div key = {post.id} className="columns">
-                                <MovieCardProduction2 details = {post}/>
+                                <MovieCardProduction2 details = {post} functiondelete = {deleteMovie}   />
                             </div>
                         )
                     })}

@@ -22,7 +22,7 @@ export default function MovieCardProduction2(props) {
                 </div>
                 <div className="text-center">
                     <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn grp1"><img src="./../images/delete.png" className="icon"
+                        <button type="button" onClick = {() => props.functiondelete(props.details.id)} className="btn grp1"><img src="./../images/delete.png" className="icon"
                                                                         alt="..."/></button>
                         <button type="button" className="btn  grp1"><img src="./../images/edit (1).png" className="icon"
                                                                          alt="..."/></button>
