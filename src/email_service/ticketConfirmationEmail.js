@@ -1,3 +1,1 @@
-export function ticketConfirmationEmail(){
-
-}
+export function ticketConfirmationEmail() {}
