@@ -43,8 +43,6 @@ function App() {
                 <Route exact path="/movieCart" element={<MovieCart/>}/>
                 <Route exact path="/reservation" element={<Reservation/>}/>
 
-
-
                 {/*Production Team*/}
                 <Route exact path="/addNewShowTime" element={<AddNewShowTime/>}/>
                 <Route exact path="/updateShowTime" element={<UpdateShowTime/>}/>

@@ -61,9 +61,9 @@ export default function AllMoviesCustomer() {
      }
      function filterByGenre(e, type){
         let genreText = e;
-        if(type == 1){
+        if(type === 1){
             let filteredContent = nowShowingDataHolder.filter((post) =>
-                post.genre.toLowerCase().includes(genreText)
+                post.genre.toLowerCase().includes(genreText.toLowerCase())
             )
             if(!genreText){
                 setNowShowing(nowShowingDataHolder);
@@ -77,16 +77,31 @@ export default function AllMoviesCustomer() {
                 }
                 setNowShowing(filteredContent);
             }
-        }
+        }else{
+            let filteredContent = comingSoonDataHolder.filter((post) =>
+                post.genre.toLowerCase().includes(genreText.toLowerCase())
+            )
+            if(!genreText){
+                setComingSoon(comingSoonDataHolder);
+                setNoComingSoonText("");
+            }else{
+                if(filteredContent.length > 0){
+                    setNoComingSoonText("");
 
+                }else{
+                    setNoComingSoonText("No movies by genre "+ genreText);
+                }
+                setComingSoon(filteredContent);
+            }
+        }
      }
 
      function searchMovie(e, type){
         let searchText = e;
 
-        if(type == 1){
+        if(type === 1){
             let filteredContent = nowShowingDataHolder.filter((post) =>
-                post.name.toLowerCase().includes(searchText)
+                post.name.toLowerCase().includes(searchText.toLowerCase())
             )
             if(!searchText){
                 setNowShowing(nowShowingDataHolder);
@@ -102,7 +117,7 @@ export default function AllMoviesCustomer() {
             }
         }else{
             let filteredContent = comingSoonDataHolder.filter((post) =>
-                post.name.toLowerCase().includes(searchText)
+                post.name.toLowerCase().includes(searchText.toLowerCase())
             )
             if(!searchText){
                 setComingSoon(comingSoonDataHolder);
@@ -218,6 +233,8 @@ export default function AllMoviesCustomer() {
                     <li onClick={() => filterByGenre("Thriller", 2)}><a className="dropdown-item" href="#">Thriller</a></li>
                     <li onClick={() => filterByGenre("Comedy", 2)}><a className="dropdown-item" href="#">Comedy</a></li>
                     <li onClick={() => filterByGenre("Romance", 2)}><a className="dropdown-item" href="#">Romance</a></li>
+                    <li onClick={() => filterByGenre("", 1)}><a className="dropdown-item" href="#">All</a></li>
+
                 </ul>
             </div>
 
