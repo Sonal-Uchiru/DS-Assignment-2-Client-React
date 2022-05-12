@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import { codeGenerator } from '../../generators/codeGenerator'
 import { forgotPasswordEmail } from '../../email_service/forgotPasswordEmail'
 import PasswordStrengthIndicator from '../external_components/passwordStrengthIndicator'
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 export default function ForgotPassword() {
     const [stage1, setStage1] = useState(true)
@@ -28,22 +28,24 @@ export default function ForgotPassword() {
     const isNumberRegx = /\d/
     const specialCharacterRegx = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
 
-    function getUserByEmail(){
-       return new Promise(async (resolve, reject) => {
-           await axios({
-               url : "http://localhost:8093/api/users/"+email+"/email",
-               method : "Get",
-           }).then((res)=>{
-               resolve(res.data)
-           }).catch((err) => {
-               reject(err)
-           })
-       })
+    function getUserByEmail() {
+        return new Promise(async (resolve, reject) => {
+            await axios({
+                url: 'http://localhost:8093/api/users/' + email + '/email',
+                method: 'Get',
+            })
+                .then((res) => {
+                    resolve(res.data)
+                })
+                .catch((err) => {
+                    reject(err)
+                })
+        })
     }
     async function sendEmail(e) {
         e.preventDefault()
         await getUserByEmail().then(async (res) => {
-            if(res !== ""){
+            if (res !== '') {
                 setInvalidTxt(true)
                 code = codeGenerator(5)
                 const emailContent = {
@@ -68,25 +70,20 @@ export default function ForgotPassword() {
                             text: 'Something went wrong!',
                         })
                     })
-
-            }else{
+            } else {
                 await Swal.fire({
                     title: 'User not Found!',
                     icon: 'info',
                 })
             }
-
-
-
         })
-
     }
 
-    function validateCode(e) {
+    async function validateCode(e) {
         e.preventDefault()
         setInvalidTxt(false)
         if (code === inputCode) {
-            Swal.fire(
+            await Swal.fire(
                 'Code Valid!',
                 'Now you can change your password',
                 'success'
@@ -115,35 +112,37 @@ export default function ForgotPassword() {
             return false
         }
         if (inputPassword === inputConfirmPassword) {
-           await axios({
+            await axios({
                 url: 'https://',
                 method: 'POST',
-                headers:{
-                    "x-auth-token":""
-                }
-            }).then((res)=>{
-                Swal.fire(
-                    'Password Changed',
-                    'You can log into the system',
-                    'success'
-                )
-            }).catch((err)=>{
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                })
+                headers: {
+                    'x-auth-token': '',
+                },
             })
+                .then((res) => {
+                    Swal.fire(
+                        'Password Changed',
+                        'You can log into the system',
+                        'success'
+                    )
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                })
         } else {
             setMisMatchTextStatus(false)
         }
     }
 
-    function back(){
-        setMisMatchTextStatus(true);
+    function back() {
+        setMisMatchTextStatus(true)
         setInvalidTxt(true)
-        setStage1(false);
-        setStage2(true);
+        setStage1(false)
+        setStage2(true)
     }
 
     return (
@@ -256,11 +255,15 @@ export default function ForgotPassword() {
                                     </button>
                                 </div>
                             </form>
-                            <br/>
+                            <br />
                             <div className="text-center">
-                                <a onClick={()=>back()} className= "text-warning">Back</a>
+                                <a
+                                    onClick={() => back()}
+                                    className="text-warning"
+                                >
+                                    Back
+                                </a>
                             </div>
-
                         </div>
 
                         {/*Stage 3 */}
