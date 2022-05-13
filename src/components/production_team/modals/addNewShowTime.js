@@ -24,19 +24,17 @@ export default function AddNewShowTime(props) {
     }, [])
 
     async function getAllMovies(){
-        const movies = await axios({
+        await axios({
             url: 'http://localhost:8093/api/movies',
             method: 'GET',
             headers: {"x-auth-token":userToken}
+        }).then((res)=>{
+            setMovieData(res.data);
         }).catch((err) => {
             alert(err);
+            showAlerts(2, err)
         })
 
-        if(!movies){
-            alert("No movies available")
-        }else{
-            setMovieData(movies.data);
-        }
     }
 
     async function addShowTime(){
