@@ -19,12 +19,11 @@ export default function OneTheater() {
                 <h1 className="Tname">PVR CINEMA</h1>
             </div>
 
-            <div className="box2">
                 <img src="./../images/rows-red-seats-theater.jpg" className="TheaterImage" alt=""/>
-            </div>
-            <br/><br/><br/><br/><br/><br/><br/>
+
+            <br/><br/><br/>
             <div className="containerrr">
-                <div className="row">
+                <div className="row parent">
                     <div className="col">
 
                         <img src="./../images/location.png" className="location" alt=""/>
@@ -35,8 +34,8 @@ export default function OneTheater() {
                         <p className="address">No. 35
                             Srimath Anagarika Dharmapala Mawatha,
                             Colombo 3</p>
-
                     </div>
+                    <br/>
                     <div className="col">
                         <img src="./../images/capacity.png" className="capacity" alt=""/>
 
@@ -45,21 +44,24 @@ export default function OneTheater() {
                         <br/><br/><br/><br/>
                         <p className="seats">200 Seats</p>
                     </div>
+                    <br/>
                     <div className="col">
 
                         <img src="./../images/ticket.png" className="child" alt=""/>
                         <h3 className="childT">Child-Ticket Price</h3>
 
-                        <br/><br/><br/>
+                        <br/><br/><br/><br/>
                         <p className="childP">LKR 600</p>
                     </div>
+
+                    <br/>
 
                     <div className="col">
 
                         <img src="./../images/ticket.png" className="child" alt=""/>
                         <h3 className="adultT">Adult-Ticket Price</h3>
 
-                        <br/><br/><br/>
+                        <br/><br/><br/><br/>
                         <p className="adultP">LKR 1200</p>
                     </div>
 

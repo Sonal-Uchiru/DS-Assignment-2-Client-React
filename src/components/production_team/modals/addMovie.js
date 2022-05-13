@@ -4,6 +4,8 @@ import "./../css/addMovie.css"
 
 export default function AddMovie() {
 
+
+
     return (
         <div className="addMov">
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -20,17 +22,19 @@ export default function AddMovie() {
                             </button>
                         </div>
                         <div className="modal-body">
-
                             <div className="container">
 
-                                <form>
-
+                                <form id="addMovie">
                                     <span>
                                         <center>
                                         <div className="box">
-                                            <img className="z-depth-2 Img1" alt="100x100" src="./../images/clapperboard.png"
+                                            <img className="z-depth-2 Img1" alt="movie_image"
+                                                 src="./../images/clapperboard.png"
+                                                 id="movieImage"
                                                  data-holder-rendered="true"/>
                                         </div>
+
+
                                         </center>
                                         <div className="image-upload">
                                         <label for="file-input">
@@ -42,28 +46,66 @@ export default function AddMovie() {
                                     <br/>
                                     <div className="mb-3">
                                         <label for="Mname" className="form-label">Movie Name</label>
-                                        <input type="text" className="form-control" id="Mname" placeholder="Toy Story"/>
+                                        <input type="text" className="form-control" id="Mname" placeholder="Toy Story"
+                                        />
                                     </div>
 
                                     <div className="mb-3">
                                         <label for="duration" className="form-label">Duration</label>
-                                        <input type="text" className="form-control" id="duration"
-                                               placeholder="2 HR 30 MIN"/>
+                                        <input className="html-duration-picker" data-hide-seconds/>
+
                                     </div>
 
                                     <div className="mb-3">
                                         <label for="rating" className="form-label allselect">Ratings</label><br/>
-                                        <select className="form-select" name="rating" id="rating">
+                                        <select class="selectpicker" name="rating" id="rating">
                                             <option value="">Select the Movie from IMDB</option>
-                                            <option value="batman">The Batman</option>
+                                            <option value="batman" > The Batman</option>
                                             <option value="sonic">Sonic the Hedgehog 2</option>
                                             <option value="kfg">K.G.F Chapter 2</option>
                                         </select>
                                     </div>
 
                                     <div className="mb-3">
+                                        <label htmlFor="rating"
+                                               className="form-label allselect">Ratings</label><br/>
+                                        <div className="selector">
+
+                                            <div id="selectField">
+                                                <p>Select the Movie from IMDB</p>
+                                                <img src="./../images/arrow_down.png" className="img1"/>
+                                            </div>
+                                        </div>
+                                      <ul id="list">
+                                          <li className="options">
+                                              <img src="./../images/batman.jpg" className="img2"/>
+                                              <p>THE BATMAN</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+
+                                          <li className="options">
+                                              <img src="./../images/sonic.jpg" className="img2"/>
+                                              <p>SONIC THE HEDGEHOG 2</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+
+                                          <li className="options">
+                                              <img src="./../images/dr.jpg" className="img2"/>
+                                              <p>DOCTOR STRANGE IN THE MULTIVERSE of MADNESS</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+
+                                          <li className="options">
+                                              <img src="./../images/kgf.jpg" className="img2"/>
+                                              <p>K.G.F CHAPTER 2</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+                                      </ul>
+                                    </div>
+
+                                    <div className="mb-3">
                                         <label for="language" className="form-label allselect">Language</label><br/>
-                                        <select className="form-select" name="language" id="language">
+                                        <select className="form-select" name="language" id="language" >
                                             <option value="">Select Language</option>
                                             <option value="English">English</option>
                                             <option value="Hindi">Hindi</option>
@@ -85,8 +127,8 @@ export default function AddMovie() {
                                         <label for="status" className="form-label allselect">Status</label><br/>
                                         <select className="form-select" name="status" id="status">
                                             <option value="">Select Status</option>
-                                            <option value="Now">Now Showing</option>
-                                            <option value="Soon">Coming Soon</option>
+                                            <option value="Now Showing">Now Showing</option>
+                                            <option value= "Coming Soon">Coming Soon</option>
                                         </select>
                                     </div>
 
@@ -94,16 +136,17 @@ export default function AddMovie() {
                                     <div className="mb-3">
                                         <label for="storyLine" className="form-label">Story Line</label>
                                         <textarea className="form-control" placeholder="Story Line"
-                                                  id="storyLine"/>
+                                                  id="storyLine"
+                                        />
                                     </div>
+
                                 </form>
                             </div>
                             <br/>
 
                         </div>
                         <div className="modal-footer border-0">
-
-                            <button type="button" className="btn5">Add</button>
+                            <button form= "addMovie" type="submit" className="btn5">Add</button>
                         </div>
                     </div>
                 </div>

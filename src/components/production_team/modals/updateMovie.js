@@ -57,7 +57,7 @@ export default function UpdateMovie() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="rating" className="form-label allselect">Ratings</label><br/>
+                                        <label for="rating" className="form-label">Ratings</label>
                                         <select name="rating" id="rating" className="form-select allselect">
                                             <option value="">Select the Movie from IMDB</option>
                                             <option value="batman">The Batman</option>
@@ -67,7 +67,7 @@ export default function UpdateMovie() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="language" className="form-label allselect">Language</label><br/>
+                                        <label for="language" className="form-label">Language</label>
                                         <select name="language" className="form-select allselect" id="language">
                                             <option value="">Select Language</option>
                                             <option value="English">English</option>
@@ -77,7 +77,7 @@ export default function UpdateMovie() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="genre" className="form-label allselect">Genre</label><br/>
+                                        <label for="genre" className="form-label">Genre</label>
                                         <select name="genre" className="form-select allselect" id="genere">
                                             <option value="" selected>Select Genre</option>
                                             <option value="English">Action</option>
@@ -87,7 +87,7 @@ export default function UpdateMovie() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="status" className="form-label allselect">Status</label><br/>
+                                        <label for="status" className="form-label">Status</label>
                                         <select name="status" className="form-select allselect" id="status">
                                             <option value="" selected>Select Status</option>
                                             <option value="Now">Now Showing</option>

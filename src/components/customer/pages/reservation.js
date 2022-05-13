@@ -38,15 +38,17 @@ export default function Reservation() {
                 </div>
             </div>
 
-            <div className="containerrrr">
+            <div className="containerrrr ">
+
+
                 <ReservationCard/>
+
                 <ReservationCard/>
+
             </div>
 
 
-
             <br/>
-
 
 
             <br/><br/>
