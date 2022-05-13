@@ -4,7 +4,31 @@ import "./../css/addMovie.css"
 
 export default function AddMovie() {
 
+    const [hours, setHours] = useState(0)
+    const [minutes, setMinutes] = useState(0)
 
+
+    function handleDecrement(){
+        if(hours > 0) {
+            setHours(prevCount => prevCount - 1)
+        }
+    }
+
+    function handleIncrement(){
+        setHours(prevCount => prevCount + 1)
+    }
+
+    function handleDecrement2(){
+        if(minutes > 0 ) {
+            setMinutes(prevCount => prevCount - 1)
+        }
+    }
+
+    function handleIncrement2(){
+        if(minutes < 59 ) {
+            setMinutes(prevCount => prevCount + 1)
+        }
+    }
 
     return (
         <div className="addMov">
@@ -52,60 +76,89 @@ export default function AddMovie() {
 
                                     <div className="mb-3">
                                         <label for="duration" className="form-label">Duration</label>
-                                        <input className="html-duration-picker" data-hide-seconds/>
+                                        <div className="row d-flex">
+                                                <div className="plusMinus">
+                                                    <p className="text-center">(Hours)</p>
+                                                    <div className="btn-group btn-group-sm" role="group" aria-label="Second group">
+                                                        <button type="button" className="btn"  onClick={handleDecrement}> <i className = "fa fa-minus"/></button>
+                                                        <button  type="text" className="btn" disabled>{hours} </button>
+                                                        <button type="button" className="btn" onClick={handleIncrement}> <i className = "fa fa-plus"/></button>
+                                                    </div>
+                                                </div>
 
-                                    </div>
+                                                <div className="plusMinus">
+                                                  <p className="text-center">(Minutes)</p>
+                                                    <div className="btn-group btn-group-sm" role="group" aria-label="Second group">
+                                                        <button type="button" className="btn"  onClick={handleDecrement2}> <i className = "fa fa-minus"/></button>
+                                                        <button  type="text" className="btn" disabled>{minutes}</button>
+                                                        <button type="button" className="btn" onClick={handleIncrement2}> <i className = "fa fa-plus"/></button>
+                                                    </div>
+                                                </div>
 
-                                    <div className="mb-3">
-                                        <label for="rating" className="form-label allselect">Ratings</label><br/>
-                                        <select class="selectpicker" name="rating" id="rating">
-                                            <option value="">Select the Movie from IMDB</option>
-                                            <option value="batman" > The Batman</option>
-                                            <option value="sonic">Sonic the Hedgehog 2</option>
-                                            <option value="kfg">K.G.F Chapter 2</option>
-                                        </select>
-                                    </div>
-
-                                    <div className="mb-3">
-                                        <label htmlFor="rating"
-                                               className="form-label allselect">Ratings</label><br/>
-                                        <div className="selector">
-
-                                            <div id="selectField">
-                                                <p>Select the Movie from IMDB</p>
-                                                <img src="./../images/arrow_down.png" className="img1"/>
-                                            </div>
                                         </div>
-                                      <ul id="list">
-                                          <li className="options">
-                                              <img src="./../images/batman.jpg" className="img2"/>
-                                              <p>THE BATMAN</p>
-                                              <img src="./../images/imdb.png" className="img3"/>
-                                          </li>
+                                        <br/>
+                                        <input type="text" className="form-control" readOnly/>
 
-                                          <li className="options">
-                                              <img src="./../images/sonic.jpg" className="img2"/>
-                                              <p>SONIC THE HEDGEHOG 2</p>
-                                              <img src="./../images/imdb.png" className="img3"/>
-                                          </li>
-
-                                          <li className="options">
-                                              <img src="./../images/dr.jpg" className="img2"/>
-                                              <p>DOCTOR STRANGE IN THE MULTIVERSE of MADNESS</p>
-                                              <img src="./../images/imdb.png" className="img3"/>
-                                          </li>
-
-                                          <li className="options">
-                                              <img src="./../images/kgf.jpg" className="img2"/>
-                                              <p>K.G.F CHAPTER 2</p>
-                                              <img src="./../images/imdb.png" className="img3"/>
-                                          </li>
-                                      </ul>
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="language" className="form-label allselect">Language</label><br/>
-                                        <select className="form-select" name="language" id="language" >
+                                        <label htmlFor="rating" className="form-label rate">Ratings</label>
+                                        <div className="dropdown" id="drop">
+                                            <button className="btn dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton"
+                                                    data-toggle="dropdown"
+                                                    aria-haspopup="true"
+                                                    aria-expanded="false"
+                                            >
+                                                Select the Movie from IMDB
+                                                <i className="fa fa-solid fa-angle-down icon"/>
+                                            </button>
+
+                                            <ul className="dropdown-menu" id="style1"
+                                                aria-labelledby="dropdownMenuButton">
+                                                <li className="dropdown-item">
+                                                    <img src="./../images/batman.jpg"
+                                                         width="60" height="60" className="rounded-circle img2"
+                                                         alt=""/> THE BATMAN
+                                                    <br/>
+                                                    <img src="./../images/star.png"
+                                                         width="15" height="15" alt=""/> 8.1/10
+                                                </li>
+
+                                                <li className="dropdown-item">
+                                                    <img src="./../images/sonic.jpg" width="60" height="60"
+                                                         className="rounded-circle img2"
+                                                         alt=""/> SONIC THE HEDGEHOG 2
+                                                    <br/>
+                                                    <img src="./../images/star.png" width="15" height="15"
+                                                         alt=""/> 8.1/10
+                                                </li>
+
+                                                <li className="dropdown-item">
+                                                    <img src="./../images/kgf.jpg"
+                                                         width="60" height="60" className="rounded-circle img2"
+                                                         alt=""/> K.G.F CHAPTER 2
+                                                    <br/>
+                                                    <img src="./../images/star.png" width="15" height="15"
+                                                         alt=""/> 8.1/10
+                                                </li>
+
+
+                                                <li className="dropdown-item">
+                                                    <img src="./../images/dr.jpg" width="60" height="60"
+                                                         className="rounded-circle img2" alt=""/> DOCTOR STRANGE IN THE
+                                                    MULTIVERSE of MADNESS
+                                                    <br/>
+                                                    <img src="./../images/star.png" width="15" height="15"
+                                                         alt=""/> 8.1/10
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label for="language" className="form-label">Language</label><br/><br/>
+                                        <select className="form-select" name="language" id="language">
                                             <option value="">Select Language</option>
                                             <option value="English">English</option>
                                             <option value="Hindi">Hindi</option>
@@ -114,7 +167,7 @@ export default function AddMovie() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="genre" className="form-label allselect">Genre</label><br/>
+                                        <label for="genre" className="form-label">Genre</label><br/><br/>
                                         <select className="form-select" name="genre" id="genre">
                                             <option value="">Select Genre</option>
                                             <option value="English">Action</option>
@@ -124,11 +177,11 @@ export default function AddMovie() {
                                     </div>
 
                                     <div className="mb-3">
-                                        <label for="status" className="form-label allselect">Status</label><br/>
+                                        <label for="status" className="form-label">Status</label><br/><br/>
                                         <select className="form-select" name="status" id="status">
                                             <option value="">Select Status</option>
                                             <option value="Now Showing">Now Showing</option>
-                                            <option value= "Coming Soon">Coming Soon</option>
+                                            <option value="Coming Soon">Coming Soon</option>
                                         </select>
                                     </div>
 
@@ -146,7 +199,7 @@ export default function AddMovie() {
 
                         </div>
                         <div className="modal-footer border-0">
-                            <button form= "addMovie" type="submit" className="btn5">Add</button>
+                            <button form="addMovie" type="submit" className="btn5">Add</button>
                         </div>
                     </div>
                 </div>

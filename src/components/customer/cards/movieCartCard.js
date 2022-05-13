@@ -61,7 +61,6 @@ export default function MovieCartCard() {
                                 <p className="dName">Child-Tickets</p>
                             </div>
                             <div className="col">
-
                                     <div className="plusMinus">
                                         <div className="btn-group btn-group-sm" role="group" aria-label="Second group">
                                             <button type="button" className="btn"  onClick={handleDecrement}> <i className = "fa fa-minus"/></button>
