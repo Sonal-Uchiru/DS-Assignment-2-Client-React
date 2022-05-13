@@ -1,0 +1,91 @@
+.MovieCardCustomer .card-img-top {
+    height: 400px;
+}
+
+.MovieCardCustomer .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #041C32;
+    border-radius: 5px;
+    max-width: 21rem;
+}
+
+.MovieCardCustomer .card:hover{
+    transform: scale(1.01);
+}
+
+.MovieCardCustomer .card-title {
+    font-weight: bold !important;
+    color: white;
+}
+
+.MovieCardCustomer .text {
+    color: white;
+    font-weight: bold;
+}
+
+.MovieCardCustomer .status {
+    color: #ECB365;
+    font-weight: bold;
+}
+
+.MovieCardCustomer .icon {
+    width: 25px;
+    height: 25px;
+}
+
+.MovieCardCustomer .grp1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-block;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+.MovieCardCustomer .grp1:hover {
+    transform: scale(1.5);
+}
+
+.MovieCardCustomer .time {
+    font-weight: bold;
+    color: white;
+    margin-top: 5px;
+}
+
+.MovieCardCustomer .imdb{
+
+    width: 70px;
+    height: 60px;
+    margin-top: -18px;
+}
+
+
+.MovieCardCustomer .rating{
+    font-weight: bold;
+    float: left;
+    color: white !important;
+    margin-top: -16px;
+    margin-left: 22px;
+}
+
+.MovieCardCustomer .star{
+    width:15px;
+    height: 15px;
+    float: left;
+
+}
+
+@media screen and (max-width: 290px) {
+
+    .MovieCardCustomer .imdb{
+        width: 60px;
+        height: 60px;
+    }
+
+    .MovieCardCustomer .rating{
+       font-size: 12px;
+    }
+}

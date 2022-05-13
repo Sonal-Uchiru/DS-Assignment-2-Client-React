@@ -1,0 +1,65 @@
+.Theaters{
+    overflow-x: hidden;
+}
+
+.Theaters .theater{
+    font-weight: bold;
+    color: #04293A;
+    margin: 30px;
+
+}
+
+.Theaters .main {
+    width: 70%;
+    margin: 50px auto;
+}
+
+
+.Theaters .searchbtn{
+    background-color: transparent !important;
+    border: 2px solid #04293A;
+    border-left: none;
+   border-radius: 0px 10px 10px 0px;
+
+}
+
+.Theaters input{
+    border: 2px solid #04293A;
+    border-right: none;
+    border-radius: 10px;
+}
+
+.Theaters .icon:hover{
+    transform: scale(1.2);
+}
+
+.Theaters .containerrrr {
+    margin: 50px 15px 30px;
+}
+
+.Theaters .parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Theaters  .col {
+    flex: 25%;
+    padding: 20px;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 992px) {
+
+    .Theaters  .col{
+        flex: 50%;
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    .Theaters .parent {
+        flex-direction: column;
+        margin: auto;
+    }
+}

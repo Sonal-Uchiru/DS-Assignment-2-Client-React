@@ -1,0 +1,91 @@
+.MovieCardProduction .card-img-top {
+    height: 400px;
+}
+
+.MovieCardProduction .card {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    background-color: #041C32;
+    border-radius: 5px;
+    max-width: 21rem;
+}
+
+.MovieCardProduction .card:hover{
+    transform: scale(1.01);
+}
+
+.MovieCardProduction .card-title {
+    font-weight: bold !important;
+    color: white;
+}
+
+.MovieCardProduction .text {
+    color: white;
+    font-weight: bold;
+}
+
+.MovieCardProduction .status {
+    color: #ECB365;
+    font-weight: bold;
+}
+
+.MovieCardProduction .icon {
+    width: 25px;
+    height: 25px;
+}
+
+.MovieCardProduction .grp1 {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    box-shadow: none;
+    display: inline-block;
+    text-align: center;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+.MovieCardProduction .grp1:hover {
+    transform: scale(1.5);
+}
+
+.MovieCardProduction .time {
+    font-weight: bold;
+    color: white;
+    margin-top: 5px;
+}
+
+.MovieCardProduction .imdb{
+
+    width: 70px;
+    height: 60px;
+    margin-top: -18px;
+}
+
+
+.MovieCardProduction .rating{
+    font-weight: bold;
+    float: left;
+    color: white !important;
+    margin-top: -16px;
+    margin-left: 22px;
+}
+
+.MovieCardProduction .star{
+    width:15px;
+    height: 15px;
+    float: left;
+
+}
+
+@media screen and (max-width: 290px) {
+
+    .MovieCardProduction .imdb{
+        width: 60px;
+        height: 60px;
+    }
+
+    .MovieCardProduction .rating{
+        font-size: 12px;
+    }
+}
