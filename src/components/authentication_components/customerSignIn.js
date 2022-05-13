@@ -12,18 +12,26 @@ const sleye = <FontAwesomeIcon icon={faEyeSlash} />
 
 export default function CustomerLogin() {
     const [passwordShown, setPasswordShown] = useState(false)
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [invalidTxtStatus, setInvalidTxtStatus] = useState(true)
+
+    useEffect(() => {
+        const savedUsername = localStorage.getItem('moon-cinema-username')
+        if (savedUsername) {
+            setUsername(savedUsername)
+            document.getElementById('remember-check').checked = true
+        }
+    })
     // Password toggle handler
     const togglePasswordVisibility = () => {
         setPasswordShown(!passwordShown)
     }
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
-
-    const [invalidTxt, setInvalidTxt] = useState('')
-
     async function signIn(e) {
         e.preventDefault()
+        setInvalidTxtStatus(true)
+        isRememberMe()
         const content = {
             username,
             password,
@@ -34,22 +42,18 @@ export default function CustomerLogin() {
             data: content,
         })
             .then((res) => {
-                // if(res.data.token) {
-                //     // save localstorage
-                //     saveTokenInLocalStorage(res.data.token)
-                //     // path separation
-                //     navigateHome(res.data.userRole)
-                // }else{
-                //     console.log(res)
-                // }
+                if(res.data.token) {
+                    // save localstorage
+                    saveTokenInLocalStorage(res.data.token)
+                    // path separation
+                    navigateHome(res.data.userRole)
+                }else{
+                    setInvalidTxtStatus(false)
+                }
 
             })
             .catch(async (err) => {
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
-                })
+                setInvalidTxtStatus(false)
             })
     }
 
@@ -73,6 +77,13 @@ export default function CustomerLogin() {
         }
     }
 
+    function isRememberMe() {
+        const isRemember = document.getElementById('remember-check').checked
+        if (isRemember) {
+            localStorage.setItem('moon-cinema-username', username)
+        }
+    }
+
     return (
         <div className="CusLogin">
             <section className="">
@@ -89,8 +100,11 @@ export default function CustomerLogin() {
                         <div className="col-md-8 col-lg-6 col-xl-5 offset-xl-1 rightSide">
                             <h1 className="sign">Sign in</h1>
                             <br />
-                            <h5 className="text-center text-danger">
-                                {invalidTxt}
+                            <h5
+                                className="text-center text-danger"
+                                hidden={invalidTxtStatus}
+                            >
+                                Invalid Credentials!
                             </h5>
                             <form onSubmit={signIn}>
                                 <div className="form-outline mb-4">
@@ -106,6 +120,7 @@ export default function CustomerLogin() {
                                         id="form3Example3"
                                         className="form-control form-control-lg"
                                         placeholder="Username"
+                                        Value={username}
                                         onKeyDown={preventWhiteSpace}
                                         onChange={(e) =>
                                             setUsername(e.target.value)
@@ -156,7 +171,7 @@ export default function CustomerLogin() {
                                             className="form-check-input me-2"
                                             type="checkbox"
                                             value=""
-                                            id="check"
+                                            id="remember-check"
                                         />
                                         <label
                                             className="form-check-label"
@@ -178,14 +193,14 @@ export default function CustomerLogin() {
                                     Sign in
                                 </button>
 
-                                <button className="btn" id="googlebtn">
-                                    <img
-                                        id="gicon"
-                                        src="/images/google.png"
-                                        alt="googleIcon"
-                                    />
-                                    Continue with Google
-                                </button>
+                                {/*<button className="btn" id="googlebtn">*/}
+                                {/*    <img*/}
+                                {/*        id="gicon"*/}
+                                {/*        src="/images/google.png"*/}
+                                {/*        alt="googleIcon"*/}
+                                {/*    />*/}
+                                {/*    Continue with Google*/}
+                                {/*</button>*/}
 
                                 <span className="text-center" id="acc">
                                     Don't you have an account yet?{' '}
