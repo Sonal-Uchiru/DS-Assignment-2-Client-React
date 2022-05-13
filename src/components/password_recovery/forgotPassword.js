@@ -34,9 +34,15 @@ export default function ForgotPassword() {
     const isNumberRegx = /\d/
     const specialCharacterRegx = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
     const [passwordShown, setPasswordShown] = useState(false)
+    const [confirmPasswordShown,setConfirmPasswordShown] = useState(false);
     // Password toggle handler
     const togglePasswordVisibility = () => {
         setPasswordShown(!passwordShown)
+    }
+
+    // Confirm password visibility
+    const toggleConfirmPasswordVisibility = () =>{
+        setConfirmPasswordShown(!confirmPasswordShown)
     }
 
     function getUserByEmail() {
@@ -320,19 +326,20 @@ export default function ForgotPassword() {
                                         }}
                                         required
                                     />
-                                    {/*<span className="p-viewer">*/}
-                                    {/*    <i*/}
-                                    {/*        id="eyeIcon"*/}
-                                    {/*        className={`fa ${*/}
-                                    {/*            passwordShown*/}
-                                    {/*                ? 'fa-eye'*/}
-                                    {/*                : 'fa-eye-slash'*/}
-                                    {/*        } password-icon`}*/}
-                                    {/*        onClick={togglePasswordVisibility}*/}
-                                    {/*    >*/}
-                                    {/*        {' '}*/}
-                                    {/*    </i>*/}
-                                    {/*</span>*/}
+                                    <span className="input-group-append custom-border">
+                                         <span className="p-viewer bg-transparent icon  input-group-append">
+                                        <i
+                                            id="eyeIcon"
+                                            className={`fa ${
+                                                passwordShown
+                                                    ? 'fa-eye'
+                                                    : 'fa-eye-slash'
+                                            } password-icon Imgs` }
+                                            onClick={togglePasswordVisibility}
+                                        >
+                                            {' '}
+                                        </i>
+                                         </span></span>
                                 </div>
                                 <br />
                                 <PasswordStrengthIndicator
@@ -353,7 +360,9 @@ export default function ForgotPassword() {
                                     </span>
                                     <input
                                         className="form-control inp"
-                                        type="password"
+                                        type={
+                                            confirmPasswordShown ? 'text' : 'password'
+                                        }
                                         id="userConfirmPassword"
                                         placeholder="Confirm Password"
                                         onChange={(e) =>
@@ -363,6 +372,20 @@ export default function ForgotPassword() {
                                         }
                                         required
                                     />
+                                    <span className="input-group-append custom-border">
+                                         <span className="p-viewer bg-transparent icon  input-group-append">
+                                        <i
+                                            id="eyeIcon"
+                                            className={`fa ${
+                                                confirmPasswordShown
+                                                    ? 'fa-eye'
+                                                    : 'fa-eye-slash'
+                                            } password-icon Imgs` }
+                                            onClick={toggleConfirmPasswordVisibility}
+                                        >
+                                            {' '}
+                                        </i>
+                                         </span></span>
                                 </div>
 
                                 <br />
