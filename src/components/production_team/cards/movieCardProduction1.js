@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import "./../css/movieCardProduction.css"
 
-export default function MovieCardProduction1() {
+export default function MovieCardProduction1(props) {
 
     return (
         <div className="MovieCardProduction">
@@ -12,7 +12,7 @@ export default function MovieCardProduction1() {
                 <div className="card-body">
                     <div className="row">
                         <div className="col-8">
-                            <h4 className="card-title">THE BATMAN</h4>
+                            <h4 className="card-title">{props.details.name}</h4>
                         </div>
 
                         <div className="col-4">
@@ -24,12 +24,13 @@ export default function MovieCardProduction1() {
                         </div>
                     </div>
 
-                    <p className="status">Now Showing</p><br/>
+                    {props.details.showing? <p className="status">Now Showing</p> : <p className="status">Coming Soon</p>}
+                    <br/>
 
                 </div>
                 <div className="text-center">
                     <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn grp1"><img src="./../images/delete.png" className="icon"
+                        <button type="button" onClick = {() => props.functiondelete(props.details.id)} className="btn grp1"><img src="./../images/delete.png" className="icon"
                                                                         alt="..."/></button>
                         <button type="button" className="btn  grp1"><img src="./../images/edit (1).png" className="icon"
                                                                          alt="..."/></button>

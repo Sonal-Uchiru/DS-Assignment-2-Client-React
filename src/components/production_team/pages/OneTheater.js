@@ -3,8 +3,11 @@ import axios from "axios";
 import "./../css/oneTheater.css"
 import MovieCardTheater from "../cards/movieCardTheater";
 import MovieCardTheater2 from "../cards/movieCardTheater2";
+import ShowTimeModal from "./../modals/addNewShowTime";
+
 
 export default function OneTheater() {
+    let theaterId = "6277e51007fed789651bd99e";
 
     return (
         <div className="OneTheater">
@@ -66,7 +69,7 @@ export default function OneTheater() {
             </div>
 
             <h1 className="show">Show Times</h1>
-            <button type="button" className="btn btn-lg ADD">Add New Showtime</button>
+            <ShowTimeModal theaterID = {theaterId} movieID = ""/>
             <br/><br/><br/><br/>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
