@@ -14,8 +14,8 @@ export default function ForgotPassword() {
     const eye = <FontAwesomeIcon icon={faEye} />
     const sleye = <FontAwesomeIcon icon={faEyeSlash} />
 
-    const [stage1, setStage1] = useState(true)
-    const [stage2, setStage2] = useState(false)
+    const [stage1, setStage1] = useState(false)
+    const [stage2, setStage2] = useState(true)
     const [stage3, setStage3] = useState(true)
     const [invalidTxt, setInvalidTxt] = useState(true)
     const [email, setEmail] = useState('')
@@ -34,14 +34,14 @@ export default function ForgotPassword() {
     const isNumberRegx = /\d/
     const specialCharacterRegx = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
     const [passwordShown, setPasswordShown] = useState(false)
-    const [confirmPasswordShown,setConfirmPasswordShown] = useState(false);
+    const [confirmPasswordShown, setConfirmPasswordShown] = useState(false)
     // Password toggle handler
     const togglePasswordVisibility = () => {
         setPasswordShown(!passwordShown)
     }
 
     // Confirm password visibility
-    const toggleConfirmPasswordVisibility = () =>{
+    const toggleConfirmPasswordVisibility = () => {
         setConfirmPasswordShown(!confirmPasswordShown)
     }
 
@@ -129,32 +129,49 @@ export default function ForgotPassword() {
         if (!validatePassword()) {
             return false
         }
+
         if (inputPassword === inputConfirmPassword) {
             const content = {
                 password: inputPassword,
             }
-            await axios({
-                url: 'http://localhost:8093/api/users/' + email + '/password',
-                method: 'PATCH',
-                data: content,
+            await Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, change it!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    changePasswordApi(content)
+                }
             })
-                .then((res) => {
-                    Swal.fire(
-                        'Password Changed',
-                        'You can log into the system',
-                        'success'
-                    )
-                })
-                .catch((err) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong!',
-                    })
-                })
         } else {
             setMisMatchTextStatus(false)
         }
+    }
+
+    async function changePasswordApi(content) {
+        await axios({
+            url: 'http://localhost:8093/api/users/' + email + '/password',
+            method: 'PATCH',
+            data: content,
+        })
+            .then((res) => {
+                Swal.fire(
+                    'Password Changed',
+                    'You can log into the system',
+                    'success'
+                )
+            })
+            .catch((err) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+            })
     }
 
     function back() {
@@ -327,19 +344,22 @@ export default function ForgotPassword() {
                                         required
                                     />
                                     <span className="input-group-append custom-border">
-                                         <span className="p-viewer bg-transparent icon  input-group-append">
-                                        <i
-                                            id="eyeIcon"
-                                            className={`fa ${
-                                                passwordShown
-                                                    ? 'fa-eye'
-                                                    : 'fa-eye-slash'
-                                            } password-icon Imgs` }
-                                            onClick={togglePasswordVisibility}
-                                        >
-                                            {' '}
-                                        </i>
-                                         </span></span>
+                                        <span className="p-viewer bg-transparent icon  input-group-append">
+                                            <i
+                                                id="eyeIcon"
+                                                className={`fa ${
+                                                    passwordShown
+                                                        ? 'fa-eye'
+                                                        : 'fa-eye-slash'
+                                                } password-icon Imgs`}
+                                                onClick={
+                                                    togglePasswordVisibility
+                                                }
+                                            >
+                                                {' '}
+                                            </i>
+                                        </span>
+                                    </span>
                                 </div>
                                 <br />
                                 <PasswordStrengthIndicator
@@ -361,7 +381,9 @@ export default function ForgotPassword() {
                                     <input
                                         className="form-control password-inp"
                                         type={
-                                            confirmPasswordShown ? 'text' : 'password'
+                                            confirmPasswordShown
+                                                ? 'text'
+                                                : 'password'
                                         }
                                         id="userConfirmPassword"
                                         placeholder="Confirm Password"
@@ -373,19 +395,22 @@ export default function ForgotPassword() {
                                         required
                                     />
                                     <span className="input-group-append custom-border">
-                                         <span className="p-viewer bg-transparent icon  input-group-append">
-                                        <i
-                                            id="eyeIcon"
-                                            className={`fa ${
-                                                confirmPasswordShown
-                                                    ? 'fa-eye'
-                                                    : 'fa-eye-slash'
-                                            } password-icon Imgs` }
-                                            onClick={toggleConfirmPasswordVisibility}
-                                        >
-                                            {' '}
-                                        </i>
-                                         </span></span>
+                                        <span className="p-viewer bg-transparent icon  input-group-append">
+                                            <i
+                                                id="eyeIcon"
+                                                className={`fa ${
+                                                    confirmPasswordShown
+                                                        ? 'fa-eye'
+                                                        : 'fa-eye-slash'
+                                                } password-icon Imgs`}
+                                                onClick={
+                                                    toggleConfirmPasswordVisibility
+                                                }
+                                            >
+                                                {' '}
+                                            </i>
+                                        </span>
+                                    </span>
                                 </div>
 
                                 <br />
