@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 import './customerSignIn.css'
-import axios from "axios";
+import axios from 'axios'
 
 const eye = <FontAwesomeIcon icon={faEye} />
 const sleye = <FontAwesomeIcon icon={faEyeSlash} />
@@ -17,31 +17,62 @@ export default function CustomerLogin() {
         setPasswordShown(!passwordShown)
     }
 
-    const [username,setUsername] = useState("");
-    const [password,setPassword] = useState("");
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
-    function signIn(e){
+    const [invalidTxt, setInvalidTxt] = useState('')
+
+    async function signIn(e) {
         e.preventDefault()
         const content = {
             username,
-            password
+            password,
         }
         axios({
-            url: 'https://',
+            url: 'http://localhost:8093/api/auth',
             method: 'POST',
-            data:content
-        }).then((res) =>{
-            // save localstorage
-            // path separation
+            data: content,
         })
+            .then((res) => {
+                // if(res.data.token) {
+                //     // save localstorage
+                //     saveTokenInLocalStorage(res.data.token)
+                //     // path separation
+                //     navigateHome(res.data.userRole)
+                // }else{
+                //     console.log(res)
+                // }
 
+            })
+            .catch(async (err) => {
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!',
+                })
+            })
+    }
+
+    function saveTokenInLocalStorage(token) {
+        localStorage.setItem('moon-cinema-token', token)
+    }
+
+    function navigateHome(userRole) {
+        if (userRole === 'user') {
+            // navigate to customer home
+            alert('customer')
+        } else if (userRole === 'admin') {
+            // navigate to admin home
+            alert('Production team')
+        }
     }
 
     const preventWhiteSpace = (e) => {
-        if(e.key === " "){
-            e.preventDefault();
+        if (e.key === ' ') {
+            e.preventDefault()
         }
     }
+
     return (
         <div className="CusLogin">
             <section className="">
@@ -58,6 +89,9 @@ export default function CustomerLogin() {
                         <div className="col-md-8 col-lg-6 col-xl-5 offset-xl-1 rightSide">
                             <h1 className="sign">Sign in</h1>
                             <br />
+                            <h5 className="text-center text-danger">
+                                {invalidTxt}
+                            </h5>
                             <form onSubmit={signIn}>
                                 <div className="form-outline mb-4">
                                     <label
@@ -73,7 +107,9 @@ export default function CustomerLogin() {
                                         className="form-control form-control-lg"
                                         placeholder="Username"
                                         onKeyDown={preventWhiteSpace}
-                                        onChange={(e)=> setUsername(e.target.value)}
+                                        onChange={(e) =>
+                                            setUsername(e.target.value)
+                                        }
                                         required
                                     />
                                 </div>
@@ -121,7 +157,6 @@ export default function CustomerLogin() {
                                             type="checkbox"
                                             value=""
                                             id="check"
-
                                         />
                                         <label
                                             className="form-check-label"
