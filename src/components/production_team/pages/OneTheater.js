@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/oneTheater.css"
 import MovieCardTheater from "../cards/movieCardTheater";
-import MovieCardTheater2 from "../cards/movieCardTheater2";
 import ShowTimeModal from "./../modals/addNewShowTime";
 import Swal from "sweetalert2";
 
@@ -21,12 +20,14 @@ export default function OneTheater() {
     }, [])
 
     async function getTheaterDetails(){
+        alert("as")
         await axios({
             url: `http://localhost:8093/api/theaters/${theaterId}`,
             method: 'GET',
             headers: {"x-auth-token":userToken}
 
         }).then((res)=> {
+
             setTheaterDetails(res.data)
         }).catch((err)=> {
             showAlerts(2, err);
@@ -42,7 +43,6 @@ export default function OneTheater() {
             method: 'GET',
             headers: {"x-auth-token":userToken}
         }).then((res)=> {
-            console.log(res.data)
             setShowTimes(res.data)
         }).catch((err)=>{
             showAlerts(2, err)
@@ -74,16 +74,16 @@ export default function OneTheater() {
         <div className="OneTheater">
 
             <div className="box">
-                <img src="./../images/new_logo.png" className="logo"/>
+                <img src={theaterDetails.logo} className="logo"/>
             </div>
             <div className="theaterName">
                 <h1 className="Tname">PVR CINEMA</h1>
             </div>
 
             <div className="box2">
-                <img src="./../images/rows-red-seats-theater.jpg" className="TheaterImage" alt=""/>
+                <img src={theaterDetails.image} className="TheaterImage" alt=""/>
             </div>
-            <br/><br/><br/><br/><br/><br/><br/>
+            <br/><br/>
             <div className="containerrr">
                 <div className="row parent">
                     <div className="col">
@@ -92,7 +92,7 @@ export default function OneTheater() {
 
                         <h3 className="locationN">Location</h3>
 
-                        <br/><br/><br/><br/>
+                        <br/><br/><br/>
                         <p className="address">{theaterDetails.location}</p>
 
                     </div>
@@ -102,7 +102,7 @@ export default function OneTheater() {
 
                         <h3 className="capacityY">Capacity</h3>
 
-                        <br/><br/><br/><br/>
+                        <br/><br/><br/>
                         <p className="seats">{theaterDetails.capacity} Seats</p>
                     </div>
                     <br/>
@@ -132,31 +132,18 @@ export default function OneTheater() {
             </div>
 
             <h1 className="show">Show Times</h1>
-            <ShowTimeModal theaterID = {theaterId} movieID = ""/>
+            <ShowTimeModal theaterID = {theaterId} getDetailsFunction = {getShowTimeDetails} />
             <br/><br/><br/><br/>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
-                <div className="row parent">
                     {showTimes.map((post)=> {
+                        return (
+                            <div className="row parent">
+                                <MovieCardTheater key = {post.showTime.id} movieDetails = {post.movie} showTimeDetails = {post.showTime} />
+                            </div>
 
+                        )
                     })}
-                    <div className="colmn">
-                        <MovieCardTheater/>
-                    </div>
-
-                    <div className="colmn">
-                        <MovieCardTheater/>
-                    </div>
-
-                    <div className="colmn">
-                        <MovieCardTheater/>
-                    </div>
-
-                    <div className="colmn">
-                        <MovieCardTheater/>
-                    </div>
-
-                </div>
 
             </div>
 

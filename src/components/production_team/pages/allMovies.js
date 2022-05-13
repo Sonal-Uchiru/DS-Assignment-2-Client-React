@@ -146,20 +146,17 @@ export default function AllMovies() {
             confirmButtonText: "Yes, delete it!",
         }).then(async (result) => {
            if (result.isConfirmed) {
-               const movies = await axios({
+               await axios({
                    url: `http://localhost:8093/api/movies/${movieId}`,
                    method: 'DELETE',
                    headers: {"x-auth-token":userToken}
+               }).then((res)=> {
+                   showAlerts(1, "Movie Deleted successfully")
+                   getAllMovies()
                }).catch((err) => {
                    alert(err);
                })
 
-               if(movies.status == 200){
-                   showAlerts(1, "Movie Deleted successfully")
-                   getAllMovies()
-               }else{
-                   throw new Error(movies.status)
-               }
            }
 
        })

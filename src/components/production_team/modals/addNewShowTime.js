@@ -18,6 +18,7 @@ export default function AddNewShowTime(props) {
 
 
     useEffect(() => {
+
         getAllMovies()
     }, [])
 
@@ -52,6 +53,7 @@ export default function AddNewShowTime(props) {
                 data: showTimeObj
             }).then((res)=> {
                 showAlerts(1, "Show time added successfully")
+                props.getDetailsFunction()
             }).catch((err)=> {
                 showAlerts(2, err)
             })
@@ -81,7 +83,7 @@ export default function AddNewShowTime(props) {
 
         if(e == ""){
             movieObj = {
-                image: "",
+                image: "https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100006/137486703-no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-.jpg?fj=1",
                 storyline: "",
                 duration: ""
             }
@@ -179,7 +181,7 @@ export default function AddNewShowTime(props) {
                                         <div className="column left">
                                             <div className="box">
                                                 <img className="z-depth-2 Img1" alt="100x100"
-                                                     src="./../images/sonic.jpg"
+                                                     src={selectedMovieObj.image}
                                                      data-holder-rendered="true"/>
                                             </div>
                                         </div>
