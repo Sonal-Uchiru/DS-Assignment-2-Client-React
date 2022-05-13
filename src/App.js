@@ -17,7 +17,7 @@ import MovieCardProduction2 from './components/production_team/cards/movieCardPr
 import CustomerHeader from './components/customer/navigation/customerHeader'
 import ProductionTeamHeader from './components/production_team/navigation/productionTeamHeader'
 import AllMoviesCustomer from './components/customer/pages/allMoviesCustomer'
-import CustomerLogin from './components/customer/pages/customerSignIn'
+import CustomerLogin from './components/authentication_components/customerSignIn'
 import ProductionTeamLogin from './components/production_team/pages/productionSignIn'
 import MovieCart from './components/customer/pages/movieCart'
 

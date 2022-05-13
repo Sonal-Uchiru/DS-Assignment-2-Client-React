@@ -4,19 +4,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-import './../css/customerSignIn.css'
+import './customerSignIn.css'
+import axios from "axios";
 
 const eye = <FontAwesomeIcon icon={faEye} />
 const sleye = <FontAwesomeIcon icon={faEyeSlash} />
 
 export default function CustomerLogin() {
     const [passwordShown, setPasswordShown] = useState(false)
-    let [Password, setPassword] = useState('')
     // Password toggle handler
     const togglePasswordVisibility = () => {
         setPasswordShown(!passwordShown)
     }
 
+    const [username,setUsername] = useState("");
+    const [password,setPassword] = useState("");
+
+    function signIn(e){
+        e.preventDefault()
+        const content = {
+            username,
+            password
+        }
+        axios({
+            url: 'https://',
+            method: 'POST',
+            data:content
+        }).then((res) =>{
+            // save localstorage
+            // path separation
+        })
+
+    }
+
+    const preventWhiteSpace = (e) => {
+        if(e.key === " "){
+            e.preventDefault();
+        }
+    }
     return (
         <div className="CusLogin">
             <section className="">
@@ -33,11 +58,11 @@ export default function CustomerLogin() {
                         <div className="col-md-8 col-lg-6 col-xl-5 offset-xl-1 rightSide">
                             <h1 className="sign">Sign in</h1>
                             <br />
-                            <form>
+                            <form onSubmit={signIn}>
                                 <div className="form-outline mb-4">
                                     <label
                                         className="form-label"
-                                        for="form3Example3"
+                                        form="form3Example3"
                                         id="username"
                                     >
                                         Username
@@ -47,13 +72,16 @@ export default function CustomerLogin() {
                                         id="form3Example3"
                                         className="form-control form-control-lg"
                                         placeholder="Username"
+                                        onKeyDown={preventWhiteSpace}
+                                        onChange={(e)=> setUsername(e.target.value)}
+                                        required
                                     />
                                 </div>
 
                                 <div className="form-outline mb-3">
                                     <label
                                         className="form-label"
-                                        for="form3Example4"
+                                        form="form3Example4"
                                         id="password"
                                     >
                                         Password
@@ -65,9 +93,11 @@ export default function CustomerLogin() {
                                         type={
                                             passwordShown ? 'text' : 'password'
                                         }
-                                        onChange={(e) => {
+                                        onKeyDown={preventWhiteSpace}
+                                        onChange={(e) =>
                                             setPassword(e.target.value)
-                                        }}
+                                        }
+                                        required
                                     />
                                     <span className="p-viewer">
                                         <i
@@ -91,6 +121,7 @@ export default function CustomerLogin() {
                                             type="checkbox"
                                             value=""
                                             id="check"
+
                                         />
                                         <label
                                             className="form-check-label"
