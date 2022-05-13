@@ -132,7 +132,6 @@ export default function OneTheater() {
             <br/><br/><br/><br/>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
-
                 <div className="row parent">
                     {showTimes.map((post)=> {
 
