@@ -4,6 +4,8 @@ import "./../css/addMovie.css"
 
 export default function AddMovie() {
 
+
+
     return (
         <div className="addMov">
             <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -50,19 +52,55 @@ export default function AddMovie() {
 
                                     <div className="mb-3">
                                         <label for="duration" className="form-label">Duration</label>
-                                        <input type="text" className="form-control" id="duration"
-                                               placeholder="2 HR 30 MIN"
-                                        />
+                                        <input className="html-duration-picker" data-hide-seconds/>
+
                                     </div>
 
                                     <div className="mb-3">
                                         <label for="rating" className="form-label allselect">Ratings</label><br/>
-                                        <select className="form-select" name="rating" id="rating">
+                                        <select class="selectpicker" name="rating" id="rating">
                                             <option value="">Select the Movie from IMDB</option>
-                                            <option value="batman">The Batman</option>
+                                            <option value="batman" > The Batman</option>
                                             <option value="sonic">Sonic the Hedgehog 2</option>
                                             <option value="kfg">K.G.F Chapter 2</option>
                                         </select>
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label htmlFor="rating"
+                                               className="form-label allselect">Ratings</label><br/>
+                                        <div className="selector">
+
+                                            <div id="selectField">
+                                                <p>Select the Movie from IMDB</p>
+                                                <img src="./../images/arrow_down.png" className="img1"/>
+                                            </div>
+                                        </div>
+                                      <ul id="list">
+                                          <li className="options">
+                                              <img src="./../images/batman.jpg" className="img2"/>
+                                              <p>THE BATMAN</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+
+                                          <li className="options">
+                                              <img src="./../images/sonic.jpg" className="img2"/>
+                                              <p>SONIC THE HEDGEHOG 2</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+
+                                          <li className="options">
+                                              <img src="./../images/dr.jpg" className="img2"/>
+                                              <p>DOCTOR STRANGE IN THE MULTIVERSE of MADNESS</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+
+                                          <li className="options">
+                                              <img src="./../images/kgf.jpg" className="img2"/>
+                                              <p>K.G.F CHAPTER 2</p>
+                                              <img src="./../images/imdb.png" className="img3"/>
+                                          </li>
+                                      </ul>
                                     </div>
 
                                     <div className="mb-3">

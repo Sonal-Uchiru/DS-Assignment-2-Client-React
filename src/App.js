@@ -28,6 +28,8 @@ import ReservationCard from "./components/customer/cards/reservationCard";
 import Reservation from "./components/customer/pages/reservation";
 import Test from "./components/Test";
 import ForgotPassword from "./components/password_recovery/forgotPassword";
+import SelectedMovie from "./components/customer/pages/selectedMovie";
+import SelectedMovieCard from "./components/customer/cards/selectedMovieCard";
 
 function App() {
     return (
@@ -43,6 +45,10 @@ function App() {
                 <Route exact path="/customerSignIn" element={<CustomerLogin/>}/>
                 <Route exact path="/movieCart" element={<MovieCart/>}/>
                 <Route exact path="/reservation" element={<Reservation/>}/>
+                <Route exact path="/selectedMovie" element={<SelectedMovie/>}/>
+
+                <Route exact path="/s" element={<SelectedMovieCard/>}/>
+
 
                 {/*Both*/}
 
