@@ -181,6 +181,12 @@ export default function ForgotPassword() {
         setStage2(true)
     }
 
+    const preventWhiteSpace = (e) => {
+        if (e.key === ' ') {
+            e.preventDefault()
+        }
+    }
+
     return (
         <div className="ForgotPassword">
             <div className="d-flex justify-content-center">
@@ -228,6 +234,7 @@ export default function ForgotPassword() {
                                         className="form-control inp"
                                         type="email"
                                         id="userEmail"
+                                        onKeyUp={preventWhiteSpace}
                                         placeholder="Enter Email"
                                         onChange={(e) => {
                                             setEmail(e.target.value)
@@ -327,6 +334,7 @@ export default function ForgotPassword() {
                                         }
                                         id="userPassword"
                                         placeholder="Create New Password"
+                                        onKeyUp={preventWhiteSpace}
                                         onChange={(e) => {
                                             setInputPassword(e.target.value)
                                             setPasswordValidity({
@@ -380,6 +388,7 @@ export default function ForgotPassword() {
                                     </span>
                                     <input
                                         className="form-control password-inp"
+                                        onKeyUp = {preventWhiteSpace}
                                         type={
                                             confirmPasswordShown
                                                 ? 'text'
