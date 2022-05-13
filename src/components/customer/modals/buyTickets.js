@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 
 export default function BuyTicket() {
-    let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTI1MDQ5MzU2ODYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImRheU9mWWVhciI6MTMxLCJkYXlPZldlZWsiOiJXRURORVNEQVkiLCJtb250aCI6Ik1BWSIsImRheU9mTW9udGgiOjExLCJ5ZWFyIjoyMDIyLCJtb250aFZhbHVlIjo1LCJob3VyIjoyMiwibWludXRlIjozOCwic2Vjb25kIjo1NSwibmFubyI6Njg1MDAwMDAwLCJjaHJvbm9sb2d5Ijp7ImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEiLCJpZCI6IklTTyJ9fX0.xDzxVpPzvzwi7SjrW1UUazAjGdfEOgtvlEilX5eZjnjGYPkWWdLqnkInzpQVnOxYn9zdfwcXc8z7NRIjSYxDDw";
+    let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng";
     let theaterID = "6277e51007fed789651bd99e";
     let showTimeID = "6277e51007fed789651bd99e";
 
@@ -16,9 +16,8 @@ export default function BuyTicket() {
 
     let [totalPrice, setTotalPrice] = useState("")
     let [errorText, setErrorText] = useState("");
-    let ticketAdult = 0;
-    let ticketChild = 0;
-
+    var ticketAdult = 0;
+    var ticketChild = 0;
     let movieObj = {
         showTime:"9.00",
         movieName: "Bat Man",
@@ -28,13 +27,19 @@ export default function BuyTicket() {
 
     useEffect(() => {
         getTheaterDetails()
+        // getResearvedMovie()
     }, [])
+
+    useEffect(()=> {
+        calcTotal()
+
+    }, [childTicket, adultTicket])
 
     function getTheaterDetails(){
         axios({
             url: `http://localhost:8093/api/theaters/${theaterID}`,
             method: "GET",
-            headers: {"x-auth-token":userToken}
+            headers: {"x-auth-token": userToken}
         }).then((res)=>{
             console.log(res.data)
             setAdultTicketPrice(res.data.adult_ticket_price)
@@ -76,6 +81,8 @@ export default function BuyTicket() {
             data: cartObj
         }).then((res)=> {
             showAlerts(1, "Movie is added to your cart")
+            document.getElementById('closeModalbtn').click()
+
         }).catch((err)=> {
             showAlerts(1, err)
         })
@@ -106,20 +113,14 @@ export default function BuyTicket() {
         }
     }
 
-    function calcTotal(count, type){
-        if(type === 1){
-            setChildTicket(count)
-            ticketChild = count
-        }else{
-            setAdultTicket(count)
-            ticketAdult = count
-        }
+    function calcTotal(){
 
         console.log(adultTicket)
         console.log(childTicket)
         let total = (adultTicket * adultTicketPrice) + (childTicket * childTicketPrice);
         setTotalPrice(total)
     }
+
 
     return (
         <div className="buyTicket">
@@ -134,7 +135,7 @@ export default function BuyTicket() {
                     <div className="modal-content">
                         <div className="modal-header border-0">
                             <h2 className="modal-title" id="exampleModalLabel">Buy Tickets</h2>
-                            <button type="button" className="closebtn" data-dismiss="modal" aria-label="Close">
+                            <button type="button" id = "closeModalbtn" className="closebtn" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -156,7 +157,7 @@ export default function BuyTicket() {
                                     <div className="mb-3">
                                         <label for="Ctickets" className="form-label">Child-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR {childTicketPrice})</b></label>
                                         <input type="number" onKeyUp={(e) => {
-                                            setChildTicket(e.target.value); calcTotal(e.target.value, 1)
+                                            setChildTicket(e.target.value)
                                         }} className="form-control" id="Ctickets" placeholder="2"/>
                                     </div>
 
@@ -164,7 +165,7 @@ export default function BuyTicket() {
                                     <div className="mb-3">
                                         <label for="Atickets" className="form-label">Adult-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR {adultTicketPrice})</b></label>
                                         <input type="number" onKeyUp={(e) => {
-                                            setAdultTicket(e.target.value); calcTotal(e.target.value, 2)
+                                            setAdultTicket(e.target.value)
                                         }} className="form-control" id="Atickets" placeholder="2"/>
                                         <label htmlFor="error" className="form-label text-danger">{errorText}</label>
 
@@ -184,10 +185,10 @@ export default function BuyTicket() {
                         <div className="modal-footer border-0">
                             <div className="row text-center">
                                 <div className="col">
-                                    <button onClick = {() => checkValidity(1)} type="button" className="btn5 btn-lg">Buy Tickets</button>
+                                    <button onClick = {() => checkValidity(2)} type="button" className="btn5 btn-lg">Buy Tickets</button>
                                 </div>
                                 <div className="col">
-                                    <button onClick = {() => checkValidity(2)} type="button" className="btn6 btn-lg">Add to Cart</button>
+                                    <button onClick = {() => checkValidity(1)} type="button" className="btn6 btn-lg">Add to Cart</button>
                                 </div>
                             </div>
                         </div>

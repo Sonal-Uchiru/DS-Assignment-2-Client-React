@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from "axios";
 import "./../css/movieCardTheater.css"
-import ShowTimeModal from "./../modals/addNewShowTime";
+import UpdateShowTimeModal from "./../modals/updateShowTime";
 import Swal from "sweetalert2";
 
 export default function MovieCardTheater() {
@@ -67,7 +67,7 @@ export default function MovieCardTheater() {
                     <p className="status">Now Showing</p><br/>
                     <div className="text-center">
                         <div className="btn-group" role="group" aria-label="Basic example">
-                            <ShowTimeModal theaterID = {theaterId} movieID = {movieID} />
+                            <UpdateShowTimeModal  theaterID = {theaterId} movieID = {movieID}/>
 
                             <button onClick = {()=> deleteShowtime()} type="button" className="btn grp1"><img src="./../images/delete.png"
                                                                             className="icon"
