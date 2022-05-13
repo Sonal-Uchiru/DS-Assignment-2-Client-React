@@ -15,8 +15,8 @@ export default function ForgotPassword() {
     const sleye = <FontAwesomeIcon icon={faEyeSlash} />
 
     const [stage1, setStage1] = useState(true)
-    const [stage2, setStage2] = useState(true)
-    const [stage3, setStage3] = useState(false)
+    const [stage2, setStage2] = useState(false)
+    const [stage3, setStage3] = useState(true)
     const [invalidTxt, setInvalidTxt] = useState(true)
     const [email, setEmail] = useState('')
     const [inputCode, setInputCode] = useState('')
@@ -276,7 +276,7 @@ export default function ForgotPassword() {
                             </form>
                             <br />
                             <div className="text-center">
-                                <a onClick={back} className="text-warning">
+                                <a onClick={back} className="back-link">
                                     Back
                                 </a>
                             </div>
@@ -304,7 +304,7 @@ export default function ForgotPassword() {
                                         </span>
                                     </span>
                                     <input
-                                        className="form-control inp"
+                                        className="form-control password-inp"
                                         type={
                                             passwordShown ? 'text' : 'password'
                                         }
@@ -359,7 +359,7 @@ export default function ForgotPassword() {
                                         </span>
                                     </span>
                                     <input
-                                        className="form-control inp"
+                                        className="form-control password-inp"
                                         type={
                                             confirmPasswordShown ? 'text' : 'password'
                                         }
