@@ -1,0 +1,224 @@
+.SelectedMovieCard .card {
+    max-width: 1200px;
+    border: 2px solid #041C32;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    margin: 50px auto;
+}
+
+.SelectedMovieCard .card:hover {
+    transform: scale(1.01);
+}
+
+.SelectedMovieCard .Img {
+    height: 300px;
+    padding: 10px;
+}
+
+.SelectedMovieCard .card-title {
+    color: #041C32;
+    font-weight: bold !important;
+}
+
+.SelectedMovieCard .location {
+    font-weight: bold;
+    color: #ECB365;
+}
+
+.SelectedMovieCard .tprice {
+    font-weight: bold;
+}
+
+.SelectedMovieCard .price {
+    color: #ECB365;
+    font-size: 22px;
+}
+
+.SelectedMovieCard .btnView {
+    margin-left: 20px;
+    background-color: #041C32;
+    color: white;
+    border: none;
+    height: 50px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.SelectedMovieCard .btnless {
+   text-align: center;
+    background-color:  #ECB365;
+    color: white;
+    border: none;
+    height: 50px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.SelectedMovieCard .crd {
+    background-color: white;
+    max-width: 500px;
+    border-radius: 5px;
+    text-align: left;
+    margin: 20px auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.SelectedMovieCard .dtil {
+    color: #041C32;
+    margin-left: 30px;
+    font-weight: bold;
+}
+
+.SelectedMovieCard #collapseOne {
+    background-color: #041C32;
+    padding-bottom: 20px;
+}
+
+.SelectedMovieCard .titl{
+    margin-top: 20px;
+}
+
+.SelectedMovieCard .show {
+    color: #ECB365;
+    text-align: center;
+}
+
+.SelectedMovieCard .btnB{
+    background-color: #041C32;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    float: right;
+    margin-top: -65px;
+    margin-right: 20px;
+    height: 40px;
+}
+
+.SelectedMovieCard .Img5 {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.SelectedMovieCard .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.SelectedMovieCard .btnView:hover {
+
+    background-color: #ECB365;
+    color: #041C32;
+    font-weight: bold;
+}
+
+
+.SelectedMovieCard .btnless:hover {
+
+    background-color: #064663;
+    color: white;
+    font-weight: bold;
+}
+
+.SelectedMovieCard .parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.SelectedMovieCard .columns{
+    flex: 50%;
+}
+
+@media (max-width: 1200px){
+    .SelectedMovieCard .card {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .SelectedMovieCard .crd {
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+}
+@media (max-width: 768px) {
+
+    .SelectedMovieCard .columns{
+        flex: 100%;
+    }
+
+
+    .SelectedMovieCard .Img {
+        height: 350px;
+
+    }
+
+    .SelectedMovieCard .card {
+        margin-left: 10px;
+        margin-right: 5px;
+    }
+
+    .SelectedMovieCard .crd {
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .SelectedMovieCard .col-md-4{
+        text-align: center;
+    }
+
+    .SelectedMovieCard .btnView{
+        margin-bottom: 10px;
+    }
+
+
+}
+
+@media (max-width: 373px){
+
+    .SelectedMovieCard .tprice {
+        font-size: 20px;
+    }
+
+    .SelectedMovieCard .price {
+        font-size: 17px;
+    }
+
+}
+
+@media (max-width: 337px){
+    .SelectedMovieCard .dtil {
+        color: #041C32;
+        margin-left: 10px;
+        font-weight: bold;
+    }
+
+
+}
+
+@media (max-width: 329px){
+
+    .SelectedMovieCard .tprice {
+        font-size: 24px;
+    }
+
+    .SelectedMovieCard .price {
+        font-size: 18px;
+    }
+
+
+}
+
+@media (max-width: 312px){
+    .SelectedMovieCard .dtil {
+        margin-left: 5px;
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .SelectedMovieCard .btnB{
+        margin-top: -55px;
+    }
+}

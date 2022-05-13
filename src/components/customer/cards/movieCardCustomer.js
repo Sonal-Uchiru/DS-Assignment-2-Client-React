@@ -2,17 +2,17 @@ import React, {useState} from "react";
 import axios from "axios";
 import "./../css/movieCardCustomer.css"
 
-export default function MovieCardCustomer1() {
+export default function MovieCardCustomer1(props) {
 
     return (
         <div className="MovieCardCustomer">
             <div className="card">
 
-                <img src="./../images/batman.jpg" className="card-img-top" alt="..."/>
+                <img src="./../images/sonic.jpg" className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <div className="row">
                         <div className="col-8">
-                            <h4 className="card-title">THE BATMAN</h4>
+                            <h4 className="card-title">{props.details.name}</h4>
                         </div>
 
                         <div className="col-4">
@@ -23,9 +23,8 @@ export default function MovieCardCustomer1() {
                             </div>
                         </div>
                     </div>
-
-                    <p className="status">Now Showing</p><br/>
-
+                    {props.details.showing? <p className="status">Now Showing</p> : <p className="status">Coming Soon</p>}
+                    <br/>
                 </div>
                 <br/>
             </div>
