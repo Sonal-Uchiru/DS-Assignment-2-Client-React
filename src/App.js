@@ -47,8 +47,6 @@ function App() {
                 <Route exact path="/reservation" element={<Reservation/>}/>
                 <Route exact path="/selectedMovie" element={<SelectedMovie/>}/>
 
-                <Route exact path="/s" element={<SelectedMovieCard/>}/>
-
 
                 {/*Both*/}
 

@@ -88,3 +88,18 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+@media screen and (max-width: 992px) {
+    .TheaterCard .card{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    .TheaterCard .card {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+}
