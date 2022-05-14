@@ -9,6 +9,7 @@ export default function MovieCardProduction1(props) {
     let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng";
 
     let [movieImage, setMovieImage] = useState("")
+    let [movieID, setMovieID] = useState("")
     let [movieName, setMovieName] = useState("")
     let [movieDuration, setMovieDuration] = useState("")
     let [movieRatings, setMovieRatings] = useState("")
@@ -28,13 +29,13 @@ export default function MovieCardProduction1(props) {
 
 
     useEffect(()=> {
-        console.log(movieDetails)
         assignDetails()
 
     }, [])
 
 
     function assignDetails(){
+        setMovieID(movieDetails.id)
         setMovieImage(movieDetails.image)
         setMovieName(movieDetails.name)
         setMovieDuration(movieDetails.duration)
@@ -56,8 +57,10 @@ export default function MovieCardProduction1(props) {
         movieStoryline == "" ? setStoryError("Movie storyline cannot be empty"): setStoryError("")
 
         if(movieName != "" && movieDuration != "" && movieRatings != "" && movieLanguage != "" && movieGenre != "" && movieStoryline != "" ){
-            let status = true;
+            let status = false;
+            console.log(movieStatus)
             movieStatus == 1 ? status = true : status = false;
+            console.log(status)
             let movieObj = {
                 name: movieName,
                 image: movieImage,
@@ -66,11 +69,10 @@ export default function MovieCardProduction1(props) {
                 story_line: movieGenre,
                 language: movieLanguage,
                 imdb_key: "rating",
-                showing: status,
+                isShowing: status,
             }
-            console.log(movieObj)
             axios({
-                url: `http://localhost:8093/api/movies/${movieDetails.id}`,
+                url: `http://localhost:8093/api/movies/${movieID}`,
                 method: "PUT",
                 headers: {"x-auth-token":userToken},
                 data: movieObj
@@ -134,7 +136,7 @@ export default function MovieCardProduction1(props) {
                         <button type="button" onClick = {() => props.functiondelete(props.details.id)} className="btn grp1"><img src="./../images/delete.png" className="icon"
                                                                         alt="..."/></button>
 
-                        <button type="button" className="btn  grp1" data-toggle="modal" data-target="#exampleModal"><img src="./../images/edit (1).png" className="icon"
+                        <button type="button" className="btn  grp1" data-toggle="modal" data-target={`#${props.details.id}`}><img src="./../images/edit (1).png" className="icon"
                                                                                                                          alt="..."/></button>
 
                     </div>
@@ -144,7 +146,7 @@ export default function MovieCardProduction1(props) {
 
             {/*Modal*/}
             <div className="UpdateMov">
-                <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
+                <div className="modal fade" id={`${props.details.id}`} tabIndex="-1" role="dialog"
                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
@@ -272,7 +274,7 @@ export default function MovieCardProduction1(props) {
 
                             </div>
                             <div className="modal-footer border-0">
-                                <button type="button" className="btn5">Delete</button>
+                                <button type="button" onClick = {() => props.functiondelete(movieID)} className="btn5">Delete</button>
                                 <button type="button" onClick = {(e)=> updateMovie()} className="btn6">Update</button>
                             </div>
                         </div>

@@ -38,6 +38,7 @@ export default function AllMovies() {
     function filterMovies(data){
         var nowShowing = [];
         var comingSoon = [];
+        console.log(data)
         data.map((post) => {
             if(post.showing){
                 nowShowing.push(post)
@@ -46,10 +47,10 @@ export default function AllMovies() {
                 comingSoon.push(post)
             }
         })
-        if(comingSoon.length < 0){
+        if(comingSoon.length <= 0){
             setNoComingSoonText("There are no coming soon movies at the moment");
         }
-        if(nowShowing.length < 0){
+        if(nowShowing.length <= 0){
             setNoNowShowingText("There are no showing movies at the moment");
         }
         setNowShowing(nowShowing)
@@ -298,7 +299,8 @@ export default function AllMovies() {
                     {comingSoon.map((post) => {
                         return (
                             <div key = {post.id} className="columns">
-                                <MovieCardProduction2 details = {post} functiondelete = {deleteMovie}   />
+                                <MovieCardProduction2 details = {post} functionReload = {getAllMovies} functiondelete = {deleteMovie} />
+
                             </div>
                         )
                     })}
