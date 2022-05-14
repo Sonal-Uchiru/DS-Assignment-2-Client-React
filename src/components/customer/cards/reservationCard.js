@@ -4,6 +4,24 @@ import "../css/reservationCard.css"
 
 export default function ReservationCard({reservation}) {
 
+    const userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng"
+
+    function cancelReservation(id){
+        axios({
+            url: `http://localhost:8093/api/reservations/${id}/status`,
+            method: 'PUT',
+            headers: {"x-auth-token": userToken}
+
+        }).then((res)=>{
+            console.log(res.data);
+
+        }).catch((err)=>{
+            console.log(err);
+        })
+    }
+
+    const [price,setPrice] = useState((reservation.showTimeWithMovieTheaterDetailsDTO.theater.child_ticket_price * reservation.child_tickets) + (reservation.showTimeWithMovieTheaterDetailsDTO.theater.adult_ticket_price * reservation.adult_tickets))
+
     return (
         <div className="ReservationCard">
 
@@ -23,7 +41,7 @@ export default function ReservationCard({reservation}) {
                                         <p className="dName">Duration</p>
                                     </div>
                                     <div className="col">
-                                        <p>2 HR 30 MIN</p>
+                                        <p>{reservation.showTimeWithMovieTheaterDetailsDTO.movie.duration}</p>
                                     </div>
                                 </div>
 
@@ -32,7 +50,7 @@ export default function ReservationCard({reservation}) {
                                         <p className="dName">Theater</p>
                                     </div>
                                     <div className="col">
-                                        <p>Liberty Cinema</p>
+                                        <p>{reservation.showTimeWithMovieTheaterDetailsDTO.theater.name}</p>
                                     </div>
                                 </div>
 
@@ -67,7 +85,7 @@ export default function ReservationCard({reservation}) {
                                         <p className="dName">Payment</p>
                                     </div>
                                     <div className="col">
-                                        <p>LKR 6000.00</p>
+                                        <p>{price}</p>
                                     </div>
                                 </div>
 
@@ -75,7 +93,7 @@ export default function ReservationCard({reservation}) {
 
 
                         </div>
-                        <button type="button" className="btnCancel btn-lg">Cancel Reservation</button>
+                        <button type="button" className="btnCancel btn-lg" onClick={()=>cancelReservation(reservation.reservation.id)}>Cancel Reservation</button>
                     </div>
                 </div>
 
