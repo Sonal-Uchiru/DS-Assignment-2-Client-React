@@ -59,7 +59,7 @@ export default function UpdateMovie() {
 
                                         <center>
                                         <div className="box">
-                                            <img className="z-depth-2 Img1" alt="100x100" src="./../images/avatar.webp"
+                                            <img className="z-depth-2 Img1" alt="100x100" src="./../images/clapperboard.png"
                                                  data-holder-rendered="true"/>
                                         </div>
                                         </center>

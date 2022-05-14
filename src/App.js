@@ -33,7 +33,7 @@ import SelectedMovieCard from "./components/customer/cards/selectedMovieCard";
 
 function App() {
     return (
-        <Router>
+        <>
             <Routes>
 
                 <Route exact path="/te" element={<Test/>}/>
@@ -47,8 +47,8 @@ function App() {
                 <Route exact path="/reservation" element={<Reservation/>}/>
                 <Route exact path="/selectedMovie" element={<SelectedMovie/>}/>
 
-
                 {/*Both*/}
+
 
                 <Route exact path="/forgotPassword" element={<ForgotPassword/>}/>
 
@@ -64,7 +64,7 @@ function App() {
                 <Route exact path="/productionSignIn" element={<ProductionTeamLogin/>}/>
 
             </Routes>
-        </Router>
+        </>
     );
 }
 

@@ -53,7 +53,7 @@ export default function AddMovie() {
                                         <center>
                                         <div className="box">
                                             <img className="z-depth-2 Img1" alt="movie_image"
-                                                 src="./../images/clapperboard.png"
+                                                 src="./../images/sonic.jpg"
                                                  id="movieImage"
                                                  data-holder-rendered="true"/>
                                         </div>
