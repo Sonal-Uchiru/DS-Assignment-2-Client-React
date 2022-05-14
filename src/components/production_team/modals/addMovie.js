@@ -5,11 +5,13 @@ import { GetMoviesByTitle } from '../../../imdb_api/getMoviesByTitle'
 import { GetRatingByImdbMovieId } from '../../../imdb_api/getRatingByImdbMovieId'
 
 export default function AddMovie() {
+
+    const token = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng"
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)
 
     const [name, setName] = useState('')
-    const [image, setImage] = useState()
+    const [image, setImage] = useState("./../images/clapperboard.png" )
     const [genre, setGenre] = useState('')
     const [story_line, setStoryLine] = useState('')
     const [language, setLanguage] = useState('')
@@ -55,7 +57,19 @@ export default function AddMovie() {
             imdb_key,
             showing: showing === 'Now Showing',
         }
-        console.log(content)
+
+        axios({
+            url: 'http://localhost:8093/api/movies',
+            method:'POST',
+            headers:{
+                "x-auth-token" : token
+            },
+            data: content
+        }).then((res)=>{
+            alert("add")
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 
     function getMoviesToTheMovieTitle() {
@@ -114,27 +128,27 @@ export default function AddMovie() {
                                                 <img
                                                     className="z-depth-2 Img1"
                                                     alt="movie_image"
-                                                    src="./../images/sonic.jpg"
+                                                    src={image}
                                                     id="movieImage"
                                                     data-holder-rendered="true"
                                                 />
                                             </div>
                                         </center>
-                                        <div className="image-upload">
-                                            <label for="file-input">
-                                                <img
-                                                    src="./../images/editing.png"
-                                                    className="Img2"
-                                                    id="btn4"
-                                                    alt="edit icon"
-                                                />
-                                            </label>
-                                            <input
-                                                id="file-input"
-                                                type="file"
-                                                onChange={(e) => setFile(e)}
-                                            />
-                                        </div>
+                                        {/*<div className="image-upload">*/}
+                                        {/*    <label for="file-input">*/}
+                                        {/*        <img*/}
+                                        {/*        */}
+                                        {/*            className="Img2"*/}
+                                        {/*            id="btn4"*/}
+                                        {/*            alt="edit icon"*/}
+                                        {/*        />*/}
+                                        {/*    </label>*/}
+                                        {/*    <input*/}
+                                        {/*        id="file-input"*/}
+                                        {/*        type="file"*/}
+                                        {/*        onChange={(e) => setFile(e)}*/}
+                                        {/*    />*/}
+                                        {/*</div>*/}
                                     </span>
                                     <br />
                                     <div className="mb-3">
@@ -288,10 +302,14 @@ export default function AddMovie() {
                                                             <li
                                                                 className="dropdown-item"
                                                                 key={movie.id}
-                                                                onClick={() =>
+                                                                onClick={() =>{
                                                                     setImdbKey(
                                                                         movie.id
                                                                     )
+                                                                    setImage(movie.image)
+                                                                }
+
+
                                                                 }
                                                             >
                                                                 <img
