@@ -19,6 +19,7 @@ export default function MovieCart() {
             headers: { 'x-auth-token': userToken },
         })
             .then((res) => {
+                console.log(res.data);
                 setCartItems(res.data)
                 setDuplicateCartItems(res.data)
             })

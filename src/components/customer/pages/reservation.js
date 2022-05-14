@@ -39,8 +39,8 @@ export default function Reservation() {
                     .toLowerCase()
                     .includes(userIn.toLowerCase())
         )
-
-        result ? setReservedMovies(result):setSearchError("Sorry No Reservation could be found by that name!!");
+        console.log(result === [])
+        result === [] ? setSearchError("Sorry No Reservation could be found by that name!!"):setReservedMovies(result);
 
     }
 
