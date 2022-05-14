@@ -7,10 +7,8 @@ export default function UpdateMovie() {
     return (
         <div className="UpdateMov">
 
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
-
+            <button type="button" className="btn  grp1" data-toggle="modal" data-target="#exampleModal"><img src="./../images/edit (1).png" className="icon"
+                                                             alt="..."/></button>
 
             <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
