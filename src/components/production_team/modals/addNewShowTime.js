@@ -12,7 +12,9 @@ export default function AddNewShowTime(props) {
     let [selectedMovie, setSelectedMovie] = useState("");
     let [selectShowTime, setSelectShowTime] = useState("");
 
-    let [selectedMovieObj, setSelectedMovieObj] = useState({});
+    let [selectedMovieObj, setSelectedMovieObj] = useState({
+        image: "https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100006/137486703-no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-.jpg?fj=1"
+    });
     let [showTimeError, setShowTimeError] = useState("");
     let [movieError, setMovieError] = useState("");
 

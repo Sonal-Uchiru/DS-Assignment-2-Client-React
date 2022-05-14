@@ -20,7 +20,6 @@ export default function OneTheater() {
     }, [])
 
     async function getTheaterDetails(){
-        alert("as")
         await axios({
             url: `http://localhost:8093/api/theaters/${theaterId}`,
             method: 'GET',
@@ -136,14 +135,17 @@ export default function OneTheater() {
             <br/><br/><br/><br/>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
-                    {showTimes.map((post)=> {
+                <div className="row parent">
+
+                {showTimes.map((post)=> {
                         return (
-                            <div className="row parent">
-                                <MovieCardTheater key = {post.showTime.id} movieDetails = {post.movie} showTimeDetails = {post.showTime} />
+                            <div className="colmn">
+                                <MovieCardTheater key = {post.showTime.id} movieDetails = {post.movie} showTimeDetails = {post.showTime} getDetailsFunction2 = {getShowTimeDetails} />
                             </div>
 
                         )
                     })}
+                </div>
 
             </div>
 

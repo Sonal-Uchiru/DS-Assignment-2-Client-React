@@ -24,6 +24,7 @@ import MovieCart from './components/customer/pages/movieCart'
 import Reservation from './components/customer/pages/reservation'
 import Test from './components/Test'
 import ForgotPassword from './components/password_recovery/forgotPassword'
+import SelectedMovie from './components/customer/pages/selectedMovie'
 
 function App() {
     return (
@@ -54,7 +55,11 @@ function App() {
                 />
                 <Route exact path="/movieCart" element={<MovieCart />} />
                 <Route exact path="/reservation" element={<Reservation />} />
-
+                <Route
+                    exact
+                    path="/customerSelectedMovie"
+                    element={<SelectedMovie />}
+                />
                 {/*Both*/}
 
                 <Route

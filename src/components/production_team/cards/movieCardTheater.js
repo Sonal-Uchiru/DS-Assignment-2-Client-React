@@ -12,10 +12,27 @@ export default function MovieCardTheater(props) {
     let showTimeDetails = props.showTimeDetails;
     let [showTimeStatus, setShowTimeStatus] = useState('');
 
+    //modal content
+    let [selectedMovie, setSelectedMovie] = useState("");
+    let [selectShowTime, setSelectShowTime] = useState("");
+    let [selectedMovieObj, setSelectedMovieObj] = useState({});
+    let [movieData, setMovieData] = useState([]);
+    let [movieError, setMovieError] = useState((""))
+    let [showTimeError, setShowTimeError] = useState((""))
+
+
     useEffect(()=> {
         setShowTimeStatus(showTimeDetails.status)
-
+        setSelectShowTime(showTimeDetails.show_time)
+        setSelectedMovie(movieDetails.id)
+        getMovieDetails()
+        setMovieObj()
     }, [])
+
+    useEffect(()=> {
+
+    }, [selectShowTime, selectedMovie])
+
     async function deleteShowtime(){
         Swal.fire({
             title: "Are you sure you want to delete this?",
@@ -28,23 +45,28 @@ export default function MovieCardTheater(props) {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await axios({
-                    url: 'http://localhost:8093/api/showtimes/',
+                    url: 'http://localhost:8093/api/showtimes/${showTimeDetails.id}',
                     method: 'DELETE',
                     headers: {"x-auth-token":userToken}
                 }).then((res)=> {
                     showAlerts(1, "Show time deleted successfully")
-                }).catch((err) => {
-                    showAlerts(2, err)
+                    reload()
+
+                }).catch(async (err) => {
+                    await showAlerts(2, err)
+
                 })
 
             }
-
         })
+    }
 
-
+    async function reload(){
+        await props.getDetailsFunction2()
     }
 
     async function changeStatus(){
+
         if(showTimeStatus == 1){
             deactivateShowtime()
         }else{
@@ -52,6 +74,7 @@ export default function MovieCardTheater(props) {
         }
 
     }
+
     function deactivateShowtime(){
         Swal.fire({
             title: "Are you sure you want to deactivate this?",
@@ -128,8 +151,114 @@ export default function MovieCardTheater(props) {
         }
     }
 
+    //Modal functions
+    async function fillMovieData(e){
+        let movieID = e
+        let movieObj = {}
+        setSelectedMovie(movieID);
+
+        if(e == ""){
+            movieObj = {
+                image: "",
+                storyline: "",
+                duration: ""
+            }
+        }else{
+            let result = await axios({
+                url: `http://localhost:8093/api/movies/${movieID}`,
+                method: "GET",
+                header: userToken,
+            }).catch((err)=> {
+                alert(err)
+            })
+            movieObj = {
+                image: result.data.image,
+                storyline: result.data.story_line,
+                duration: result.data.duration
+            }
+        }
+
+        setSelectedMovieObj(movieObj);
 
 
+
+    }
+
+    async function getMovieDetails(){
+        await axios({
+            url: "http://localhost:8093/api/movies",
+            method: "GET",
+            headers: {"x-auth-token":userToken}
+
+        }).then((res)=>{
+            setMovieData(res.data);
+
+        }).catch((err)=> {
+            showAlerts(2, err);
+        })
+    }
+
+    function setMovieObj(){
+        let movieObj = {
+            image: movieDetails.image,
+            storyline: movieDetails.story_line,
+            duration: movieDetails.duration
+        }
+
+        setSelectedMovieObj(movieObj);
+    }
+
+    async function updateShowTimes(){
+
+        if(selectShowTime != "" && selectedMovie != ""){
+            let movieObj = {
+                theater_id: theaterId,
+                movie_id: selectedMovie,
+                show_time: selectShowTime
+            }
+            console.log(movieObj)
+            await axios({
+                url: `http://localhost:8093/api/showtimes/${showTimeDetails.id}`,
+                method: 'PUT',
+                headers: {"x-auth-token":userToken},
+                data:  movieObj
+            }).then((res)=>{
+                showAlerts(1, "Show time updated successfully")
+                document.getElementById('closeModalBtn2').click()
+                props.getDetailsFunction2()
+            }).catch((err) => {
+                alert(err);
+                showAlerts(2, err)
+            })
+        }
+
+        if(selectedMovie == ""){
+            setMovieError("You must select a movie")
+        }else{
+            setMovieError("")
+        }
+        if(selectShowTime == ""){
+            setShowTimeError("You must select a showtime")
+        }else{
+            setShowTimeError("")
+        }
+
+    }
+
+
+    function fillModal(){
+
+        setSelectShowTime(showTimeDetails.show_time)
+        let movieObj = {
+            id: movieDetails.id,
+            image: movieDetails.image,
+            storyline: movieDetails.story_line,
+            duration: movieDetails.duration
+        }
+
+        setSelectedMovieObj(movieObj);
+
+    }
 
     return (
         <div className="MovieCardTheater">
@@ -156,8 +285,15 @@ export default function MovieCardTheater(props) {
                     <p className="status">{movieDetails.showing? "Now Showing": "Coming soon"}</p><br/>
                     <div className="text-center">
                         <div className="btn-group" role="group" aria-label="Basic example">
-                            <UpdateShowTimeModalll  showTimeDetails = {showTimeDetails} movieDetails = {movieDetails}/>
+                            {/*<UpdateShowTimeModalll  showTimeDetails = {showTimeDetails} movieDetails = {movieDetails}/>*/}
 
+
+                            <button onClick = {()=> {
+                                fillModal()
+                            }}
+                                    data-toggle="modal" data-target={`#${showTimeDetails.id}`} type="button" className="btn grp1">
+                                <img src="./../images/edit (1).png" className="icon" alt="..."/>
+                            </button>
                             <button onClick = {()=> deleteShowtime()} type="button" className="btn grp1"><img src="./../images/delete.png"
                                                                             className="icon"
                                                                             alt="..."/></button>
@@ -173,18 +309,116 @@ export default function MovieCardTheater(props) {
                         {showTimeStatus == "1" ? <input
                             type="checkbox"
                             onClick = {()=> changeStatus()}
-                            checked
+                            checked="checked"
 
                         />: <input
                             type="checkbox"
-                            onClick = {()=> changeStatus()}
-                            unchecked
+                            onClick = { (e)=> {e.preventDefault(); changeStatus()}}
                         />}
 
                         <span className="slider round"/>
                     </label>
                 </div>
                 <br/>
+            </div>
+
+
+            {/*Modal*/}
+            <div className="updateShow">
+
+
+                <div className="modal fade" id={showTimeDetails.id} tabIndex="-1" role="dialog"
+                     aria-labelledby="modal2label"
+                     aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header border-0">
+                                <h2 className="modal-title" id="modal2label">Update Show Time</h2>
+                                <button type="button" id = "closeModalBtn2" className="closebtn" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+
+                                <div className="container">
+
+                                    <form>
+
+
+                                        <div className="mb-3">
+                                            <label htmlFor="ShowTime" className="form-label">Show Time</label>
+                                            <input type="time"
+                                                   className="form-control" id="ShowTime" value = {selectShowTime} onChange={(e) => {
+                                                setSelectShowTime(e.target.value)
+                                            }} placeholder="9.00 AM"/>
+                                            <label htmlFor="ShowTime" className="form-label text-danger">{showTimeError}</label>
+
+                                        </div>
+
+                                        <div className="mb-3">
+                                            <label htmlFor="movie" className="form-label movie">Movie</label><br/>
+                                            <select name="movie" value={selectedMovieObj.id} id="movie"
+                                                    className="form-select" onChange={(e) => {
+                                                fillMovieData(e.target.value);
+                                            }}>
+                                                <option value="">Select a Movie</option>
+                                                {movieData.map((post) => {
+                                                    return (
+                                                        <option key={post.id} value={post.id}>{post.name}</option>
+                                                    )
+                                                })}
+                                            </select>
+                                            <label htmlFor="ShowTime" className="form-label text-danger">{movieError}</label>
+
+                                        </div>
+
+
+                                        <div className="row">
+                                            <div className="column left">
+                                                <div className="box">
+                                                    <img className="z-depth-2 Img1" alt="100x100"
+                                                         src={selectedMovieObj.image}
+                                                         data-holder-rendered="true"/>
+                                                </div>
+                                            </div>
+
+                                            <div className="column right">
+                                                <p className="story">{selectedMovieObj.storyline}</p>
+
+                                                <p className="duration"> {selectedMovieObj.duration}</p>
+                                                <img className="imdb" alt="imdb" src="./../images/imdb (2).png"/>
+                                                <p className="rating"><img className="star" alt="star"
+                                                                           src="./../images/star.png"/> 8.1/10</p>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+                                </div>
+
+
+                                <br/>
+
+
+                            </div>
+                            <div className="modal-footer border-0">
+                                <div className="row text-center">
+                                    <div className="col">
+                                        <button type="button" onClick={() => updateShowTimes()}
+                                                className="btn5 btn-lg">Update
+                                        </button>
+                                    </div>
+                                    <div className="col">
+                                        <button type="button" onClick={() => deleteShowtime()}
+                                                className="btn6 btn-lg">Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 
