@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import "./../css/allTheaters.css"
 
@@ -7,13 +7,44 @@ import TheaterCard from "../cards/theaterCard";
 
 export default function AllTheaters() {
 
+    const [theaters, setTheaters] = useState([]);
+    const [duplicateTheaters, setDuplicateTheaters] = useState([]);
+
+    useEffect(()=>{
+        function getTheaters(){
+            axios({
+                url: 'http://localhost:8093/api/theaters',
+                method: 'GET'
+
+            }).then((res)=>{
+                console.log(res.data);
+                setTheaters(res.data);
+                setDuplicateTheaters(res.data);
+
+            }).catch((err)=>{
+                console.log(err);
+            })
+        }
+
+        getTheaters();
+
+        },[])
+
+
+    function handleSearch(userIn){
+
+        const result = duplicateTheaters.filter((movie)=>movie.toLowerCase().includes(userIn.toLowerCase()));
+        setTheaters(result);
+    }
+
     return (
         <div className="Theaters">
             <h1 className="theater">Theaters</h1>
 
             <div className="main">
                 <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search Theaters..."/>
+                    <input type="text" className="form-control" placeholder="Search Theaters..."
+                    onChange={(e)=>handleSearch(e.target.value)}/>
                     <div className="input-group-append">
                         <button className="btn searchbtn" type="button">
                             <svg
@@ -36,21 +67,17 @@ export default function AllTheaters() {
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                     <div className="row parent ">
-                        <div className="col">
-                            <TheaterCard/>
-                        </div>
 
-                        <div className="col">
-                            <TheaterCard/>
-                        </div>
+                        {theaters.map((theater) => {
+                            return(
+                                <div className="col">
+                                    <TheaterCard theater={theater}/>
+                                </div>
 
-                        <div className="col">
-                            <TheaterCard/>
-                        </div>
+                            )
+                        })}
 
-                        <div className="col">
-                            <TheaterCard/>
-                        </div>
+
 
 
                     </div>

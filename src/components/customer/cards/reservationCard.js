@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 import "../css/reservationCard.css"
 
-export default function ReservationCard() {
+export default function ReservationCard({reservation}) {
 
     return (
         <div className="ReservationCard">
@@ -10,12 +10,12 @@ export default function ReservationCard() {
             <div className="card mb-3">
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img src="./../images/batman.jpg" className="img-fluid rounded Img" alt="..."/>
+                        <img src={reservation.showTimeWithMovieTheaterDetailsDTO.movie.image} className="img-fluid rounded Img" alt="..."/>
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="status"> Now Showing</h5>
-                            <h2 className="card-title">THE BATMAN</h2><br/>
+                            <h2 className="card-title">{reservation.showTimeWithMovieTheaterDetailsDTO.movie.name}</h2><br/>
 
                             <div className="details">
                                 <div className="row">
@@ -50,7 +50,7 @@ export default function ReservationCard() {
                                         <p className="dName">Child-Tickets</p>
                                     </div>
                                     <div className="col">
-                                        <p>2</p>
+                                        <p>{reservation.reservation.child_tickets}</p>
                                     </div>
                                 </div>
                                 <div className="row">
@@ -58,7 +58,7 @@ export default function ReservationCard() {
                                         <p className="dName">Adult-Tickets</p>
                                     </div>
                                     <div className="col">
-                                        <p>2</p>
+                                        <p>{reservation.reservation.adult_tickets}</p>
                                     </div>
                                 </div>
 
