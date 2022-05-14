@@ -17,17 +17,23 @@ import MovieCardProduction2 from './components/production_team/cards/movieCardPr
 import CustomerHeader from './components/customer/navigation/customerHeader'
 import ProductionTeamHeader from './components/production_team/navigation/productionTeamHeader'
 import AllMoviesCustomer from './components/customer/pages/allMoviesCustomer'
-import CustomerLogin from './components/customer/pages/customerSignIn'
+import CustomerLogin from './components/authentication_components/customerSignIn'
 import ProductionTeamLogin from './components/production_team/pages/productionSignIn'
 import MovieCart from './components/customer/pages/movieCart'
 
 import Reservation from './components/customer/pages/reservation'
 import Test from './components/Test'
 import ForgotPassword from './components/password_recovery/forgotPassword'
+import Example from "./components/external_components/loading";
 
 function App() {
     return (
         <Router>
+            {/*loading*/}
+            {/*<div className="container d-flex justify-content-center">*/}
+            {/*    <Example type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>*/}
+            {/*</div>*/}
+
             <Routes>
                 <Route exact path="/te" element={<Test />} />
                 {/*Customer*/}
