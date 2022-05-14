@@ -49,7 +49,7 @@ export default function AddMovie() {
             story_line,
             language,
             imdb_key,
-            showing,
+            showing : showing === "Now Showing",
         }
         console.log(content)
     }
@@ -117,7 +117,6 @@ export default function AddMovie() {
                                             <input
                                                 id="file-input"
                                                 type="file"
-                                                required
                                                 onChange={(e) => setFile(e)}
                                             />
                                         </div>
@@ -233,7 +232,6 @@ export default function AddMovie() {
                                             type="text"
                                             className="form-control"
                                             readOnly
-
                                         />
                                     </div>
 
@@ -336,13 +334,13 @@ export default function AddMovie() {
                                             <option value="">
                                                 Select Genre
                                             </option>
-                                            <option value="English">
+                                            <option value="Action">
                                                 Action
                                             </option>
-                                            <option value="Hindi">
+                                            <option value="Comedy">
                                                 Comedy
                                             </option>
-                                            <option value="Telugu">
+                                            <option value="Horror">
                                                 Horror
                                             </option>
                                         </select>
@@ -395,18 +393,19 @@ export default function AddMovie() {
                                             required
                                         />
                                     </div>
-                                    <button
-                                        // form="addMovie"
-                                        type="submit"
-                                        className="btn5"
-                                    >
-                                        Add
-                                    </button>
                                 </form>
                             </div>
                             <br />
                         </div>
-                        <div className="modal-footer border-0"></div>
+                        <div className="modal-footer border-0">
+                            <button
+                                form="addMovie"
+                                type="submit"
+                                className="btn5"
+                            >
+                                Add
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
