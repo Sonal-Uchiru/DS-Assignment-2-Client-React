@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './../css/addMovie.css'
+import {GetMoviesByTitle} from "../../../imdb_api/getMoviesByTitle";
 
 export default function AddMovie() {
     const [hours, setHours] = useState(0)
@@ -8,7 +9,6 @@ export default function AddMovie() {
 
     const [name, setName] = useState('')
     const [image, setImage] = useState()
-    const [duration, setDuration] = useState('')
     const [genre, setGenre] = useState('')
     const [story_line, setStoryLine] = useState('')
     const [language, setLanguage] = useState('')
@@ -17,6 +17,7 @@ export default function AddMovie() {
 
     const [file, setFile] = useState()
 
+    const [imdbMovies, setImdbMovies] = useState([]);
     function handleDecrement() {
         if (hours > 0) {
             setHours((prevCount) => prevCount - 1)
@@ -44,14 +45,23 @@ export default function AddMovie() {
         const content = {
             name,
             image,
-            duration,
+            duration : document.getElementById("duration").value,
             genre,
             story_line,
             language,
             imdb_key,
-            showing : showing === "Now Showing",
+            showing: showing === 'Now Showing',
         }
         console.log(content)
+    }
+
+    function getMoviesToTheMovieTitle(){
+        GetMoviesByTitle(name).then((res)=>{
+            console.log(res.data)
+            setImdbMovies(res.data.results)
+        }).catch((err) => {
+            alert(err)
+        })
     }
 
     return (
@@ -136,6 +146,7 @@ export default function AddMovie() {
                                             placeholder="Toy Story"
                                             onChange={(e) =>
                                                 setName(e.target.value)
+
                                             }
                                             required
                                         />
@@ -231,6 +242,8 @@ export default function AddMovie() {
                                         <input
                                             type="text"
                                             className="form-control"
+                                            id = "duration"
+                                            Value = {hours + 'h ' + minutes + 'min'}
                                             readOnly
                                         />
                                     </div>
@@ -242,7 +255,7 @@ export default function AddMovie() {
                                         >
                                             Ratings
                                         </label>
-                                        <div className="dropdown" id="drop">
+                                        <div className="dropdown" id="drop" >
                                             <button
                                                 className="btn dropdown-toggle"
                                                 type="button"
@@ -250,6 +263,7 @@ export default function AddMovie() {
                                                 data-toggle="dropdown"
                                                 aria-haspopup="true"
                                                 aria-expanded="false"
+                                                onClick = {getMoviesToTheMovieTitle}
                                             >
                                                 Select the Movie from IMDB
                                                 <i className="fa fa-solid fa-angle-down icon" />
@@ -260,28 +274,27 @@ export default function AddMovie() {
                                                 id="style1"
                                                 aria-labelledby="dropdownMenuButton"
                                             >
-                                                <li className="dropdown-item">
-                                                    <img
-                                                        src="./../images/batman.jpg"
-                                                        width="60"
-                                                        height="60"
-                                                        className="rounded-circle img2"
-                                                        alt=""
-                                                    />{' '}
-                                                    THE BATMAN
-                                                    <br />
-                                                    <img
-                                                        src="./../images/star.png"
-                                                        width="15"
-                                                        height="15"
-                                                        alt=""
-                                                    />{' '}
-                                                    8.1/10
-                                                </li>
+                                                {imdbMovies.map((movie, index) =>{
+                                                    return(
+                                                        <li className="dropdown-item" key = {movie.id} onClick={()=> setImdbKey(movie.id)}>
+                                                            <img
+                                                                src={movie.image}
+                                                                width="60"
+                                                                height="60"
+                                                                className="rounded-circle img2"
+                                                                alt=""
+                                                            />{' '}
+                                                            {movie.title}
+                                                            <br />
+                                                            {movie.description}
+                                                        </li>
+                                                    )
+                                                })}
+
                                             </ul>
                                         </div>
                                     </div>
-
+                                    <button type="button" onClick = {getMoviesToTheMovieTitle}>refresh</button>
                                     <div className="mb-3">
                                         <label
                                             for="language"
