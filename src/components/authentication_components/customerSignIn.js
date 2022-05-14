@@ -42,15 +42,14 @@ export default function CustomerLogin() {
             data: content,
         })
             .then((res) => {
-                if(res.data.token) {
+                if (res.data.token) {
                     // save localstorage
                     saveTokenInLocalStorage(res.data.token)
                     // path separation
                     navigateHome(res.data.userRole)
-                }else{
+                } else {
                     setInvalidTxtStatus(false)
                 }
-
             })
             .catch(async (err) => {
                 setInvalidTxtStatus(false)
