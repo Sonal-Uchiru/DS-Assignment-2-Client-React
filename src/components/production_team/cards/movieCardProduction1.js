@@ -15,6 +15,13 @@ export default function MovieCardProduction1(props) {
     let [movieStoryline, setMovieStoryline] = useState("")
     let [movieStatus, setMovieStatus] = useState(true)
 
+    let [nameError, setNameError] = useState("")
+    let [durationError, setDurationError] = useState("")
+    let [ratingsError, setRatingsError] = useState("")
+    let [languageError, setLanguageError] = useState("")
+    let [genreError, setGenreError] = useState("")
+    let [storyError, setStoryError] = useState("")
+
 
 
 
@@ -32,6 +39,16 @@ export default function MovieCardProduction1(props) {
         setMovieGenre(movieDetails.genre)
         setMovieStoryline(movieDetails.story_line)
         movieDetails.showing ? setMovieStatus(1) : setMovieStatus(2)
+
+    }
+
+    function updateMovie(){
+        movieName == "" ? setNameError("Movie name cannot be empty"): setNameError("")
+        movieDuration == "" ? setDurationError("Movie duration cannot be empty"): setDurationError("")
+        movieRatings == "" ? setRatingsError("Movie ratings cannot be empty"): setRatingsError("")
+        movieLanguage == "" ? setLanguageError("Movie language cannot be empty"): setLanguageError("")
+        movieGenre == "" ? setGenreError("Movie genre cannot be empty"): setGenreError("")
+        movieStoryline == "" ? setStoryError("Movie storyline cannot be empty"): setStoryError("")
 
     }
     return (
@@ -102,44 +119,64 @@ export default function MovieCardProduction1(props) {
                                                 <label htmlFor="file-input">
                                                     <img src={movieImage} className="Img2" id="btn4"/>
                                                 </label>
-                                                <input id="file-input" type="file"/>
+                                                <input id="file-input" type="file" onChange={(e)=>{
+                                                    setMovieImage(e.target.value)
+                                                }}/>
                                             </div>
                                         </span>
                                         <br/>
                                         <div className="mb-3">
                                             <label htmlFor="Mname" className="form-label">Movie Name</label>
-                                            <input type="text" value = {movieName} className="form-control" id="Mname" placeholder="Toy Story"/>
+                                            <input type="text" value = {movieName} className="form-control" id="Mname" placeholder="Toy Story" onChange={(e)=>{
+                                                setMovieName(e.target.value)
+                                            }}/>
+                                            <label htmlFor="Mname" className="form-label text-danger">{nameError}</label>
+
                                         </div>
 
                                         <div className="mb-3">
                                             <label htmlFor="duration" className="form-label">Duration</label>
                                             <input type="text" value = {movieDuration} className="form-control" id="duration"
-                                                   placeholder="2 HR 30 MIN"/>
+                                                   placeholder="2 HR 30 MIN" onChange={(e)=>{
+                                                setMovieDuration(e.target.value)
+                                            }}/>
+                                            <label htmlFor="Mname" className="form-label text-danger">{durationError}</label>
+
                                         </div>
 
                                         <div className="mb-3">
                                             <label htmlFor="rating" className="form-label">Ratings</label>
-                                            <select name="rating" value = {movieRatings} id="rating" className="form-select allselect">
+                                            <select name="rating" value = {movieRatings} id="rating" className="form-select allselect" onChange={(e)=> {
+                                                setMovieRatings(e.target.value)
+                                            }}>
                                                 <option value="">Select the Movie from IMDB</option>
                                                 <option value="batman">The Batman</option>
                                                 <option value="sonic">Sonic the Hedgehog 2</option>
                                                 <option value="kfg">K.G.F Chapter 2</option>
                                             </select>
+                                            <label htmlFor="Mname" className="form-label text-danger">{ratingsError}</label>
+
                                         </div>
 
                                         <div className="mb-3">
                                             <label htmlFor="language" className="form-label">Language</label>
-                                            <select name="language" value = {movieLanguage} className="form-select allselect" id="language">
+                                            <select name="language" value = {movieLanguage} className="form-select allselect" id="language" onChange={(e)=>{
+                                                setMovieLanguage(e.target.value)
+                                            }}>
                                                 <option value="">Select Language</option>
                                                 <option value="English">English</option>
                                                 <option value="Hindi">Hindi</option>
                                                 <option value="Telugu">Telugu</option>
                                             </select>
+                                            <label htmlFor="Mname" className="form-label text-danger">{languageError}</label>
+
                                         </div>
 
                                         <div className="mb-3">
                                             <label htmlFor="genre" className="form-label">Genre</label>
-                                            <select name="genre" value = {movieGenre} className="form-select allselect" id="genere">
+                                            <select name="genre" value = {movieGenre} className="form-select allselect" id="genere" onChange={(e)=>{
+                                                setMovieGenre(e.target.value)
+                                            }}>
                                                 <option value="" selected>Select Genre</option>
                                                 <option value="Action">Action</option>
                                                 <option value="Drama">Drama</option>
@@ -148,13 +185,16 @@ export default function MovieCardProduction1(props) {
                                                 <option value="Comedy">Comedy</option>
                                                 <option value="Horror">Horror</option>
                                             </select>
+                                            <label htmlFor="Mname" className="form-label text-danger">{genreError}</label>
+
                                         </div>
 
                                         <div className="mb-3">
                                             <label htmlFor="status" className="form-label">Status</label>
-                                            <select name="status" value = {movieStatus} className="form-select allselect" id="status">
-                                                <option value="" selected>Select Status</option>
-                                                <option value="1">Now Showing</option>
+                                            <select name="status" value = {movieStatus} className="form-select allselect" id="status" onChange={(e)=>{
+                                                setMovieStatus(e.target.value)
+                                            }}>
+                                                <option value="1" selected>Now Showing</option>
                                                 <option value="2">Coming Soon</option>
                                             </select>
                                         </div>
@@ -162,7 +202,11 @@ export default function MovieCardProduction1(props) {
 
                                         <div className="mb-3">
                                             <label htmlFor="storyLine" className="form-label">Story Line</label>
-                                            <textarea className="form-control" value = {movieStoryline} placeholder="Story Line" id="storyLine"/>
+                                            <textarea className="form-control" value = {movieStoryline} placeholder="Story Line" id="storyLine" onChange={(e)=>{
+                                                setMovieStoryline(e.target.value)
+                                            }}/>
+                                            <label htmlFor="Mname" className="form-label text-danger">{storyError}</label>
+
                                         </div>
 
                                     </form>
@@ -175,7 +219,7 @@ export default function MovieCardProduction1(props) {
                             </div>
                             <div className="modal-footer border-0">
                                 <button type="button" className="btn5">Delete</button>
-                                <button type="button" className="btn6">Update</button>
+                                <button type="button" onClick = {(e)=> updateMovie()} className="btn6">Update</button>
                             </div>
                         </div>
                     </div>
