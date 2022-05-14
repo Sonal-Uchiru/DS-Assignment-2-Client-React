@@ -1,10 +1,46 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import "./../css/movieCart.css"
 import MovieCardProduction1 from "../../production_team/cards/movieCardProduction1";
 import MovieCartCard from "../cards/movieCartCard";
 
 export default function MovieCart() {
+
+    const [cartItems, setCartItems] = useState([]);
+    const [duplicateCartItems, setDuplicateCartItems] = useState([]);
+    const userToken =
+        'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng'
+
+
+    useEffect(()=>{
+        axios({
+            url: 'http://localhost:8093/api/carts',
+            method: 'GET',
+            headers: { 'x-auth-token': userToken },
+        })
+            .then((res) => {
+                setCartItems(res.data)
+                setDuplicateCartItems(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },[])
+
+    function handleSearch(userIn) {
+        const result = duplicateCartItems.filter(
+            (cart) =>
+                cart.showTimeWithMovieTheaterDetailsDTO.movie.name
+                    .toLowerCase()
+                    .includes(userIn.toLowerCase()) ||
+                cart.showTimeWithMovieTheaterDetailsDTO.theater.name
+                    .toLowerCase()
+                    .includes(userIn.toLowerCase())
+        )
+
+        setCartItems(result)
+    }
+
 
     return (
         <div className="MovieCart">
@@ -20,7 +56,10 @@ export default function MovieCart() {
             <br/>
             <div className="main">
                 <div className="input-group">
-                    <input type="text" className="form-control" placeholder="Search By name..."/>
+                    <input type="text" className="form-control" placeholder="Search By name..."
+                    onChange={(e) => {
+                        handleSearch(e.target.value)
+                    }}/>
                     <div className="input-group-append">
                         <button className="btn searchbtn" type="button">
                             <svg
@@ -45,21 +84,15 @@ export default function MovieCart() {
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
-                    <div className="columns">
-                        <MovieCartCard/>
-                    </div>
+                    {cartItems.map((cart) => {
+                        return(
+                            <div className="columns">
+                                <MovieCartCard cart={cart}/>
+                            </div>
+                        )
+                    })
 
-                    <div className="columns">
-                        <MovieCartCard/>
-                    </div>
-
-                    <div className="columns">
-                        <MovieCartCard/>
-                    </div>
-
-                    <div className="columns">
-                        <MovieCartCard/>
-                    </div>
+                    }
                 </div>
             </div>
 

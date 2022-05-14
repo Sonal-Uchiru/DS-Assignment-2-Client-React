@@ -1,112 +1,154 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./../css/movieCartCard.css";
+import axios from "axios";
 
-export default function MovieCartCard() {
+export default function MovieCartCard({cart}) {
 
-    const [tickets, setTickets] = useState(1)
-    const [ticket, setTickets2] = useState(1)
+        const [childtickets, setChildTickets] = useState(cart.cart.child_tickets)
+        const [adulttickets, setAdultTickets] = useState(cart.cart.adult_tickets)
+
+        const [price, setPrice] = useState(
+            cart.showTimeWithMovieTheaterDetailsDTO.theater
+                .child_ticket_price *
+            cart.cart.child_tickets +
+            cart.showTimeWithMovieTheaterDetailsDTO.theater
+                .adult_ticket_price *
+            cart.cart.adult_tickets
+        )
 
 
-    function handleDecrement(){
-        if(tickets > 1) {
-            setTickets(prevCount => prevCount - 1)
+        useEffect(()=>{
+            setPrice(cart.showTimeWithMovieTheaterDetailsDTO.theater
+                    .child_ticket_price *
+                cart.cart.child_tickets +
+                cart.showTimeWithMovieTheaterDetailsDTO.theater
+                    .adult_ticket_price *
+                cart.cart.adult_tickets)
+        },[childtickets,adulttickets])
+
+
+        function handleDecrementChildTickets(){
+            if(childtickets > 1) {
+                setChildTickets(prevCount => prevCount - 1)
+            }
         }
-    }
 
-    function handleIncrement(){
-        setTickets(prevCount => prevCount + 1)
-    }
-
-    function handleDecrement2(){
-        if(ticket > 1) {
-            setTickets2(prevCount => prevCount - 1)
+        function handleIncrementChildTickets(){
+            setChildTickets(prevCount => prevCount + 1)
         }
-    }
 
-    function handleIncrement2(){
-        setTickets2(prevCount => prevCount + 1)
-    }
+        function handleDecrementAdultTickets(){
+            if(adulttickets > 1) {
+                setAdultTickets(prevCount => prevCount - 1)
+            }
+        }
+
+        function handleIncrementAdultTickets(){
+            setAdultTickets(prevCount => prevCount + 1)
+        }
+
+        function removeCartItem(id){
+
+            axios({
+                url: `http://localhost:8093/api/carts/${id}`,
+                method: 'DELETE',
+            })
+                .then((res) => {
+                    window.location.reload()
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        }
+
+        function updateTicketsCount(){
+
+        }
 
 
-    return (
-        <div className="MovieCartCard">
-            <div className="card">
+        return (
+            <div className="MovieCartCard">
+                <div className="card">
 
-                <img src="./../images/batman.jpg" className="card-img-top" alt="..."/>
-                <div className="card-body">
+                    <img src={cart.showTimeWithMovieTheaterDetailsDTO
+                        .movie.image} className="card-img-top" alt="..."/>
+                    <div className="card-body">
 
-                    <h4 className="card-title">THE BATMAN</h4>
-                    <br/>
-                    <div className="details">
-                        <div className="row">
-                            <div className="col">
-                                <p className="dName">Duration</p>
+                        <h4 className="card-title">{cart.showTimeWithMovieTheaterDetailsDTO
+                            .movie.name}</h4>
+                        <br/>
+                        <div className="details">
+                            <div className="row">
+                                <div className="col">
+                                    <p className="dName">Duration</p>
+                                </div>
+                                <div className="col">
+                                    <p>{cart.showTimeWithMovieTheaterDetailsDTO
+                                        .movie.duration}</p>
+                                </div>
                             </div>
-                            <div className="col">
-                                <p>2 HR 30 MIN</p>
-                            </div>
-                        </div>
 
-                        <div className="row">
-                            <div className="col">
-                                <p className="dName">Theater</p>
+                            <div className="row">
+                                <div className="col">
+                                    <p className="dName">Theater</p>
+                                </div>
+                                <div className="col">
+                                    <p >{cart.showTimeWithMovieTheaterDetailsDTO
+                                        .theater.name} </p>
+                                </div>
                             </div>
-                            <div className="col">
-                                <p >Liberty Cinema </p>
-                            </div>
-                        </div>
 
-                        <div className="row">
-                            <div className="col">
-                                <p className="dName">Child-Tickets</p>
-                            </div>
-                            <div className="col">
+                            <div className="row">
+                                <div className="col">
+                                    <p className="dName">Child-Tickets</p>
+                                </div>
+                                <div className="col">
 
-                                    <div className="plusMinus">
-                                        <div className="btn-group btn-group-sm" role="group" aria-label="Second group">
-                                            <button type="button" className="btn"  onClick={handleDecrement}> <i className = "fa fa-minus"/></button>
-                                            <button  type="text" className="btn">{tickets} </button>
-                                            <button type="button" className="btn" onClick={handleIncrement}> <i className = "fa fa-plus"/></button>
+                                        <div className="plusMinus">
+                                            <div className="btn-group btn-group-sm" role="group" aria-label="Second group">
+                                                <button type="button" className="btn"  onClick={handleDecrementChildTickets}> <i className = "fa fa-minus"/></button>
+                                                <button  type="text" className="btn">{childtickets} </button>
+                                                <button type="button" className="btn" onClick={handleIncrementChildTickets}> <i className = "fa fa-plus"/></button>
+                                            </div>
                                         </div>
-                                    </div>
 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col">
-                            <p className="dName">Adult-Tickets</p>
-                        </div>
-                        <div className="col">
-                            <div className="plusMinus">
-                                <div className="btn-group btn-group-sm" role="group" aria-label="Second group">
-                                    <button type="button" className="btn"  onClick={handleDecrement2}> <i className = "fa fa-minus"/></button>
-                                    <button  type="text" className="btn">{ticket} </button>
-                                    <button type="button" className="btn" onClick={handleIncrement2}> <i className = "fa fa-plus"/></button>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div className="row">
-                        <div className="col">
-                            <p className="dName">Payment</p>
+                        <div className="row">
+                            <div className="col">
+                                <p className="dName">Adult-Tickets</p>
+                            </div>
+                            <div className="col">
+                                <div className="plusMinus">
+                                    <div className="btn-group btn-group-sm" role="group" aria-label="Second group">
+                                        <button type="button" className="btn"  onClick={handleDecrementAdultTickets}> <i className = "fa fa-minus"/></button>
+                                        <button  type="text" className="btn">{adulttickets} </button>
+                                        <button type="button" className="btn" onClick={handleIncrementAdultTickets}> <i className = "fa fa-plus"/></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="col">
-                            <p>LKR 2500.00</p>
-                        </div>
-                    </div>
 
-                        <button type="button" className="btnRemove">Remove</button>
-                    </div>
+                        <div className="row">
+                            <div className="col">
+                                <p className="dName">Payment</p>
+                            </div>
+                            <div className="col">
+                                <p>{`LKR ${price}`}</p>
+                            </div>
+                        </div>
+
+                            <button type="button" className="btnRemove" onClick={()=>removeCartItem(cart.cart.id)}>Remove</button>
+                        </div>
+
+                    <br/>
+                </div>
 
                 <br/>
+
             </div>
 
-            <br/>
-
-        </div>
-
-    );
+        );
 }
