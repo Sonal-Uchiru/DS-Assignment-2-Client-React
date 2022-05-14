@@ -233,6 +233,7 @@ export default function AddMovie() {
                                             type="text"
                                             className="form-control"
                                             readOnly
+
                                         />
                                     </div>
 
