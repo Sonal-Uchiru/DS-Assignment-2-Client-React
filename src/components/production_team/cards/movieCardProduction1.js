@@ -2,9 +2,11 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/movieCardProduction.css"
 import UpdateMovieModal from "./../modals/updateMovie";
+import Swal from "sweetalert2";
 
 export default function MovieCardProduction1(props) {
     let movieDetails = props.details;
+    let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng";
 
     let [movieImage, setMovieImage] = useState("")
     let [movieName, setMovieName] = useState("")
@@ -28,7 +30,9 @@ export default function MovieCardProduction1(props) {
     useEffect(()=> {
         console.log(movieDetails)
         assignDetails()
+
     }, [])
+
 
     function assignDetails(){
         setMovieImage(movieDetails.image)
@@ -43,19 +47,69 @@ export default function MovieCardProduction1(props) {
     }
 
     function updateMovie(){
-        movieName == "" ? setNameError("Movie name cannot be empty"): setNameError("")
+        let val = 0;
+        movieName == "" ? (setNameError("Movie name cannot be empty")) : setNameError("")
         movieDuration == "" ? setDurationError("Movie duration cannot be empty"): setDurationError("")
         movieRatings == "" ? setRatingsError("Movie ratings cannot be empty"): setRatingsError("")
         movieLanguage == "" ? setLanguageError("Movie language cannot be empty"): setLanguageError("")
         movieGenre == "" ? setGenreError("Movie genre cannot be empty"): setGenreError("")
         movieStoryline == "" ? setStoryError("Movie storyline cannot be empty"): setStoryError("")
 
+        if(movieName != "" && movieDuration != "" && movieRatings != "" && movieLanguage != "" && movieGenre != "" && movieStoryline != "" ){
+            let status = true;
+            movieStatus == 1 ? status = true : status = false;
+            let movieObj = {
+                name: movieName,
+                image: movieImage,
+                duration: movieDuration,
+                genre: movieGenre,
+                story_line: movieGenre,
+                language: movieLanguage,
+                imdb_key: "rating",
+                showing: status,
+            }
+            console.log(movieObj)
+            axios({
+                url: `http://localhost:8093/api/movies/${movieDetails.id}`,
+                method: "PUT",
+                headers: {"x-auth-token":userToken},
+                data: movieObj
+            }).then((res)=> {
+                props.functionReload()
+                showAlerts(1, "Movie Updated successfully")
+                document.getElementById('closebtn').click()
+            }).catch(async (err) => {
+                await showAlerts(2, err)
+
+            })
+        }
+
+    }
+
+    function showAlerts(type, text){
+        // type 1 = success, type 2 = error, type 3 = update success
+        if(type == 1){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: text,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }else if(type == 2){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: text,
+                footer: '<p style = "color : #D0193A">Currently unavailable!',
+            });
+        }
     }
     return (
         <div className="MovieCardProduction">
             <div className="card">
 
-                <img src="./../images/batman.jpg" className="card-img-top" alt="..."/>
+                <img src={movieDetails.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <div className="row">
                         <div className="col-8">
@@ -96,7 +150,7 @@ export default function MovieCardProduction1(props) {
                         <div className="modal-content">
                             <div className="modal-header border-0">
                                 <h2 className="modal-title" id="exampleModalLabel">Update Movie</h2>
-                                <button type="button" className="closebtn" data-dismiss="modal" aria-label="Close">
+                                <button type="button" id = "closebtn" className="closebtn" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
