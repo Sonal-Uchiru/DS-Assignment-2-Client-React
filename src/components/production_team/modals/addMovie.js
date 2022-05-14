@@ -405,9 +405,7 @@ export default function AddMovie() {
                             </div>
                             <br />
                         </div>
-                        <div className="modal-footer border-0">
-
-                        </div>
+                        <div className="modal-footer border-0"></div>
                     </div>
                 </div>
             </div>
