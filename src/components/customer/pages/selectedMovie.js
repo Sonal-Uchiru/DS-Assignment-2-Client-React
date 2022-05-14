@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/selectedMovie.css"
 import SelectedMovieCard from "../cards/selectedMovieCard";
+
 import Swal from "sweetalert2";
 
 
@@ -33,10 +34,9 @@ export default function SelectedMovie() {
     }
     async function getAllTheaters(){
         await axios({
-            url: `http://localhost:8093/api/theaters`,
+            url: `http://localhost:8093/api/showtimes/movies/${movieID}`,
             method: "GET",
             headers: {"x-auth-token":userToken}
-
         }).then((res)=> {
             console.log(res.data)
             setTheaterDetails(res.data)
@@ -69,7 +69,7 @@ export default function SelectedMovie() {
     return (
         <div className="SelectedMovie">
             <h1 className="movieName">{movieData.name}</h1>
-            <img src="./../images/batman1.jpeg" className="img-fluid batman" alt="Responsive image"/>
+            <img src={movieData.image} className="img-fluid batman" alt="Responsive image"/>
 
             <h2 className="story"> Story Line</h2>
             <p className="storyline">{movieData.story_line}</p>
@@ -100,12 +100,12 @@ export default function SelectedMovie() {
                 </div>
             </div>
 
-<div className="crdss">
+            <div className="crdss">
 
-    {theaterDetails.map((post)=> {
-        return (    <SelectedMovieCard key = {post.id} theaterDetails = {post}/>)
-    })}
-</div>
+                {theaterDetails.map((post)=> {
+                    return (    <SelectedMovieCard key = {post.id} dataObject = {post} movieDetails = {movieData} />)
+                })}
+            </div>
 
         </div>
 

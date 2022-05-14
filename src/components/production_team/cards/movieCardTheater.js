@@ -45,7 +45,7 @@ export default function MovieCardTheater(props) {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await axios({
-                    url: 'http://localhost:8093/api/showtimes/${showTimeDetails.id}',
+                    url: `http://localhost:8093/api/showtimes/${showTimeDetails.id}`,
                     method: 'DELETE',
                     headers: {"x-auth-token":userToken}
                 }).then((res)=> {

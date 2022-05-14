@@ -16,8 +16,7 @@ export default function BuyTicket() {
 
     let [totalPrice, setTotalPrice] = useState("")
     let [errorText, setErrorText] = useState("");
-    var ticketAdult = 0;
-    var ticketChild = 0;
+
     let movieObj = {
         showTime:"9.00",
         movieName: "Bat Man",
@@ -89,9 +88,49 @@ export default function BuyTicket() {
 
     }
 
-    function buyTicket(){
-        alert("buy")
+    async function buyTicket() {
+
+        var payment = {
+            // whether it is a testing environment or not
+            sandbox: true,
+            merchant_id: "1219390", // Replace your Merchant ID
+            return_url: undefined, // Important
+            cancel_url: undefined, // Important
+            notify_url: "http://sample.com/notify",
+            order_id: "MT" + new Date().valueOf(),
+            items: "movieObj.movieName",
+            amount: "2000",
+            currency: "USD",
+            first_name: "DS",
+            email: "asdasd@gmail.com",
+            phone: "DS",
+            address: "",
+            city: "",
+            delivery_address: "",
+            delivery_city: "",
+            delivery_country: "",
+            custom_1: "",
+            custom_2: "",
+        };
+
+        // Show the payhere.js popup, when "PayHere Pay" is clicked
+        window.payhere.startPayment(payment);
     }
+    window.payhere.onCompleted = function onCompleted(orderId) {
+        // postOrder(orderId);
+    };
+
+    // Called when error happens when initializing payment such as invalid parameters
+    window.payhere.onError = function onError(error) {
+        // Note: show an error page
+        console.log(error);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+        });
+    };
+
 
     function showAlerts(type, text){
         // type 1 = success, type 2 = error, type 3 = update success
@@ -125,76 +164,76 @@ export default function BuyTicket() {
     return (
         <div className="buyTicket">
 
-            <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
+            {/*<button type="button" className="btn btn-primary btnB" data-toggle="modal" data-target="#exampleModal">*/}
+            {/*    Buy Ticket*/}
+            {/*</button>*/}
 
-            <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-centered" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header border-0">
-                            <h2 className="modal-title" id="exampleModalLabel">Buy Tickets</h2>
-                            <button type="button" id = "closeModalbtn" className="closebtn" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="container">
-                                <form>
-                                    <div className="mb-3">
-                                        <label for="Stime" className="form-label">Show Time</label>
-                                        <input type="text" value = {movieObj.showTime} className="form-control" id="Stime" placeholder="9.00 AM"
-                                               readOnly/>
-                                    </div>
+            {/*<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog"*/}
+            {/*     aria-labelledby="exampleModalLabel" aria-hidden="true">*/}
+            {/*    <div className="modal-dialog modal-dialog-centered" role="document">*/}
+            {/*        <div className="modal-content">*/}
+            {/*            <div className="modal-header border-0">*/}
+            {/*                <h2 className="modal-title" id="exampleModalLabel">Buy Tickets</h2>*/}
+            {/*                <button type="button" id = "closeModalbtn" className="closebtn" data-dismiss="modal" aria-label="Close">*/}
+            {/*                    <span aria-hidden="true">&times;</span>*/}
+            {/*                </button>*/}
+            {/*            </div>*/}
+            {/*            <div className="modal-body">*/}
+            {/*                <div className="container">*/}
+            {/*                    <form>*/}
+            {/*                        <div className="mb-3">*/}
+            {/*                            <label for="Stime" className="form-label">Show Time</label>*/}
+            {/*                            <input type="text" value = {movieObj.showTime} className="form-control" id="Stime" placeholder="9.00 AM"*/}
+            {/*                                   readOnly/>*/}
+            {/*                        </div>*/}
 
-                                    <div className="mb-3">
-                                        <label for="Mname" className="form-label">Movie Name</label>
-                                        <input type="text" value = {movieObj.movieName} className="form-control" id="Mname" placeholder="THE BATMAN"
-                                               readOnly/>
-                                    </div>
+            {/*                        <div className="mb-3">*/}
+            {/*                            <label for="Mname" className="form-label">Movie Name</label>*/}
+            {/*                            <input type="text" value = {movieObj.movieName} className="form-control" id="Mname" placeholder="THE BATMAN"*/}
+            {/*                                   readOnly/>*/}
+            {/*                        </div>*/}
 
-                                    <div className="mb-3">
-                                        <label for="Ctickets" className="form-label">Child-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR {childTicketPrice})</b></label>
-                                        <input type="number" onKeyUp={(e) => {
-                                            setChildTicket(e.target.value)
-                                        }} className="form-control" id="Ctickets" placeholder="2"/>
-                                    </div>
-
-
-                                    <div className="mb-3">
-                                        <label for="Atickets" className="form-label">Adult-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR {adultTicketPrice})</b></label>
-                                        <input type="number" onKeyUp={(e) => {
-                                            setAdultTicket(e.target.value)
-                                        }} className="form-control" id="Atickets" placeholder="2"/>
-                                        <label htmlFor="error" className="form-label text-danger">{errorText}</label>
-
-                                    </div>
-
-                                    <p className="total">Total: <b style={{color: "#ECB365"}}>LKR {totalPrice}</b></p>
+            {/*                        <div className="mb-3">*/}
+            {/*                            <label for="Ctickets" className="form-label">Child-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR {childTicketPrice})</b></label>*/}
+            {/*                            <input type="number" onKeyUp={(e) => {*/}
+            {/*                                setChildTicket(e.target.value)*/}
+            {/*                            }} className="form-control" id="Ctickets" placeholder="2"/>*/}
+            {/*                        </div>*/}
 
 
-                                </form>
-                            </div>
+            {/*                        <div className="mb-3">*/}
+            {/*                            <label for="Atickets" className="form-label">Adult-tickets <b style={{color:"#041C32", fontSize:"14px"}}>(LKR {adultTicketPrice})</b></label>*/}
+            {/*                            <input type="number" onKeyUp={(e) => {*/}
+            {/*                                setAdultTicket(e.target.value)*/}
+            {/*                            }} className="form-control" id="Atickets" placeholder="2"/>*/}
+            {/*                            <label htmlFor="error" className="form-label text-danger">{errorText}</label>*/}
+
+            {/*                        </div>*/}
+
+            {/*                        <p className="total">Total: <b style={{color: "#ECB365"}}>LKR {totalPrice}</b></p>*/}
 
 
-                            <br/>
+            {/*                    </form>*/}
+            {/*                </div>*/}
 
 
-                        </div>
-                        <div className="modal-footer border-0">
-                            <div className="row text-center">
-                                <div className="col">
-                                    <button onClick = {() => checkValidity(2)} type="button" className="btn5 btn-lg">Buy Tickets</button>
-                                </div>
-                                <div className="col">
-                                    <button onClick = {() => checkValidity(1)} type="button" className="btn6 btn-lg">Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {/*                <br/>*/}
+
+
+            {/*            </div>*/}
+            {/*            <div className="modal-footer border-0">*/}
+            {/*                <div className="row text-center">*/}
+            {/*                    <div className="col">*/}
+            {/*                        <button onClick = {() => checkValidity(2)} type="button" className="btn5 btn-lg">Buy Tickets</button>*/}
+            {/*                    </div>*/}
+            {/*                    <div className="col">*/}
+            {/*                        <button onClick = {() => checkValidity(1)} type="button" className="btn6 btn-lg">Add to Cart</button>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
         </div>
     );
