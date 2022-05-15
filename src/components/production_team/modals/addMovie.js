@@ -21,6 +21,8 @@ export default function AddMovie() {
     const [showing, setShowings] = useState('')
 
     const [imdbLoading, setImdbLoading] = useState(true)
+    const [saveMovieDBLoading, setSaveMovieDBLoading] = useState(true)
+    const [noResultStatus, setNoResultStatus] = useState(true)
     const [file, setFile] = useState()
 
     const [ratings, setRatings] = useState('')
@@ -48,8 +50,27 @@ export default function AddMovie() {
         }
     }
 
-    function addMovie(e) {
+    async function addMovie(e) {
         e.preventDefault()
+
+        await Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+        }).then(async (result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                setSaveMovieDBLoading(false)
+                saveMovieDB()
+            } else if (result.isDenied) {
+                await Swal.fire('Changes are not saved', '', 'info')
+            }
+        })
+    }
+
+    function saveMovieDB() {
         const content = {
             name,
             image,
@@ -60,7 +81,6 @@ export default function AddMovie() {
             imdb_key,
             showing: showing === 'Now Showing',
         }
-
         axios({
             url: 'http://localhost:8093/api/movies',
             method: 'POST',
@@ -69,8 +89,9 @@ export default function AddMovie() {
             },
             data: content,
         })
-            .then((res) => {
-                alert('add')
+            .then(async (res) => {
+                setSaveMovieDBLoading(true)
+                await Swal.fire('Saved!', '', 'success')
             })
             .catch(async (err) => {
                 await Swal.fire({
@@ -78,24 +99,30 @@ export default function AddMovie() {
                     title: 'Oops...',
                     text: 'Something went wrong!',
                 })
+                setSaveMovieDBLoading(true)
             })
     }
 
     function getMoviesToTheMovieTitle() {
         setImdbLoading(false)
-        GetMoviesByTitle(name)
-            .then((res) => {
-                // console.log(res.data)
-                setImdbMovies(res.data.results)
-                setImdbLoading(true)
-            })
-            .catch(async (err) => {
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong!',
+        setNoResultStatus(true)
+        if (name !== '') {
+            GetMoviesByTitle(name)
+                .then((res) => {
+                    setImdbMovies(res.data.results)
+                    if (res.data.results.length === 0) {
+                        setNoResultStatus(false)
+                    }
+                    setImdbLoading(true)
                 })
-            })
+                .catch(async (err) => {
+                    await Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                })
+        }
     }
 
     return (
@@ -305,6 +332,13 @@ export default function AddMovie() {
                                                             width={'50px'}
                                                         />
                                                     </div>
+                                                    <div
+                                                        hidden={noResultStatus}
+                                                    >
+                                                        <h5 className="text-danger">
+                                                            No Result Found!
+                                                        </h5>
+                                                    </div>
                                                 </div>
                                                 {imdbMovies.map(
                                                     (movie, index) => {
@@ -342,12 +376,32 @@ export default function AddMovie() {
                                             </ul>
                                         </div>
                                     </div>
+
                                     <button
+                                        className="btn-sm refresh-btn"
                                         type="button"
                                         onClick={getMoviesToTheMovieTitle}
                                     >
-                                        refresh
+                                        <span className="glyphicon glyphicon-refresh"> </span>{' '}
+                                        Refresh
                                     </button>
+                                    <div className="ratingContainer">
+                                        <img
+                                            src="./../images/imdb.png"
+                                            className="imdb"
+                                            alt="imdbLogo"
+                                        />
+                                    </div>
+                                    <div className="ratingContainer">
+                                        <img
+                                            src="./../images/star.png"
+                                            className="star"
+                                            width="15"
+                                            height="15"
+                                            alt="star"
+                                        />{' '}
+                                        8.1/10
+                                    </div>
                                     <div className="mb-3">
                                         <label
                                             for="language"
@@ -461,9 +515,18 @@ export default function AddMovie() {
                                     </div>
                                 </form>
                             </div>
-                            <br />
                         </div>
                         <div className="modal-footer border-0">
+                            <div className="container d-flex justify-content-center">
+                                <div hidden={saveMovieDBLoading}>
+                                    <Example
+                                        type={'bars'}
+                                        color={'#ECB365'}
+                                        height={'50px'}
+                                        width={'50px'}
+                                    />
+                                </div>
+                            </div>
                             <button
                                 form="addMovie"
                                 type="submit"
