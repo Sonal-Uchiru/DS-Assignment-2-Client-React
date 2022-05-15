@@ -29,9 +29,11 @@ export default function SelectedMovieCard(props) {
 
     let [showTimeID, setShowTimeID] = useState("");
 
+    let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
+
     useEffect(()=> {
         console.log(theaterDetails)
-
+        setMainImage(movieDetails.image)
     },[])
 
     useEffect(()=> {
@@ -70,21 +72,6 @@ export default function SelectedMovieCard(props) {
         setTotalPrice(total)
     }
 
-    // function getTheaterDetails(){
-    //     axios({
-    //         url: `http://localhost:8093/api/theaters/${theaterID}`,
-    //         method: "GET",
-    //         headers: {"x-auth-token": userToken}
-    //     }).then((res)=>{
-    //         console.log(res.data)
-    //         setAdultTicketPrice(res.data.adult_ticket_price)
-    //         setChildTicketPrice(res.data.child_ticket_price)
-    //
-    //     }).catch((err)=>{
-    //         showAlerts(2, err)
-    //     })
-    //
-    // }
 
     function checkValidity(type){
         if(adultTicket == ""){
@@ -179,7 +166,7 @@ export default function SelectedMovieCard(props) {
             <div className="card mb-3">
                 <div className="row g-0">
                     <div className="col-md-4">
-                        <img src= {movieDetails.image} className="img-fluid rounded Img" alt="..."/>
+                        <img src= {mainImage} className="img-fluid rounded Img" alt="..."/>
                     </div>
                     <div className="col-md-8">
                         <div className="card-body">
