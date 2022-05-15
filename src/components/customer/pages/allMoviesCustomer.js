@@ -3,6 +3,7 @@ import axios from "axios";
 import "./../css/allMoviesCustomer.css"
 import MovieCardCustomer1 from "../cards/movieCardCustomer";
 import MovieCardCustomer2 from "../cards/movieCardCustomer2";
+import LoadingDiv from "./../../external_components/loading";
 
 export default function AllMoviesCustomer() {
 
@@ -17,8 +18,10 @@ export default function AllMoviesCustomer() {
     let [comingSoon, setComingSoon] = useState([]);
     let [comingSoonDataHolder, setComingSoonDataHolder] = useState([]);
 
+    let [loadingStatus, setLoadingStatus] = useState(true)
 
     useEffect(() => {
+        setLoadingStatus(false)
         getAllMovies();
 
     }, [])
@@ -57,7 +60,7 @@ export default function AllMoviesCustomer() {
          setNowShowingDataHolder(nowShowing)
          setComingSoon(comingSoon)
          setComingSoonDataHolder(comingSoon)
-
+         setLoadingStatus(true)
      }
      function filterByGenre(e, type){
         let genreText = e;
@@ -161,7 +164,7 @@ export default function AllMoviesCustomer() {
             </div>
 
             <br/>
-            <div className="dropdown">
+            <div  className="dropdown">
                 <button className="btn dropdown-toggle" type="button" id="btngenre" data-bs-toggle="dropdown"
                         aria-expanded="false">
                     Genres
@@ -178,7 +181,12 @@ export default function AllMoviesCustomer() {
                 </ul>
             </div>
 
-            <br/><br/><br/>
+            <br/><br/>
+            <div hidden = {loadingStatus}  className="container justify-content-center">
+                <center>
+                    <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                </center>
+            </div>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
@@ -238,8 +246,12 @@ export default function AllMoviesCustomer() {
                 </ul>
             </div>
 
-            <br/><br/><br/>
-
+            <br/><br/>
+            <div hidden = {loadingStatus}  className="container justify-content-center">
+                <center>
+                    <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                </center>
+            </div>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
