@@ -9,6 +9,7 @@ import PasswordStrengthIndicator from '../external_components/passwordStrengthIn
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import Example from "../external_components/loading";
 
 export default function ForgotPassword() {
     const eye = <FontAwesomeIcon icon={faEye} />
@@ -24,6 +25,9 @@ export default function ForgotPassword() {
     const [inputConfirmPassword, setInputConfirmPassword] = useState('')
     const [misMatchTextStatus, setMisMatchTextStatus] = useState(true)
     const [genCode, setGenCode] = useState('')
+
+    const [sendEmailLoading,setSendEmailLoading] = useState(true);
+    const [changePasswordLoading, setChangePasswordLoading] = useState(true)
     let code = ''
 
     const [passwordValidity, setPasswordValidity] = useState({
@@ -61,6 +65,7 @@ export default function ForgotPassword() {
     }
     async function sendEmail(e) {
         e.preventDefault()
+        setSendEmailLoading(false);
         await getUserByEmail().then(async (res) => {
             if (res !== '') {
                 setInvalidTxt(true)
@@ -80,6 +85,7 @@ export default function ForgotPassword() {
                         )
                         setStage2(false)
                         setStage1(true)
+                        setSendEmailLoading(true)
                     })
                     .catch((err) => {
                         Swal.fire({
@@ -87,12 +93,14 @@ export default function ForgotPassword() {
                             title: 'Oops...',
                             text: 'Something went wrong!',
                         })
+                        setSendEmailLoading(true)
                     })
             } else {
                 await Swal.fire({
                     title: 'User not Found!',
                     icon: 'info',
                 })
+                setSendEmailLoading(true)
             }
         })
     }
@@ -145,6 +153,7 @@ export default function ForgotPassword() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     changePasswordApi(content)
+                    setChangePasswordLoading(false)
                 }
             })
         } else {
@@ -164,6 +173,7 @@ export default function ForgotPassword() {
                     'You can log into the system',
                     'success'
                 )
+                setChangePasswordLoading(true)
             })
             .catch((err) => {
                 Swal.fire({
@@ -171,6 +181,7 @@ export default function ForgotPassword() {
                     title: 'Oops...',
                     text: 'Something went wrong!',
                 })
+                setChangePasswordLoading(true)
             })
     }
 
@@ -179,6 +190,7 @@ export default function ForgotPassword() {
         setInvalidTxt(true)
         setStage1(false)
         setStage2(true)
+        setSendEmailLoading(true)
     }
 
     const preventWhiteSpace = (e) => {
@@ -253,6 +265,11 @@ export default function ForgotPassword() {
                                     </button>
                                 </div>
                             </form>
+                            <div className="container d-flex justify-content-center">
+                                <div hidden={sendEmailLoading}>
+                                    <Example type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                                </div>
+                            </div>
                         </div>
 
                         {/*Stage 2*/}
@@ -433,6 +450,11 @@ export default function ForgotPassword() {
                                     </button>
                                 </div>
                             </form>
+                            <div className="container d-flex justify-content-center">
+                                <div hidden={changePasswordLoading}>
+                                    <Example type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
