@@ -24,26 +24,21 @@ export default function AllMovies() {
 
     async function getAllMovies() {
 
-        const movies = await axios({
+        await axios({
             url: 'http://localhost:8093/api/movies',
             method: 'GET',
             headers: {"x-auth-token":userToken}
+        }).then((res)=> {
+            filterMovies(res.data);
         }).catch((err) => {
             showAlerts(2, "Something went wrong!")
         })
-
-        if(!movies){
-            setNoNowShowingText("There are no showing movies at the moment");
-            setNoComingSoonText("There are no coming soon movies at the moment");
-
-        }else{
-            filterMovies(movies.data);
-        }
     }
 
     function filterMovies(data){
         var nowShowing = [];
         var comingSoon = [];
+        console.log(data)
         data.map((post) => {
             if(post.showing){
                 nowShowing.push(post)
@@ -52,6 +47,12 @@ export default function AllMovies() {
                 comingSoon.push(post)
             }
         })
+        if(comingSoon.length <= 0){
+            setNoComingSoonText("There are no coming soon movies at the moment");
+        }
+        if(nowShowing.length <= 0){
+            setNoNowShowingText("There are no showing movies at the moment");
+        }
         setNowShowing(nowShowing)
         setNowShowingDataHolder(nowShowing)
         setComingSoon(comingSoon)
@@ -146,20 +147,17 @@ export default function AllMovies() {
             confirmButtonText: "Yes, delete it!",
         }).then(async (result) => {
            if (result.isConfirmed) {
-               const movies = await axios({
+               await axios({
                    url: `http://localhost:8093/api/movies/${movieId}`,
                    method: 'DELETE',
                    headers: {"x-auth-token":userToken}
+               }).then((res)=> {
+                   showAlerts(1, "Movie Deleted successfully")
+                   getAllMovies()
                }).catch((err) => {
                    alert(err);
                })
 
-               if(movies.status == 200){
-                   showAlerts(1, "Movie Deleted successfully")
-                   getAllMovies()
-               }else{
-                   throw new Error(movies.status)
-               }
            }
 
        })
@@ -239,7 +237,7 @@ export default function AllMovies() {
                     {nowShowing.map((post) => {
                         return (
                             <div key = {post.id} className="columns">
-                                <MovieCardProduction1 details = {post} functiondelete = {deleteMovie} />
+                                <MovieCardProduction1 details = {post} functionReload = {getAllMovies} functiondelete = {deleteMovie} />
                             </div>
                         )
                     })}
@@ -301,7 +299,8 @@ export default function AllMovies() {
                     {comingSoon.map((post) => {
                         return (
                             <div key = {post.id} className="columns">
-                                <MovieCardProduction2 details = {post} functiondelete = {deleteMovie}   />
+                                <MovieCardProduction2 details = {post} functionReload = {getAllMovies} functiondelete = {deleteMovie} />
+
                             </div>
                         )
                     })}
