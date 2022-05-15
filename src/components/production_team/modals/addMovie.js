@@ -19,7 +19,7 @@ export default function AddMovie() {
     const [language, setLanguage] = useState('')
     const [imdb_key, setImdbKey] = useState('')
     const [showing, setShowings] = useState('')
-
+    const [imdbRating,setImdbRating] = useState("0")
     const [imdbLoading, setImdbLoading] = useState(true)
     const [saveMovieDBLoading, setSaveMovieDBLoading] = useState(true)
     const [noResultStatus, setNoResultStatus] = useState(true)
@@ -70,7 +70,17 @@ export default function AddMovie() {
         })
     }
 
-    function saveMovieDB() {
+    async function saveMovieDB() {
+        if(image === "" || imdb_key === ""){
+            setSaveMovieDBLoading(true)
+            await Swal.fire(
+                'Select Movie from the IMDB',
+                '',
+                'warning'
+            )
+            return;
+        }
+
         const content = {
             name,
             image,
@@ -122,7 +132,22 @@ export default function AddMovie() {
                         text: 'Something went wrong!',
                     })
                 })
+        }else{
+            setImdbLoading(true)
+            setNoResultStatus(false)
         }
+    }
+
+    function displaySelectedMovieRatings(movieId) {
+        GetRatingByImdbMovieId(movieId).then((res)=>{
+            setImdbRating(res)
+        }).catch(async (err)=>{
+            await Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+            })
+        })
     }
 
     return (
@@ -353,6 +378,7 @@ export default function AddMovie() {
                                                                     setImage(
                                                                         movie.image
                                                                     )
+                                                                    displaySelectedMovieRatings(movie.id)
                                                                 }}
                                                             >
                                                                 <img
@@ -400,7 +426,7 @@ export default function AddMovie() {
                                             height="15"
                                             alt="star"
                                         />{' '}
-                                        8.1/10
+                                        {imdbRating}/10
                                     </div>
                                     <div className="mb-3">
                                         <label
