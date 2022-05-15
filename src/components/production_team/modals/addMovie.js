@@ -63,7 +63,7 @@ export default function AddMovie() {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 setSaveMovieDBLoading(false)
-                saveMovieDB()
+                await saveMovieDB()
             } else if (result.isDenied) {
                 await Swal.fire('Changes are not saved', '', 'info')
             }
