@@ -4,6 +4,7 @@ import "./../css/allMovies.css"
 import MovieCardProduction1 from "../cards/movieCardProduction1";
 import MovieCardProduction2 from "../cards/movieCardProduction2";
 import Swal from "sweetalert2";
+import LoadingDiv from "../../external_components/loading";
 
 export default function AllMovies() {
     let [movieData, setMovieData] = useState([]);
@@ -17,7 +18,11 @@ export default function AllMovies() {
     let [comingSoon, setComingSoon] = useState([]);
     let [comingSoonDataHolder, setComingSoonDataHolder] = useState([]);
 
+    let [loadingStatus, setLoadingStatus] = useState(true)
+
+
     useEffect(() => {
+        setLoadingStatus(false)
         getAllMovies();
 
     }, [])
@@ -57,6 +62,7 @@ export default function AllMovies() {
         setNowShowingDataHolder(nowShowing)
         setComingSoon(comingSoon)
         setComingSoonDataHolder(comingSoon)
+        setLoadingStatus(true)
     }
 
     function filterByGenre(e, type){
@@ -229,7 +235,12 @@ export default function AllMovies() {
                 </ul>
             </div>
 
-            <br/><br/><br/>
+            <br/><br/>
+            <div hidden = {loadingStatus}  className="container justify-content-center">
+                <center>
+                    <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                </center>
+            </div>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">
@@ -289,8 +300,13 @@ export default function AllMovies() {
                 </ul>
             </div>
 
-            <br/><br/><br/>
+            <br/><br/>
 
+            <div hidden = {loadingStatus}  className="container justify-content-center">
+                <center>
+                    <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                </center>
+            </div>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">

@@ -4,6 +4,7 @@ import "./../css/oneTheater.css"
 import MovieCardTheater from "../cards/movieCardTheater";
 import ShowTimeModal from "./../modals/addNewShowTime";
 import Swal from "sweetalert2";
+import LoadingDiv from "../../external_components/loading";
 
 
 
@@ -13,8 +14,13 @@ export default function OneTheater() {
     let [theaterDetails, setTheaterDetails] = useState({})
     let [showTimes, setShowTimes] = useState([])
 
+    let [loadingStatus, setLoadingStatus] = useState(true)
+    let [theaterMainImage, setTheaterMainImage ] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
+    let [theaterLogo, setTheaterLogo ] = useState("https://glenosps.sa.edu.au/wp-content/uploads/2021/07/logo.png")
+
 
     useEffect(()=> {
+        setLoadingStatus(false)
         getTheaterDetails()
         getShowTimeDetails()
     }, [])
@@ -28,6 +34,9 @@ export default function OneTheater() {
         }).then((res)=> {
 
             setTheaterDetails(res.data)
+            setTheaterMainImage(res.data.image)
+            setTheaterLogo(res.data.logo)
+
         }).catch((err)=> {
             showAlerts(2, err);
 
@@ -43,6 +52,7 @@ export default function OneTheater() {
             headers: {"x-auth-token":userToken}
         }).then((res)=> {
             setShowTimes(res.data)
+            setLoadingStatus(true)
         }).catch((err)=>{
             showAlerts(2, err)
         })
@@ -73,17 +83,24 @@ export default function OneTheater() {
         <div className="OneTheater">
 
             <div className="box">
-                <img src={theaterDetails.logo} className="logo"/>
+                <img src={theaterLogo} className="logo"/>
             </div>
             <div className="theaterName">
-                <h1 className="Tname">PVR CINEMA</h1>
+                <h1 className="Tname">{theaterDetails.name}</h1>
             </div>
 
             <div className="box2">
-                <img src={theaterDetails.image} className="TheaterImage" alt=""/>
+                <img src={theaterMainImage} className="TheaterImage" alt=""/>
             </div>
             <br/><br/>
-            <div className="containerrr">
+            <div hidden = {loadingStatus}  className="container justify-content-center">
+                <br/><br/>
+                <center>
+                    <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                </center>
+            </div>
+
+            <div hidden = {!loadingStatus} className="containerrr">
                 <div className="row parent">
                     <div className="col">
 
@@ -135,6 +152,12 @@ export default function OneTheater() {
             <br/><br/><br/><br/>
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
+                <div hidden = {loadingStatus}  className="container justify-content-center">
+                    <center>
+                        <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                    </center>
+                </div>
+
                 <div className="row parent">
 
                 {showTimes.map((post)=> {

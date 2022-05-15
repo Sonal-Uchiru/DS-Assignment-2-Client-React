@@ -11,6 +11,8 @@ export default function MovieCardTheater(props) {
     let movieDetails = props.movieDetails;
     let showTimeDetails = props.showTimeDetails;
     let [showTimeStatus, setShowTimeStatus] = useState('');
+    let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
+
 
     //modal content
     let [selectedMovie, setSelectedMovie] = useState("");
@@ -27,6 +29,7 @@ export default function MovieCardTheater(props) {
         setSelectedMovie(movieDetails.id)
         getMovieDetails()
         setMovieObj()
+        setMainImage(movieDetails.image)
     }, [])
 
     useEffect(()=> {
@@ -41,7 +44,7 @@ export default function MovieCardTheater(props) {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, deactivate it!",
+            confirmButtonText: "Yes, delete it!",
         }).then(async (result) => {
             if (result.isConfirmed) {
                 await axios({
@@ -264,7 +267,7 @@ export default function MovieCardTheater(props) {
         <div className="MovieCardTheater">
             <div className="card">
                 <h3 className="text-center time">{showTimeDetails.show_time}</h3>
-                <img src={movieDetails.image} className="card-img-top" alt="..."/>
+                <img src={mainImage} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <div className="row">
                         <div className="col-8">
