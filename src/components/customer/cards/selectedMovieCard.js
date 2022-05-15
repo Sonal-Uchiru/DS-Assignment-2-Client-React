@@ -32,7 +32,6 @@ export default function SelectedMovieCard(props) {
     let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
 
     useEffect(()=> {
-        console.log(theaterDetails)
         setMainImage(movieDetails.image)
     },[])
 
@@ -66,8 +65,6 @@ export default function SelectedMovieCard(props) {
     // Modal details
     function calcTotal(){
 
-        console.log(adultTicket)
-        console.log(childTicket)
         let total = (adultTicket * adultTicketPrice) + (childTicket * childTicketPrice);
         setTotalPrice(total)
     }

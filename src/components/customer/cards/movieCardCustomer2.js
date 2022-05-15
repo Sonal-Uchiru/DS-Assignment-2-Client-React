@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/movieCardCustomer2.css"
 
+
 export default function MovieCardCustomer2(props) {
+
 
     return (
         <div className="MovieCardCustomer2">

@@ -3,6 +3,7 @@ import axios from "axios";
 import "./../css/movieCardProduction.css"
 import UpdateMovieModal from "./../modals/updateMovie";
 import Swal from "sweetalert2";
+import GetRating from "./../../../imdb_api/getRatingByImdbMovieId"
 
 export default function MovieCardProduction1(props) {
     let movieDetails = props.details;
@@ -24,6 +25,9 @@ export default function MovieCardProduction1(props) {
     let [languageError, setLanguageError] = useState("")
     let [genreError, setGenreError] = useState("")
     let [storyError, setStoryError] = useState("")
+    let [ratings, setRatings] = useState("")
+
+
 
 
 
@@ -45,8 +49,19 @@ export default function MovieCardProduction1(props) {
         setMovieGenre(movieDetails.genre)
         setMovieStoryline(movieDetails.story_line)
         movieDetails.showing ? setMovieStatus(1) : setMovieStatus(2)
+        getImdbRatings(movieDetails.imdb_key)
 
     }
+
+    async function getImdbRatings(key){
+        await GetRating(key).then((res)=>{
+            console.log(res)
+            setRatings(res)
+        }).catch((err)=> {
+            showAlerts(2, err)
+        })
+    }
+
 
     function updateMovie(){
         let val = 0;
@@ -123,7 +138,7 @@ export default function MovieCardProduction1(props) {
                             <img src="./../images/imdb.png" className="imdb"/>
                             <div className="row">
                                 <div className="col"><img src="./../images/star.png" className="star"/></div>
-                                <div className="col"><h6 className="rating">8.1/10</h6></div>
+                                <div className="col"><h6 className="rating">{ratings}/10</h6></div>
                             </div>
                         </div>
                     </div>

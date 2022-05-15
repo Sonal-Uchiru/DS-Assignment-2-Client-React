@@ -3,6 +3,7 @@ import axios from "axios";
 import "./../css/movieCardTheater.css"
 import UpdateShowTimeModalll from "./../modals/updateShowTime";
 import Swal from "sweetalert2";
+import GetRating from "../../../imdb_api/getRatingByImdbMovieId";
 
 export default function MovieCardTheater(props) {
     let theaterId = "6277e51007fed789651bd99e";
@@ -12,6 +13,7 @@ export default function MovieCardTheater(props) {
     let showTimeDetails = props.showTimeDetails;
     let [showTimeStatus, setShowTimeStatus] = useState('');
     let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
+    let [ratings, setRatings] = useState("")
 
 
     //modal content
@@ -27,6 +29,8 @@ export default function MovieCardTheater(props) {
         setShowTimeStatus(showTimeDetails.status)
         setSelectShowTime(showTimeDetails.show_time)
         setSelectedMovie(movieDetails.id)
+        getImdbRatings(movieDetails.imdb_key)
+
         getMovieDetails()
         setMovieObj()
         setMainImage(movieDetails.image)
@@ -201,11 +205,24 @@ export default function MovieCardTheater(props) {
         })
     }
 
-    function setMovieObj(){
+    async function getImdbRatings(key){
+        console.log(key)
+        await GetRating(key).then((res)=>{
+            console.log(res)
+            setRatings(res)
+        }).catch((err)=> {
+            showAlerts(2, err)
+        })
+    }
+
+     function setMovieObj() {
+        let rating = 0;
+
         let movieObj = {
             image: movieDetails.image,
             storyline: movieDetails.story_line,
-            duration: movieDetails.duration
+            duration: movieDetails.duration,
+            imdbRating: rating
         }
 
         setSelectedMovieObj(movieObj);
@@ -279,7 +296,7 @@ export default function MovieCardTheater(props) {
                             <img src="./../images/imdb.png" className="imdb"/>
                             <div className="row">
                                 <div className="col"><img src="./../images/star.png" className="star"/></div>
-                                <div className="col"><h6 className="rating">8.1/10</h6></div>
+                                <div className="col"><h6 className="rating">{ratings}/10</h6></div>
                             </div>
 
                         </div>
@@ -328,8 +345,6 @@ export default function MovieCardTheater(props) {
 
             {/*Modal*/}
             <div className="updateShow">
-
-
                 <div className="modal fade" id={showTimeDetails.id} tabIndex="-1" role="dialog"
                      aria-labelledby="modal2label"
                      aria-hidden="true">
@@ -391,7 +406,7 @@ export default function MovieCardTheater(props) {
                                                 <p className="duration"> {selectedMovieObj.duration}</p>
                                                 <img className="imdb" alt="imdb" src="./../images/imdb (2).png"/>
                                                 <p className="rating"><img className="star" alt="star"
-                                                                           src="./../images/star.png"/> 8.1/10</p>
+                                                                           src="./../images/star.png"/> {selectedMovieObj.imdbRating}/10</p>
                                             </div>
                                         </div>
 
