@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import React, {Fragment} from 'react';
 import './App.css'
 import CustomerSignUp from './components/customer/pages/customerSignUp'
 import AddNewShowTime from './components/production_team/modals/addNewShowTime'
@@ -24,83 +25,18 @@ import MovieCart from './components/customer/pages/movieCart'
 import Reservation from './components/customer/pages/reservation'
 import Test from './components/Test'
 import ForgotPassword from './components/password_recovery/forgotPassword'
-import Example from "./components/external_components/loading";
+import Example from './components/external_components/loading'
+import {Private} from './private/protected_route'
 
 function App() {
     return (
         <Router>
-            {/*loading*/}
-            {/*<div className="container d-flex justify-content-center">*/}
-            {/*    <Example type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>*/}
-            {/*</div>*/}
-
             <Routes>
-                <Route exact path="/te" element={<Test />} />
-                {/*Customer*/}
-                <Route
-                    exact
-                    path="/customerSignUp"
-                    element={<CustomerSignUp />}
-                />
-                <Route exact path="/buyTickets" element={<BuyTicket />} />
-                <Route
-                    exact
-                    path="/allMoviesCustomer"
-                    element={<AllMoviesCustomer />}
-                />
-                <Route
-                    exact
-                    path="/customerHeader"
-                    element={<CustomerHeader />}
-                />
-                <Route
-                    exact
-                    path="/customerSignIn"
-                    element={<CustomerLogin />}
-                />
-                <Route exact path="/movieCart" element={<MovieCart />} />
-                <Route exact path="/reservation" element={<Reservation />} />
-
-                {/*Both*/}
-
-                <Route
-                    exact
-                    path="/forgotPassword"
-                    element={<ForgotPassword />}
-                />
-
-                {/*Production Team*/}
-                <Route
-                    exact
-                    path="/addNewShowTime"
-                    element={<AddNewShowTime />}
-                />
-                <Route
-                    exact
-                    path="/updateShowTime"
-                    element={<UpdateShowTime />}
-                />
-                <Route exact path="/addMovie" element={<AddMovie />} />
-                <Route exact path="/updateMovie" element={<UpdateMovie />} />
-                <Route exact path="/allTheaters" element={<AllTheaters />} />
-                <Route exact path="/oneTheater" element={<OneTheater />} />
-                <Route
-                    exact
-                    path="/allMoviesProduction"
-                    element={<AllMovies />}
-                />
-                <Route
-                    exact
-                    path="/productionHeader"
-                    element={<ProductionTeamHeader />}
-                />
-                <Route
-                    exact
-                    path="/productionSignIn"
-                    element={<ProductionTeamLogin />}
-                />
+                <Route path="/customerSignIn" element={<CustomerLogin/>} />
+                <Route path="/user" element={<Private Component={AllMovies} />} />
             </Routes>
         </Router>
+
     )
 }
 

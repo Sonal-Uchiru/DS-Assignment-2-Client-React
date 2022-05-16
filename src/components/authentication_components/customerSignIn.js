@@ -136,13 +136,13 @@ export default function CustomerLogin() {
                                 <div className="form-outline mb-3">
                                     <label
                                         className="form-label"
-                                        form="form3Example4"
+                                        form="form3Example5"
                                         id="password"
                                     >
                                         Password
                                     </label>
                                     <input
-                                        id="form3Example4"
+                                        id="form3Example5"
                                         className="form-control form-control-lg"
                                         placeholder="Password"
                                         type={
