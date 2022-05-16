@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Swal from "sweetalert2";
 import './../css/movieCartCard.css'
 import axios from 'axios'
 
@@ -47,23 +48,66 @@ export default function MovieCartCard({ cart }) {
     }
 
     function removeCartItem(id) {
-        axios({
-            url: `http://localhost:8093/api/carts/${id}`,
-            method: 'DELETE',
-            headers: { 'x-auth-token': userToken },
+
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios({
+                    url: `http://localhost:8093/api/carts/${id}`,
+                    method: 'DELETE',
+                    headers: { 'x-auth-token': userToken },
+                })
+                    .then((res) => {
+                        Swal.fire(
+                            "Successful!",
+                            "Item Removed from the cart successfully!",
+                            "success"
+                        );
+
+                        window.location.reload()
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Something went wrong! Try again Later!",
+                        });
+                    })
+
+
+
+            }
         })
-            .then((res) => {
-                window.location.reload()
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+
     }
 
     function updateTicketsCount(isChild) {
         axios({
             url: "http://localhost:8093/api/carts/"+cart.cart.id+"/ticket?isChild="+isChild+"&tickets="+childtickets,
             method:"PATCH"
+        }).then((res)=>{
+            Swal.fire(
+                "Successful!",
+                "Ticket Count Updated Successfully!",
+                "success"
+            );
+        }).catch((err)=>{
+            console.log(err);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong! Try again Later!",
+            });
         })
     }
 

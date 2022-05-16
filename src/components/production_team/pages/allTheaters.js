@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Swal from "sweetalert2";
 import './../css/allTheaters.css'
 
 import TheaterCard from '../cards/theaterCard'
@@ -20,7 +21,12 @@ export default function AllTheaters() {
                     setDuplicateTheaters(res.data)
                 })
                 .catch((err) => {
-                    console.log(err)
+                    console.log(err);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong! Try again Later!",
+                    });
                 })
         }
 

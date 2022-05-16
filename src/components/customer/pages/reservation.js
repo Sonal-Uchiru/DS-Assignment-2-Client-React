@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Swal from "sweetalert2";
 import axios from 'axios'
 import './../css/reservation.css'
 import ReservationCard from '../cards/reservationCard'
@@ -23,6 +24,11 @@ export default function Reservation() {
                 })
                 .catch((err) => {
                     console.log(err)
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong! Try again Later!",
+                    });
                 })
         }
 
