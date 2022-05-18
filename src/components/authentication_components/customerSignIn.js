@@ -6,6 +6,7 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 import './customerSignIn.css'
 import axios from 'axios'
+import Example from "../external_components/loading";
 
 const eye = <FontAwesomeIcon icon={faEye} />
 const sleye = <FontAwesomeIcon icon={faEyeSlash} />
@@ -15,7 +16,7 @@ export default function CustomerLogin() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [invalidTxtStatus, setInvalidTxtStatus] = useState(true)
-
+    const [loginLoading,setLoginLoading] = useState(true)
     useEffect(() => {
         const savedUsername = localStorage.getItem('moon-cinema-username')
         if (savedUsername) {
@@ -31,6 +32,7 @@ export default function CustomerLogin() {
     async function signIn(e) {
         e.preventDefault()
         setInvalidTxtStatus(true)
+        setLoginLoading(false)
         isRememberMe()
         const content = {
             username,
@@ -47,12 +49,15 @@ export default function CustomerLogin() {
                     saveTokenInLocalStorage(res.data.token)
                     // path separation
                     navigateHome(res.data.userRole)
+
                 } else {
                     setInvalidTxtStatus(false)
                 }
+                setLoginLoading(true)
             })
             .catch(async (err) => {
                 setInvalidTxtStatus(false)
+                setLoginLoading(true)
             })
     }
 
@@ -131,13 +136,13 @@ export default function CustomerLogin() {
                                 <div className="form-outline mb-3">
                                     <label
                                         className="form-label"
-                                        form="form3Example4"
+                                        form="form3Example5"
                                         id="password"
                                     >
                                         Password
                                     </label>
                                     <input
-                                        id="form3Example4"
+                                        id="form3Example5"
                                         className="form-control form-control-lg"
                                         placeholder="Password"
                                         type={
@@ -192,14 +197,17 @@ export default function CustomerLogin() {
                                     Sign in
                                 </button>
 
-                                {/*<button className="btn" id="googlebtn">*/}
-                                {/*    <img*/}
-                                {/*        id="gicon"*/}
-                                {/*        src="/images/google.png"*/}
-                                {/*        alt="googleIcon"*/}
-                                {/*    />*/}
-                                {/*    Continue with Google*/}
-                                {/*</button>*/}
+                                <div className="container d-flex justify-content-center">
+                                    <div hidden={loginLoading}>
+                                        <Example
+                                            type={'bars'}
+                                            color={'#ECB365'}
+                                            height={'50px'}
+                                            width={'50px'}
+                                        />
+                                    </div>
+
+                                </div>
 
                                 <span className="text-center" id="acc">
                                     Don't you have an account yet?{' '}

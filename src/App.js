@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import React, {Fragment} from 'react';
 import './App.css'
 import CustomerSignUp from './components/customer/pages/customerSignUp'
 import AddNewShowTime from './components/production_team/modals/addNewShowTime'
@@ -27,16 +28,21 @@ import ForgotPassword from './components/password_recovery/forgotPassword'
 import Example from "./components/external_components/loading";
 import SelectedMovie from './components/customer/pages/selectedMovie'
 
+import {Private} from './private/protected_route'
 
 function App() {
     return (
         <Router>
+            <Routes>
+            {/*    <Route path="/customerSignIn" element={<CustomerLogin/>} />*/}
+            {/*   <Route path="/user" element={<Private Component={AllMovies} />} />*/}
+            {/*</Routes>*/}
             {/*loading*/}
             {/*<div className="container d-flex justify-content-center">*/}
             {/*    <Example type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>*/}
             {/*</div>*/}
 
-            <Routes>
+            {/*<Routes>*/}
                 <Route exact path="/te" element={<Test />} />
                 {/*Customer*/}
                 <Route
