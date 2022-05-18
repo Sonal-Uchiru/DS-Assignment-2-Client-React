@@ -32,17 +32,13 @@ export default function AllMoviesCustomer() {
              url: 'http://localhost:8093/api/movies',
              method: 'GET',
              headers: {"x-auth-token":userToken}
+         }).then((res)=> {
+             filterMovies(res.data);
+
          }).catch((err) => {
              alert(err);
          })
 
-         if(!movies){
-             setNoNowShowingText("There are no showing movies at the moment");
-             setNoComingSoonText("There are no coming soon movies at the moment");
-
-         }else{
-             filterMovies(movies.data);
-         }
      }
 
      function filterMovies(data){
@@ -56,6 +52,13 @@ export default function AllMoviesCustomer() {
                  comingSoon.push(post)
              }
         })
+         if(comingSoon.length <= 0){
+             setNoComingSoonText("There are no coming soon movies at the moment");
+         }
+         if(nowShowing.length <= 0){
+             setNoNowShowingText("There are no showing movies at the moment");
+         }
+
          setNowShowing(nowShowing)
          setNowShowingDataHolder(nowShowing)
          setComingSoon(comingSoon)

@@ -2,9 +2,9 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/selectedMovie.css"
 import SelectedMovieCard from "../cards/selectedMovieCard";
-
 import Swal from "sweetalert2";
 import LoadingDiv from "../../external_components/loading";
+import GetRating from "./../../../imdb_api/getRatingByImdbMovieId"
 
 
 export default function SelectedMovie() {
@@ -17,7 +17,7 @@ export default function SelectedMovie() {
     let [noShowTime, setNoShowTime] = useState("")
     let [loadingStatus, setLoadingStatus] = useState(true)
     let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
-
+    let [ratings, setRatings] = useState("")
 
 
     useEffect(()=> {
@@ -33,13 +33,27 @@ export default function SelectedMovie() {
             headers: {"x-auth-token":userToken}
 
         }).then((res)=> {
+            // console.log(res.data)
             setMovieData(res.data)
             setLoadingStatus(true)
             setMainImage(res.data.image)
+            getImdbRatings(res.data.imdb_key)
+
+
         }).catch((err)=> {
             showAlerts(2, err)
         })
     }
+
+    async function getImdbRatings(key){
+        await GetRating(key).then((res)=>{
+            console.log(res)
+            setRatings(res)
+        }).catch((err)=> {
+            showAlerts(2, err)
+        })
+    }
+
     async function getAllTheaters(){
         await axios({
             url: `http://localhost:8093/api/showtimes/movies/${movieID}`,
@@ -110,7 +124,7 @@ export default function SelectedMovie() {
                         <h2 className="duration">IMDB Ratings</h2>
                         <img src="./../images/imdb.png" className="imdb"/>
                         <p>  <img src="./../images/star.png" className="star"/>
-                            <h6 className="rating">8.1/10</h6></p>
+                            <h6 className="rating">{ratings}/10</h6></p>
                     </div>
                 </div>
             </div>

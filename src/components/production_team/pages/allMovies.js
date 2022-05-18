@@ -43,7 +43,6 @@ export default function AllMovies() {
     function filterMovies(data){
         var nowShowing = [];
         var comingSoon = [];
-        console.log(data)
         data.map((post) => {
             if(post.showing){
                 nowShowing.push(post)
@@ -159,6 +158,7 @@ export default function AllMovies() {
                    headers: {"x-auth-token":userToken}
                }).then((res)=> {
                    showAlerts(1, "Movie Deleted successfully")
+                   fetchAllShowTimes(movieId)
                    getAllMovies()
                }).catch((err) => {
                    alert(err);
@@ -168,6 +168,35 @@ export default function AllMovies() {
 
        })
 
+    }
+
+    async function fetchAllShowTimes(movieId){
+        await axios({
+            url: `http://localhost:8093/api/showtimes/movies/${movieId}`,
+            method: 'GET',
+            headers: {"x-auth-token":userToken}
+        }).then((res)=> {
+            deleteShowTimes(res.data)
+        }).catch((err) => {
+            alert(err);
+        })
+    }
+
+    function deleteShowTimes(data){
+        data.map((post)=> {
+            post.showTimes.map((post2)=> {
+                 axios({
+                    url: `http://localhost:8093/api/showtimes/${post2.id}`,
+                    method: 'DELETE',
+                    headers: {"x-auth-token":userToken}
+                }).then((res)=> {
+                    console.log("aaa")
+                }).catch((err) => {
+                    alert(err);
+                })
+            })
+
+        })
     }
     function showAlerts(type, text){
         // type 1 = success, type 2 = error, type 3 = update success

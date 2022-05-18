@@ -31,8 +31,10 @@ export default function SelectedMovieCard(props) {
 
     let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
 
+    //Payhere
+
+
     useEffect(()=> {
-        console.log(theaterDetails)
         setMainImage(movieDetails.image)
     },[])
 
@@ -66,8 +68,6 @@ export default function SelectedMovieCard(props) {
     // Modal details
     function calcTotal(){
 
-        console.log(adultTicket)
-        console.log(childTicket)
         let total = (adultTicket * adultTicketPrice) + (childTicket * childTicketPrice);
         setTotalPrice(total)
     }
@@ -116,9 +116,9 @@ export default function SelectedMovieCard(props) {
         var payment = {
             // whether it is a testing environment or not
             sandbox: true,
-            merchant_id: "1219390", // Replace your Merchant ID
-            return_url: undefined, // Important
-            cancel_url: undefined, // Important
+            merchant_id: "1213098", // Replace your Merchant ID
+            return_url: "http://localhost:3000/selectedMovie", // Important
+            cancel_url: "http://localhost:3000/selectedMovie", // Important
             notify_url: "http://sample.com/notify",
             order_id: "MT" + new Date().valueOf(),
             items: "movieObj.movieName",
@@ -150,7 +150,7 @@ export default function SelectedMovieCard(props) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
-            text: "Something went wrong!",
+            text: error,
         });
     };
 
@@ -279,7 +279,7 @@ export default function SelectedMovieCard(props) {
                             <div className="modal-footer border-0">
                                 <div className="row text-center">
                                     <div className="col">
-                                        <button onClick={() => checkValidity(2)} type="button" className="btn5 btn-lg">Buy
+                                        <button onClick={() => buyTicket(true)} type="button" className="btn5 btn-lg">Buy
                                             Tickets
                                         </button>
                                     </div>
@@ -287,6 +287,7 @@ export default function SelectedMovieCard(props) {
                                         <button onClick={() => checkValidity(1)} type="button" className="btn6 btn-lg">Add
                                             to Cart
                                         </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -294,6 +295,8 @@ export default function SelectedMovieCard(props) {
                     </div>
                 </div>
             </div>
+
+
 
         </div>
 

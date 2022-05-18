@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/addNewShowTime.css"
 import Swal from "sweetalert2";
+import GetRating from "../../../imdb_api/getRatingByImdbMovieId";
 
 export default function AddNewShowTime(props) {
     let theaterID = props.theaterID;
@@ -17,6 +18,7 @@ export default function AddNewShowTime(props) {
     });
     let [showTimeError, setShowTimeError] = useState("");
     let [movieError, setMovieError] = useState("");
+    let [ratings, setRatings] = useState("")
 
 
     useEffect(() => {
@@ -87,21 +89,31 @@ export default function AddNewShowTime(props) {
             movieObj = {
                 image: "https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100006/137486703-no-image-vector-symbol-missing-available-icon-no-gallery-for-this-moment-.jpg?fj=1",
                 storyline: "",
-                duration: ""
+                duration: "",
+                imdbRating: 0
             }
         }else{
             let result = await axios({
                 url: `http://localhost:8093/api/movies/${movieID}`,
                 method: "GET",
                 header: userToken,
+            }).then(async (res) => {
+                let ratings = 0;
+                await GetRating(res.data.imdb_key).then((res) => {
+                    ratings = res;
+                })
+                movieObj = {
+                    image: res.data.image,
+                    storyline: res.data.story_line,
+                    duration: res.data.duration,
+                    imdbRating: ratings
+                }
+
             }).catch((err)=> {
                 alert(err)
             })
-            movieObj = {
-                image: result.data.image,
-                storyline: result.data.story_line,
-                duration: result.data.duration
-            }
+
+
         }
 
         setSelectedMovieObj(movieObj);
@@ -194,7 +206,7 @@ export default function AddNewShowTime(props) {
                                             <p className="duration"> {selectedMovieObj.duration}</p>
                                             <img className="imdb" alt="imdb" src="./../images/imdb%20(2).png"/>
                                             <p className="rating"><img className="star" alt="star"
-                                                                       src="./../images/star.png"/> 8.1/10</p>
+                                                                       src="./../images/star.png"/> {selectedMovieObj.imdbRating}/10</p>
                                         </div>
                                     </div>
 
