@@ -104,7 +104,8 @@ export default function SelectedMovieCard(props) {
         }).then((res)=> {
             showAlerts(1, "Movie is added to your cart")
             document.getElementById('closeModalbtn').click()
-
+            setChildTicket('0');
+            setAdultTicket('0')
         }).catch((err)=> {
             showAlerts(1, err)
         })

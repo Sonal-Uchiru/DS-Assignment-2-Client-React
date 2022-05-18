@@ -10,7 +10,7 @@ export default function MovieCardCustomer2(props) {
         <div className="MovieCardCustomer2">
             <div className="card">
 
-                <img src="./../images/sonic.jpg" className="card-img-top" alt="..."/>
+                <img src={props.details.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <div className="row">
                         <div className="col">
