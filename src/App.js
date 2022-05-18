@@ -31,10 +31,10 @@ import {Private} from './private/protected_route'
 function App() {
     return (
         <Router>
-            <Routes>
-                <Route path="/customerSignIn" element={<CustomerLogin/>} />
-                <Route path="/user" element={<Private Component={AllMovies} />} />
-            </Routes>
+            {/*<Routes>*/}
+            {/*    <Route path="/customerSignIn" element={<CustomerLogin/>} />*/}
+            {/*   <Route path="/user" element={<Private Component={AllMovies} />} />*/}
+            {/*</Routes>*/}
         </Router>
 
     )
