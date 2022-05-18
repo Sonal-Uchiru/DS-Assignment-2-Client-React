@@ -2,22 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from 'react-router-dom'
 
 import './authenticationSignIn.css'
 import axios from 'axios'
-import Example from "../external_components/loading";
+import Example from '../external_components/loading'
 
 const eye = <FontAwesomeIcon icon={faEye} />
 const sleye = <FontAwesomeIcon icon={faEyeSlash} />
 
 export default function AuthenticationSignIn() {
-    let navigate = useNavigate();
+    let navigate = useNavigate()
     const [passwordShown, setPasswordShown] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [invalidTxtStatus, setInvalidTxtStatus] = useState(true)
-    const [loginLoading,setLoginLoading] = useState(true)
+    const [loginLoading, setLoginLoading] = useState(true)
     useEffect(() => {
         const savedUsername = localStorage.getItem('moon-cinema-username')
         if (savedUsername) {
@@ -50,7 +50,6 @@ export default function AuthenticationSignIn() {
                     saveTokenInLocalStorage(res.data.token)
                     // path separation
                     navigateHome(res.data.userRole)
-
                 } else {
                     setInvalidTxtStatus(false)
                 }
@@ -69,10 +68,10 @@ export default function AuthenticationSignIn() {
     function navigateHome(userRole) {
         if (userRole === 'user') {
             // navigate to customer home
-            navigate("/movies");
+            navigate('/movies')
         } else if (userRole === 'admin') {
             // navigate to admin home
-            navigate("/theaters");
+            navigate('/theaters')
         }
     }
 
@@ -186,7 +185,10 @@ export default function AuthenticationSignIn() {
                                             Remember me
                                         </label>
                                     </div>
-                                    <Link  className="forgot" to = "/forgotPassword">
+                                    <Link
+                                        className="forgot"
+                                        to="/forgotPassword"
+                                    >
                                         Forgot Password?
                                     </Link>
                                 </div>
@@ -207,12 +209,13 @@ export default function AuthenticationSignIn() {
                                             width={'50px'}
                                         />
                                     </div>
-
                                 </div>
 
                                 <span className="text-center" id="acc">
                                     Don't you have an account yet?{' '}
-                                    <Link id="clickme" to = "/signUp">Create New</Link>
+                                    <Link id="clickme" to="/signUp">
+                                        Create New
+                                    </Link>
                                 </span>
                             </form>
                         </div>
