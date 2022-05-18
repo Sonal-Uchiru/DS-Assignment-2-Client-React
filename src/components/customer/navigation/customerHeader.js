@@ -29,6 +29,11 @@ export default function CustomerHeader() {
                 })
         }
     })
+
+    async function logOut() {
+        await localStorage.removeItem('moon-cinema-token')
+        navigate('/')
+    }
     return (
         <div className="CustomerHeader">
             <div className="Header">
@@ -41,6 +46,13 @@ export default function CustomerHeader() {
                             className="user"
                             alt=""
                         />
+                        <button
+                            type="button"
+                            className="btn btn-danger btn-sm"
+                            onClick={logOut}
+                        >
+                            Log out
+                        </button>
                     </p>
                 </div>
 
