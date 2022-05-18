@@ -167,8 +167,13 @@ export default function MovieCartCard({ cart }) {
                                         <button
                                             type="button"
                                             className="btn"
-                                            onClick={
-                                                handleDecrementChildTickets
+                                            onClick={()=>{
+                                                handleDecrementChildTickets();
+                                                updateTicketsCount(true);
+
+                                            }
+
+
                                             }
                                         >
                                             {' '}
@@ -180,8 +185,11 @@ export default function MovieCartCard({ cart }) {
                                         <button
                                             type="button"
                                             className="btn"
-                                            onClick={
-                                                handleIncrementChildTickets
+                                            onClick={()=>{
+                                                handleIncrementChildTickets();
+                                                updateTicketsCount(true);
+                                            }
+
                                             }
                                         >
                                             {' '}
@@ -207,7 +215,10 @@ export default function MovieCartCard({ cart }) {
                                     <button
                                         type="button"
                                         className="btn"
-                                        onClick={handleDecrementAdultTickets}
+                                        onClick={()=>{
+                                            handleDecrementAdultTickets();
+                                            updateTicketsCount(false);
+                                        }}
                                     >
                                         {' '}
                                         <i className="fa fa-minus" />
@@ -218,7 +229,10 @@ export default function MovieCartCard({ cart }) {
                                     <button
                                         type="button"
                                         className="btn"
-                                        onClick={handleIncrementAdultTickets}
+                                        onClick={()=>{
+                                            handleIncrementAdultTickets();
+                                            updateTicketsCount(false);
+                                        }}
                                     >
                                         {' '}
                                         <i className="fa fa-plus" />

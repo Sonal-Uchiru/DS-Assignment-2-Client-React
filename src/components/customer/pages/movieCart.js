@@ -3,6 +3,7 @@ import axios from "axios";
 import "./../css/movieCart.css"
 import MovieCardProduction1 from "../../production_team/cards/movieCardProduction1";
 import MovieCartCard from "../cards/movieCartCard";
+import Swal from "sweetalert2";
 
 export default function MovieCart() {
 
@@ -42,6 +43,42 @@ export default function MovieCart() {
         setCartItems(result)
     }
 
+   async function clearAll(){
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+
+                cartItems.map((cart)=>{
+
+                    axios({
+                        url: `http://localhost:8093/api/carts/${cart.cart.id}`,
+                        method: 'DELETE',
+                        headers: { 'x-auth-token': userToken },
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((err) => {
+                            console.log(err)
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Something went wrong! Try again Later!",
+                            });
+                        })
+                })
+
+            }
+        })
+    }
 
     return (
         <div className="MovieCart">
