@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Swal from 'sweetalert2'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate,Link } from "react-router-dom";
 
 import './authenticationSignIn.css'
 import axios from 'axios'
@@ -12,6 +12,7 @@ const eye = <FontAwesomeIcon icon={faEye} />
 const sleye = <FontAwesomeIcon icon={faEyeSlash} />
 
 export default function AuthenticationSignIn() {
+    let navigate = useNavigate();
     const [passwordShown, setPasswordShown] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -68,10 +69,10 @@ export default function AuthenticationSignIn() {
     function navigateHome(userRole) {
         if (userRole === 'user') {
             // navigate to customer home
-            alert('customer')
+            navigate("/movies");
         } else if (userRole === 'admin') {
             // navigate to admin home
-            alert('Production team')
+            navigate("/theaters");
         }
     }
 
@@ -185,9 +186,9 @@ export default function AuthenticationSignIn() {
                                             Remember me
                                         </label>
                                     </div>
-                                    <a href="" className="forgot">
+                                    <Link  className="forgot" to = "/forgotPassword">
                                         Forgot Password?
-                                    </a>
+                                    </Link>
                                 </div>
 
                                 <button
@@ -211,7 +212,7 @@ export default function AuthenticationSignIn() {
 
                                 <span className="text-center" id="acc">
                                     Don't you have an account yet?{' '}
-                                    <a id="clickme">Create New</a>
+                                    <Link id="clickme" to = "/signUp">Create New</Link>
                                 </span>
                             </form>
                         </div>
