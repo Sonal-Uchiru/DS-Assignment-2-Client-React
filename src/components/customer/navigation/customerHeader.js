@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import axios from "axios";
 import "./../css/customerHeader.css"
+import {useNavigate,Link} from "react-router-dom";
 
 export default function CustomerHeader() {
-
+    let navigate = useNavigate();
     return (
         <div className="CustomerHeader">
             <div className="Header">
@@ -16,7 +17,7 @@ export default function CustomerHeader() {
 
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="#">MOON CINEMA</a>
+                        <Link className="navbar-brand" to = "/movies" >MOON CINEMA</Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -24,13 +25,13 @@ export default function CustomerHeader() {
                         </button>
                         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div className="navbar-nav">
-                                <a className="nav-link" href="#">Movies</a>
-                                <a className="nav-link" href="#">Reservations</a>
+                                <Link className="nav-link" to = "/movies">Movies</Link>
+                                <Link className="nav-link" to = "/reservation">Reservations</Link>
                             </div>
                         </div>
                     </div>
 
-                    <button type="button" className="cartb"><img src="./../images/bag.png" className="cart" alt=""/>
+                    <button type="button" className="cartb" onClick={() => navigate('/ticketCart')}><img src="./../images/bag.png" className="cart" alt=""/>
                     </button>
                 </nav>
 
