@@ -84,14 +84,14 @@
     color: #ECB365;
 }
 
-.updateShow .star {
+.updateShow .star1 {
     width: 15px;
     height: 15px;
     margin-top: -3px;
 
 }
 
-.updateShow .rating {
+.updateShow .rating1 {
 
     font-weight: bold;
     color: #04293A;
@@ -136,7 +136,7 @@
     font-weight: bold;
 }
 
-.updateShow .box {
+.updateShow .box1 {
     width: 160px;
     height: 180px;
 }
@@ -197,7 +197,7 @@
 
 @media screen and (max-width: 501px) {
 
-    .updateShow .box {
+    .updateShow .box1 {
         width: 140px;
         height: 200px;
     }
@@ -216,13 +216,13 @@
     }
 
 
-    .updateShow .star {
+    .updateShow .star1 {
         width: 12px;
         height: 12px;
 
     }
 
-    .updateShow .rating {
+    .updateShow .rating1 {
 
         margin-top: -8px;
         font-size: 12px;
@@ -271,7 +271,7 @@
 
 @media screen and (max-width: 422px) {
 
-    .updateShow .box {
+    .updateShow .box1 {
         width: 130px;
         height: 160px;
     }
@@ -299,7 +299,7 @@
         font-size: 12px;
     }
 
-    .updateShow .star {
+    .updateShow .star1 {
         width: 12px;
         height: 12px;
 
@@ -309,7 +309,7 @@
         margin-right: 20px;
     }
 
-    .updateShow .rating {
+    .updateShow .rating1 {
 
         font-size: 12px;
         margin-top: -9px;
@@ -320,7 +320,7 @@
 
 @media screen and (max-width: 396px) {
 
-    .updateShow .box {
+    .updateShow .box1 {
         width: 120px;
         height: 160px;
     }
@@ -335,13 +335,13 @@
         font-size: 11px;
     }
 
-    .updateShow .star {
+    .updateShow .star1 {
         width: 11px;
         height: 11px;
 
     }
 
-    .updateShow .rating {
+    .updateShow .rating1 {
 
         margin-top: -8px;
         font-size: 11px;
@@ -355,7 +355,7 @@
 
 @media screen and (max-width: 377px) {
 
-    .updateShow .box {
+    .updateShow .box1 {
         width: 110px;
         height: 160px;
     }
@@ -382,13 +382,13 @@
         font-size: 11px;
     }
 
-    .updateShow .star {
+    .updateShow .star1 {
         width: 11px;
         height: 11px;
 
     }
 
-    .updateShow .rating {
+    .updateShow .rating1 {
 
         margin-top: -8px;
         font-size: 11px;
@@ -399,7 +399,7 @@
 
 @media screen and (max-width: 353px) {
 
-    .updateShow .box {
+    .updateShow .box1 {
         width: 100px;
         height: 140px;
     }
@@ -415,13 +415,13 @@
         margin-top: -8px;
     }
 
-    .updateShow .star {
+    .updateShow .star1 {
         width: 11px;
         height: 11px;
 
     }
 
-    .updateShow .rating {
+    .updateShow .rating1 {
 
         margin-top: -8px;
         font-size: 11px;
@@ -449,7 +449,7 @@
 
 @media screen and (max-width: 325px) {
 
-    .updateShow .box {
+    .updateShow .box1 {
         width: 90px;
         height: 130px;
     }
@@ -464,13 +464,13 @@
         font-size: 10px;
     }
 
-    .updateShow .star {
+    .updateShow .star1 {
         width: 10px;
         height: 10px;
 
     }
 
-    .updateShow .rating {
+    .updateShow .rating1 {
 
         margin-top: -8px;
         font-size: 10px;
@@ -481,7 +481,7 @@
 
 @media screen and (max-width: 300px) {
 
-    .updateShow .box {
+    .updateShow .box1 {
         width: 80px;
         height: 130px;
     }
@@ -507,13 +507,13 @@
         margin-top: -8px;
     }
 
-    .updateShow .star {
+    .updateShow .star1 {
         width: 10px;
         height: 10px;
 
     }
 
-    .updateShow .rating {
+    .updateShow .rating1 {
 
         font-size: 10px;
     }

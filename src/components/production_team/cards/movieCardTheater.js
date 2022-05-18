@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/movieCardTheater.css"
+import "./../css/updateShowTime.css"
 import UpdateShowTimeModalll from "./../modals/updateShowTime";
 import Swal from "sweetalert2";
 import GetRating from "../../../imdb_api/getRatingByImdbMovieId";
@@ -215,7 +216,7 @@ export default function MovieCardTheater(props) {
         })
     }
 
-     function setMovieObj() {
+    function setMovieObj() {
         let rating = 0;
 
         let movieObj = {
@@ -315,8 +316,8 @@ export default function MovieCardTheater(props) {
                                 <img src="./../images/edit (1).png" className="icon" alt="..."/>
                             </button>
                             <button onClick = {()=> deleteShowtime()} type="button" className="btn grp1"><img src="./../images/delete.png"
-                                                                            className="icon"
-                                                                            alt="..."/></button>
+                                                                                                              className="icon"
+                                                                                                              alt="..."/></button>
 
 
                         </div>
@@ -393,7 +394,7 @@ export default function MovieCardTheater(props) {
 
                                         <div className="row">
                                             <div className="column left">
-                                                <div className="box">
+                                                <div className="box1">
                                                     <img className="z-depth-2 Img1" alt="100x100"
                                                          src={selectedMovieObj.image}
                                                          data-holder-rendered="true"/>
@@ -405,7 +406,7 @@ export default function MovieCardTheater(props) {
 
                                                 <p className="duration"> {selectedMovieObj.duration}</p>
                                                 <img className="imdb" alt="imdb" src="./../images/imdb (2).png"/>
-                                                <p className="rating"><img className="star" alt="star"
+                                                <p className="rating1"><img className="star1" alt="star"
                                                                            src="./../images/star.png"/> {selectedMovieObj.imdbRating}/10</p>
                                             </div>
                                         </div>
