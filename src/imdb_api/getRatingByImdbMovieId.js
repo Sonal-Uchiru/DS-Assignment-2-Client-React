@@ -15,13 +15,3 @@ export default function GetRatingByImdbMovieId(imdb_id) {
     })
 }
 
-
-// function gg(){
-//    // alert("dd")
-//     GetRatingByImdbMovieId("tt1877830").then((res) => {
-//         setRatings(res)
-//         console.log(res)
-//     }).catch((err) => {
-//         console.log(err)
-//     })
-// }

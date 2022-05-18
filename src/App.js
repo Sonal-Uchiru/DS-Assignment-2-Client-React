@@ -28,10 +28,10 @@ function App() {
                <Route path="/movies" element={<><CustomerHeader/><Private Component={AllMoviesCustomer} /></>} />
                 <Route path="/ticketCart" element={<><CustomerHeader/><Private Component={MovieCart} /></>} />
                 <Route path="/reservation" element={<><CustomerHeader/><Private Component={Reservation} /></>} />
-                <Route path="/movie/id" element={<><CustomerHeader/><Private Component={SelectedMovie} /></>} />
+                <Route path="/movie/:id" element={<><CustomerHeader/><Private Component={SelectedMovie} /></>} />
                 {/*production team routes*/}
                 <Route path="/theaters" element={<><ProductionTeamHeader/><Private Component={AllTheaters} /></>} />
-                <Route path="/theater/id" element={<><ProductionTeamHeader/><Private Component={OneTheater} /></>} />
+                <Route path="/theater/:id" element={<><ProductionTeamHeader/><Private Component={OneTheater} /></>} />
                 <Route path="/movieProduction" element={<><ProductionTeamHeader/><Private Component={AllMovies} /></>} />
             </Routes>
             <Footer/>
