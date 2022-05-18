@@ -10,8 +10,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import Example from "../external_components/loading";
+import {useNavigate} from "react-router-dom";
 
 export default function ForgotPassword() {
+    let navigate = useNavigate();
     const eye = <FontAwesomeIcon icon={faEye} />
     const sleye = <FontAwesomeIcon icon={faEyeSlash} />
 
@@ -174,6 +176,7 @@ export default function ForgotPassword() {
                     'success'
                 )
                 setChangePasswordLoading(true)
+                navigate("/")
             })
             .catch((err) => {
                 Swal.fire({
