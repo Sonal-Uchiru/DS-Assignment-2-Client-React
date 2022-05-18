@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Swal from "sweetalert2";
 import '../css/reservationCard.css'
 
 export default function ReservationCard({ reservation }) {
@@ -7,17 +8,52 @@ export default function ReservationCard({ reservation }) {
         'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng'
 
     function cancelReservation(id) {
-        axios({
-            url: `http://localhost:8093/api/reservations/${id}/status`,
-            method: 'PATCH',
-            headers: { 'x-auth-token': userToken },
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                axios({
+                    url: `http://localhost:8093/api/reservations/${id}/status`,
+                    method: 'PATCH',
+                    headers: { 'x-auth-token': userToken },
+                })
+                    .then((res) => {
+                        Swal.fire(
+                            "Reservation Cancelled Successfully!",
+                            "We will miss you!",
+                            "success"
+                        );
+
+                        window.location.reload()
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: "Something went wrong! Try again Later!",
+                        });
+                    })
+
+
+
+            }
         })
-            .then((res) => {
-                window.location.reload()
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+
+
+
+
+
+
+
     }
 
     const [price, setPrice] = useState(
