@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import './../css/addMovie.css'
 import { GetMoviesByTitle } from '../../../imdb_api/getMoviesByTitle'
-import { GetRatingByImdbMovieId } from '../../../imdb_api/getRatingByImdbMovieId'
+import GetRatingByImdbMovieId from '../../../imdb_api/getRatingByImdbMovieId'
 import Example from '../../external_components/loading'
 import Swal from 'sweetalert2'
 
