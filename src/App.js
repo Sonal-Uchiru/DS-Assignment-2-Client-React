@@ -21,18 +21,18 @@ function App() {
         <Router>
             <Routes>
                 {/*authentication routes*/}
-                <Route path="/" element={<AuthenticationSignIn/>} />
-                <Route path="/signUp" element={<AuthenticationSignUp />} />
-                <Route path="/forgotPassword" element={<ForgotPassword />}/>
-                {/*customer routes*/}
-               <Route path="/movies" element={<><CustomerHeader/><Private Component={AllMoviesCustomer} /></>} />
-                <Route path="/ticketCart" element={<><CustomerHeader/><Private Component={MovieCart} /></>} />
-                <Route path="/reservation" element={<><CustomerHeader/><Private Component={Reservation} /></>} />
-                <Route path="/movie/:id" element={<><CustomerHeader/><Private Component={SelectedMovie} /></>} />
-                {/*production team routes*/}
-                <Route path="/theaters" element={<><ProductionTeamHeader/><Private Component={AllTheaters} /></>} />
-                <Route path="/theater/:id" element={<><ProductionTeamHeader/><Private Component={OneTheater} /></>} />
-                <Route path="/movieProduction" element={<><ProductionTeamHeader/><Private Component={AllMovies} /></>} />
+                <Route path="/" element={<OneTheater/>} />
+               {/* <Route path="/signUp" element={<AuthenticationSignUp />} />*/}
+               {/* <Route path="/forgotPassword" element={<ForgotPassword />}/>*/}
+               {/* /!*customer routes*!/*/}
+               {/*<Route path="/movies" element={<><CustomerHeader/><Private Component={AllMoviesCustomer} /></>} />*/}
+               {/* <Route path="/ticketCart" element={<><CustomerHeader/><Private Component={MovieCart} /></>} />*/}
+               {/* <Route path="/reservation" element={<><CustomerHeader/><Private Component={Reservation} /></>} />*/}
+               {/* <Route path="/movie/:id" element={<><CustomerHeader/><Private Component={SelectedMovie} /></>} />*/}
+               {/* /!*production team routes*!/*/}
+               {/* <Route path="/theaters" element={<><ProductionTeamHeader/><Private Component={AllTheaters} /></>} />*/}
+               {/* <Route path="/theater/:id" element={<><ProductionTeamHeader/><Private Component={OneTheater} /></>} />*/}
+               {/* <Route path="/movieProduction" element={<><ProductionTeamHeader/><Private Component={AllMovies} /></>} />*/}
             </Routes>
             <Footer/>
         </Router>
