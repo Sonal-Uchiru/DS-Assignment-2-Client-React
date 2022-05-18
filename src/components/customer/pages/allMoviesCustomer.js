@@ -8,8 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function AllMoviesCustomer() {
     let navigate = useNavigate()
-    let userToken =
-        'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTI1MDQ5MzU2ODYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImRheU9mWWVhciI6MTMxLCJkYXlPZldlZWsiOiJXRURORVNEQVkiLCJtb250aCI6Ik1BWSIsImRheU9mTW9udGgiOjExLCJ5ZWFyIjoyMDIyLCJtb250aFZhbHVlIjo1LCJob3VyIjoyMiwibWludXRlIjozOCwic2Vjb25kIjo1NSwibmFubyI6Njg1MDAwMDAwLCJjaHJvbm9sb2d5Ijp7ImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEiLCJpZCI6IklTTyJ9fX0.xDzxVpPzvzwi7SjrW1UUazAjGdfEOgtvlEilX5eZjnjGYPkWWdLqnkInzpQVnOxYn9zdfwcXc8z7NRIjSYxDDw'
+    let userToken = localStorage.getItem('moon-cinema-token')
     let [movieData, setMovieData] = useState([])
     let [noNowShowingText, setNoNowShowingText] = useState('')
     let [noComingSoonText, setNoComingSoonText] = useState('')
@@ -248,6 +247,7 @@ export default function AllMoviesCustomer() {
                                 className="columns stretched-link"
                                 onClick={() => navigate('/movie/' + post.id)}
                             >
+                                <h4 hidden>{post.id}</h4>
                                 <MovieCardCustomer1 details={post} />
                             </div>
                         )
@@ -361,8 +361,10 @@ export default function AllMoviesCustomer() {
                     </h4>
                     {comingSoon.map((post) => {
                         return (
-                            <div key={post.id} className="columns">
+                            <div key={post.id}  onClick={() => navigate('/movie/' + post.id)}  className="stretched-link columns">
                                 <MovieCardCustomer2 details={post} />
+                                <h4 hidden>{post.id}</h4>
+
                             </div>
                         )
                     })}

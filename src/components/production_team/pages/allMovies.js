@@ -276,7 +276,7 @@ export default function AllMovies() {
                     <h4 className = "text text-danger text-center">{noNowShowingText}</h4>
                     {nowShowing.map((post) => {
                         return (
-                            <div key = {post.id} className="columns">
+                            <div key = {post.id}  className="columns">
                                 <MovieCardProduction1 details = {post} functionReload = {getAllMovies} functiondelete = {deleteMovie} />
                             </div>
                         )

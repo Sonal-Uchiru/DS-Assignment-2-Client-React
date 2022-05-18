@@ -1,21 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './../css/allTheaters.css'
+import {useNavigate} from "react-router-dom";
 
 import TheaterCard from '../cards/theaterCard'
 
 export default function AllTheaters() {
+    let navigate = useNavigate();
+    let userToken = localStorage.getItem('moon-cinema-token');
+
     const [theaters, setTheaters] = useState([])
     const [duplicateTheaters, setDuplicateTheaters] = useState([])
-
+    let [errorText, setErrorText] = useState("")
     useEffect(() => {
         function getTheaters() {
             axios({
                 url: 'http://localhost:8093/api/theaters',
                 method: 'GET',
+                headers: {"x-auth-token":userToken}
+
             })
                 .then((res) => {
                     console.log(res.data)
+
+                    if(res.data.length > 0){
+
+                    }else{
+                        setErrorText("No theaters available")
+                    }
+
                     setTheaters(res.data)
                     setDuplicateTheaters(res.data)
                 })
@@ -31,8 +44,14 @@ export default function AllTheaters() {
         const result = duplicateTheaters.filter((theater) =>
             theater.name.toLowerCase().includes(userIn.toLowerCase())
         )
+        if(result.length > 0){
+            setTheaters("")
+        }else{
+            setTheaters("No theaters available")
+        }
         setTheaters(result)
     }
+
 
     return (
         <div className="Theaters">
@@ -65,10 +84,11 @@ export default function AllTheaters() {
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent ">
+                    <center><h4 class = "text-danger">{errorText}</h4></center>
                     {theaters.map((theater) => {
                         return (
-                            <div className="col">
-                                <TheaterCard theater={theater} />
+                            <div onClick={()=> navigate(`/theater/${theater.id}`)} className="stretched-link col">
+                                <TheaterCard  theater={theater} />
                             </div>
                         )
                     })}
