@@ -91,9 +91,9 @@ export default function MovieCartCard({ cart }) {
 
     }
 
-    function updateTicketsCount(isChild) {
+    function updateTicketsCount(isChild, noOfTickets) {
         axios({
-            url: "http://localhost:8093/api/carts/"+cart.cart.id+"/ticket?isChild="+isChild+"&tickets="+childtickets,
+            url: "http://localhost:8093/api/carts/"+cart.cart.id+"/ticket?isChild="+isChild+"&tickets="+noOfTickets,
             method:"PATCH"
         }).then((res)=>{
             Swal.fire(
@@ -169,7 +169,6 @@ export default function MovieCartCard({ cart }) {
                                             className="btn"
                                             onClick={()=>{
                                                 handleDecrementChildTickets();
-                                                updateTicketsCount(true);
 
                                             }
 
@@ -187,7 +186,7 @@ export default function MovieCartCard({ cart }) {
                                             className="btn"
                                             onClick={()=>{
                                                 handleIncrementChildTickets();
-                                                updateTicketsCount(true);
+
                                             }
 
                                             }
@@ -217,7 +216,7 @@ export default function MovieCartCard({ cart }) {
                                         className="btn"
                                         onClick={()=>{
                                             handleDecrementAdultTickets();
-                                            updateTicketsCount(false);
+
                                         }}
                                     >
                                         {' '}
@@ -231,7 +230,7 @@ export default function MovieCartCard({ cart }) {
                                         className="btn"
                                         onClick={()=>{
                                             handleIncrementAdultTickets();
-                                            updateTicketsCount(false);
+
                                         }}
                                     >
                                         {' '}
@@ -251,6 +250,10 @@ export default function MovieCartCard({ cart }) {
                         </div>
                     </div>
 
+                    <button type="button" className="btn btn-primary" onClick={()=>{
+                        updateTicketsCount(true, childtickets);
+                        updateTicketsCount(false, adulttickets);
+                    }}>Save Changes</button>
                     <button
                         type="button"
                         className="btnRemove"

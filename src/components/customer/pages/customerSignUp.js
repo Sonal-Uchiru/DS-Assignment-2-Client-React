@@ -348,7 +348,14 @@ export default function CustomerSignUp() {
                                            required={true}
                                            placeholder="Email Address"  onChange={(e) => {
                                         setEmail(e.target.value);
+                                        SetEmailError("");
                                     }}/>
+                                    <p
+                                        className=" mt-1 mb-0"
+                                        style={{color: "red", fontWeight: "bold"}}
+                                    >
+                                        {EmailError}
+                                    </p>
                                 </div>
 
                                 <div className="form-outline mb-3">
@@ -408,7 +415,15 @@ export default function CustomerSignUp() {
                                            required={true}
                                            onChange={(e) => {
                                                setUserName(e.target.value);
+                                               SetUsernameError("");
                                            }}/>
+
+                                    <p
+                                        className=" mt-1 mb-0"
+                                        style={{color: "red", fontWeight: "bold"}}
+                                    >
+                                        {UsernameError}
+                                    </p>
                                 </div>
 
                                 <div className="form-outline mb-3">
