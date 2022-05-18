@@ -3,13 +3,13 @@ import axios from "axios";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import {faEyeSlash} from "@fortawesome/free-solid-svg-icons";
-import "./../css/customerSignUp.css"
+import "./authenticationSignUp.css"
 
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const sleye = <FontAwesomeIcon icon={faEyeSlash}/>;
 
-export default function CustomerSignUp() {
+export default function AuthenticationSignUp() {
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [CpasswordShown, setCpasswordShown] = useState(false);
