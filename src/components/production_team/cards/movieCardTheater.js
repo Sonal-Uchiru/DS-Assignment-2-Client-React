@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import "./../css/movieCardTheater.css"
+import "./../css/updateShowTime.css"
 import UpdateShowTimeModalll from "./../modals/updateShowTime";
 import Swal from "sweetalert2";
 import GetRating from "../../../imdb_api/getRatingByImdbMovieId";
 
 export default function MovieCardTheater(props) {
-    let theaterId = "6277e51007fed789651bd99e";
+    let theaterId = props.theaterID;
     let movieID = "627b7d9444c5e224032feeb4";
     let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng";
     let movieDetails = props.movieDetails;
@@ -55,9 +56,10 @@ export default function MovieCardTheater(props) {
                     url: `http://localhost:8093/api/showtimes/${showTimeDetails.id}`,
                     method: 'DELETE',
                     headers: {"x-auth-token":userToken}
-                }).then((res)=> {
+                }).then((res) => {
                     showAlerts(1, "Show time deleted successfully")
-                    reload()
+                    props.getDetailsFunction2()
+
 
                 }).catch(async (err) => {
                     await showAlerts(2, err)
@@ -68,9 +70,6 @@ export default function MovieCardTheater(props) {
         })
     }
 
-    async function reload(){
-        await props.getDetailsFunction2()
-    }
 
     async function changeStatus(){
 
@@ -215,7 +214,7 @@ export default function MovieCardTheater(props) {
         })
     }
 
-     function setMovieObj() {
+    function setMovieObj() {
         let rating = 0;
 
         let movieObj = {
@@ -315,8 +314,8 @@ export default function MovieCardTheater(props) {
                                 <img src="./../images/edit (1).png" className="icon" alt="..."/>
                             </button>
                             <button onClick = {()=> deleteShowtime()} type="button" className="btn grp1"><img src="./../images/delete.png"
-                                                                            className="icon"
-                                                                            alt="..."/></button>
+                                                                                                              className="icon"
+                                                                                                              alt="..."/></button>
 
 
                         </div>
@@ -393,7 +392,7 @@ export default function MovieCardTheater(props) {
 
                                         <div className="row">
                                             <div className="column left">
-                                                <div className="box">
+                                                <div className="box1">
                                                     <img className="z-depth-2 Img1" alt="100x100"
                                                          src={selectedMovieObj.image}
                                                          data-holder-rendered="true"/>
@@ -405,7 +404,7 @@ export default function MovieCardTheater(props) {
 
                                                 <p className="duration"> {selectedMovieObj.duration}</p>
                                                 <img className="imdb" alt="imdb" src="./../images/imdb (2).png"/>
-                                                <p className="rating"><img className="star" alt="star"
+                                                <p className="rating1"><img className="star1" alt="star"
                                                                            src="./../images/star.png"/> {selectedMovieObj.imdbRating}/10</p>
                                             </div>
                                         </div>

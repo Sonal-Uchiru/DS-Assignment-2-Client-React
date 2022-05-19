@@ -5,21 +5,27 @@ import MovieCardTheater from "../cards/movieCardTheater";
 import ShowTimeModal from "./../modals/addNewShowTime";
 import Swal from "sweetalert2";
 import LoadingDiv from "../../external_components/loading";
-
+import { useLocation } from "react-router-dom";
 
 
 export default function OneTheater() {
-    let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng";
-    let theaterId = "6277e51007fed789651bd99e";
+
+    let userToken = localStorage.getItem('moon-cinema-token');
+    let location =useLocation();
+    const theaterId =location.pathname.substring(9);
+
     let [theaterDetails, setTheaterDetails] = useState({})
     let [showTimes, setShowTimes] = useState([])
+    let [errorText, setErrorText] = useState("")
 
     let [loadingStatus, setLoadingStatus] = useState(true)
     let [theaterMainImage, setTheaterMainImage ] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
     let [theaterLogo, setTheaterLogo ] = useState("https://glenosps.sa.edu.au/wp-content/uploads/2021/07/logo.png")
 
-
     useEffect(()=> {
+        console.log(location.pathname)
+        console.log(theaterId)
+
         setLoadingStatus(false)
         getTheaterDetails()
         getShowTimeDetails()
@@ -51,7 +57,14 @@ export default function OneTheater() {
             method: 'GET',
             headers: {"x-auth-token":userToken}
         }).then((res)=> {
-            setShowTimes(res.data)
+            if(res.data.length > 0){
+                setShowTimes(res.data)
+                setErrorText("")
+
+            }else{
+                setShowTimes([])
+                setErrorText("No show times available")
+            }
             setLoadingStatus(true)
         }).catch((err)=>{
             showAlerts(2, err)
@@ -77,6 +90,8 @@ export default function OneTheater() {
             });
         }
     }
+
+
 
 
     return (
@@ -159,11 +174,12 @@ export default function OneTheater() {
                 </div>
 
                 <div className="row parent">
+                    <center><h4 className="text-danger">{errorText}</h4></center>
 
-                {showTimes.map((post)=> {
+                    {showTimes.map((post)=> {
                         return (
                             <div className="colmn">
-                                <MovieCardTheater key = {post.showTime.id} movieDetails = {post.movie} showTimeDetails = {post.showTime} getDetailsFunction2 = {getShowTimeDetails} />
+                                <MovieCardTheater key = {post.showTime.id} theaterID = {theaterId} movieDetails = {post.movie} showTimeDetails = {post.showTime} getDetailsFunction2 = {getShowTimeDetails} />
                             </div>
 
                         )
