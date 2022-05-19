@@ -13,6 +13,7 @@
     transform: scale(1.01);
 }
 
+
 .MovieCardProduction .card-title {
     font-weight: bold !important;
     color: white;
@@ -89,3 +90,4 @@
         font-size: 12px;
     }
 }
+

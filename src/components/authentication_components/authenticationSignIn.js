@@ -63,6 +63,7 @@ export default function AuthenticationSignIn() {
 
     function saveTokenInLocalStorage(token) {
         localStorage.setItem('moon-cinema-token', token)
+
     }
 
     function navigateHome(userRole) {

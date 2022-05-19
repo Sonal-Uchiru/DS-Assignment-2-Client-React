@@ -1,314 +1,266 @@
-.UpdateMov .modal-title {
-
+.MovieCardProduction .addMov .modal-title {
     font-weight: bold;
-    color: #04293A;
+    color: #04293a;
 }
 
-.UpdateMov input {
-
-    border: 1px solid #041C32;
+.MovieCardProduction .addMov input {
+    border: 1px solid #041c32;
 }
 
-.UpdateMov input,
-.UpdateMov input::placeholder {
+.MovieCardProduction .addMov input,
+.MovieCardProduction .addMov input::placeholder {
     font-size: 15px;
 }
 
-.UpdateMov textarea,
-.UpdateMov textarea::placeholder {
-    font-size: 15px;
-}
-
-.UpdateMov textarea {
-
-    border: 1px solid #041C32;
-}
-
-.UpdateMov label {
-
-    color: #064663;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.UpdateMov .allselect {
-
-    position: relative;
-    display: block;
-    max-width: 438px;
-    min-width: 180px;
-    margin: 0 auto;
-
-}
-
-.UpdateMov .closebtn {
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-    font-weight: bold;
-    font-size: 30px;
-    color: gray;
-}
-
-
-.UpdateMov select {
-    margin-top: 2px !important;
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    border-radius: 5px;
-    height: 40px;
-    border: 1px solid #041C32;
-    font-size: 15px !important;
-
-}
-
-.UpdateMov #dropdownMenuButton{
-    border: 1px solid #041C32;
+.MovieCardProduction  .addMov #dropdownMenuButton {
+    border: 1px solid #041c32;
     display: block;
     text-align: left;
     margin-top: 5px;
     width: 99.9%;
 }
 
-
-.UpdateMov .dropdown-menu{
+.MovieCardProduction .addMov .dropdown-menu {
     height: 300px;
     overflow-y: auto;
     width: 100%;
 }
 
-.UpdateMov #style1::-webkit-scrollbar{
+.MovieCardProduction .addMov #style1::-webkit-scrollbar {
     width: 3px;
-    height: 3px
+    height: 3px;
 }
 
 /* Track */
-.UpdateMov #style1::-webkit-scrollbar-track {
+.MovieCardProduction .addMov #style1::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
 }
 
 /* Handle */
-.UpdateMov #style1::-webkit-scrollbar-thumb {
-    background: #041C32;
+.MovieCardProduction .addMov #style1::-webkit-scrollbar-thumb {
+    background: #041c32;
     border-radius: 10px;
 }
 
-
-.UpdateMov .img3{
+.MovieCardProduction .addMov .img3 {
     width: 70px;
     height: 50px;
-
 }
 
-.UpdateMov .plusMinus{
-
-    width: 105px;
-    border-radius: 5px;
-    margin-left: 20px;
-}
-
-
-
-.UpdateMov .img2{
+.MovieCardProduction .addMov .img2 {
     object-fit: fill;
 }
 
-.UpdateMov .dropdown-toggle::after {
+.MovieCardProduction .addMov .dropdown-toggle::after {
     display: none;
 }
 
-.UpdateMov .icon{
+.MovieCardProduction .addMov .icon {
     float: right;
     margin-top: 5px;
     margin-right: 2px;
 }
 
+.MovieCardProduction .addMov textarea {
+    border: 1px solid #041c32;
+}
 
-.UpdateMov .box {
+.MovieCardProduction .addMov label {
+    color: #064663;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.MovieCardProduction .addMov .allselect {
+    /* wrapper style */
+    position: relative;
+    display: block;
+    max-width: 438px;
+    min-width: 180px;
+    margin: 0 auto;
+}
+
+.MovieCardProduction .addMov select {
+    margin-top: -15px;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 40px;
+    border: 1px solid #041c32;
+}
+
+.MovieCardProduction .addMov .closebtn {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 28px;
+    color: gray;
+}
+
+.MovieCardProduction .addMov .box {
     width: 200px;
     height: 200px;
 }
 
-
-.UpdateMov .Img1 {
+.MovieCardProduction .addMov .Img1 {
     width: 100%;
     height: 100%;
 }
 
-.UpdateMov .Img2 {
-
+.MovieCardProduction .addMov .Img2 {
     width: 30px;
     height: 30px;
 }
 
-
-.UpdateMov .btn5 {
-    background-color: #E15141;
-    color: #ffffff;
-    font-Weight: bold;
-    border: #E15141;
-    text-transform: none;
-    font-size: 20px;
-    margin-right: 25px;
-    height: 40px;
-    border-radius: 5px;
-    width: 90px;
-}
-
-.UpdateMov .btn5:hover {
-    color: #ffffff;
-    background-color: #d4301d;
-}
-
-.UpdateMov #btn4 {
+.MovieCardProduction .addMov #btn4 {
     background-color: transparent;
+    /* Blue background */
     border: none;
+    /* Remove borders */
     margin-left: 340px;
-    margin-top: -35px;
+    margin-top: -17px;
     position: relative;
     font-size: 16px;
+    /* Set a font size */
     float: right;
     cursor: pointer;
-
+    /* Mouse pointer on hover */
 }
 
-
-.UpdateMov .btn6 {
-    background-color: #04293A;
-    border: #04293A;
+.MovieCardProduction .addMov .btn5 {
+    background-color: #04293a;
     color: #ffffff;
-    font-Weight: bold;
+    font-weight: bold;
     text-transform: none;
+    border-radius: 5px;
     font-size: 20px;
     margin-right: 25px;
-    border-radius: 5px;
-    height: 40px;
     width: 90px;
+    border: none;
+    height: 50px;
 }
 
-.UpdateMov .btn6:hover {
-    color: #04293A;
-    background-color: #ECB365;
+.MovieCardProduction .addMov .btn5:hover {
+    background-color: #ecb365;
+    color: #041c32;
 }
 
+.MovieCardProduction .addMov .plusMinus {
+    width: 105px;
+    border-radius: 5px;
+    margin-left: 20px;
+}
 
-.UpdateMov .image-upload > input {
+.MovieCardProduction .addMov .image-upload > input {
     display: none;
 }
 
+.MovieCardProduction .addMov .imdb {
+    width: 70px;
+    height: 60px;
+    margin-top: -18px;
+}
+
+.MovieCardProduction .addMov .rating {
+    font-weight: bold;
+    float: left;
+    color: #041c32 !important;
+    margin-top: -16px;
+    margin-left: 22px;
+}
+.MovieCardProduction .addMov .star {
+    width: 15px;
+    height: 15px;
+    float: left;
+}
+
+.MovieCardProduction .addMov .ratingContainer {
+    float: right;
+}
+.MovieCardProduction .addMov .refresh-btn{
+    background-color: #ECB365;
+    color : white;
+    border:none
+}
+
+.MovieCardProduction .addMov .refresh-btn:hover{
+    background-color: #041C32;
+    color : white
+}
 
 @media screen and (max-width: 577px) {
-    .UpdateMov #btn4 {
-
-        margin-left: 350px;
+    .MovieCardProduction  .addMov #btn4 {
+        margin-left: 320px;
     }
-
 }
 
 @media screen and (max-width: 576px) {
-    .UpdateMov #btn4 {
-
+    .MovieCardProduction .addMov #btn4 {
         margin-left: 360px;
     }
-
 }
 
 @media screen and (max-width: 504px) {
-    .UpdateMov #btn4 {
-
+    .MovieCardProduction  .addMov #btn4 {
         margin-left: 325px;
     }
-
 }
 
 @media screen and (max-width: 470px) {
-    .UpdateMov #btn4 {
-
-        margin-left: 305px;
+    .MovieCardProduction .addMov #btn4 {
+        margin-left: 300px;
     }
-
 }
 
 @media screen and (max-width: 422px) {
-    .UpdateMov #btn4 {
-
+    .MovieCardProduction  .addMov #btn4 {
         margin-left: 280px;
     }
-
 }
 
 @media screen and (max-width: 380px) {
-    .UpdateMov #btn4 {
-
+    .MovieCardProduction .addMov #btn4 {
         margin-left: 260px;
     }
-
 }
 
 @media screen and (max-width: 340px) {
-    .UpdateMov #btn4 {
-
+    .MovieCardProduction .addMov #btn4 {
         margin-left: 240px;
     }
-
 }
 
 @media screen and (max-width: 322px) {
-    .UpdateMov #btn4 {
-
+    .MovieCardProduction .addMov #btn4 {
         margin-left: 220px;
     }
 
-    .UpdateMov .box {
+    .MovieCardProduction .addMov .box {
         width: 180px;
         height: 180px;
     }
-
 }
 
 @media screen and (max-width: 312px) {
-    .UpdateMov #dropdownMenuButton{
+    .MovieCardProduction .addMov #dropdownMenuButton {
         font-size: 14px;
     }
 }
 
-
-@media screen and (max-width: 296px) {
-
-    .UpdateMov #btn4 {
-
+@media screen and (max-width: 295px) {
+    .MovieCardProduction .addMov #btn4 {
         margin-left: 200px;
-
     }
 
-    .UpdateMov .box {
+    .MovieCardProduction .addMov .box {
         width: 180px;
         height: 180px;
     }
 
-    .UpdateMov #dropdownMenuButton{
+    .MovieCardProduction .addMov #dropdownMenuButton {
         font-size: 12px;
     }
-
-
-
-    .UpdateMov .btn5 {
-
-        width: 70px;
-        font-size: 15px;
-    }
-
-    .UpdateMov .btn6 {
-
-        width: 70px;
-        font-size: 15px;
-    }
-
-    .UpdateMov .modal-title {
-        font-size: 26px !important;
-    }
-
-
 }
