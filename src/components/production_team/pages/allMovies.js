@@ -5,6 +5,7 @@ import MovieCardProduction1 from "../cards/movieCardProduction1";
 import MovieCardProduction2 from "../cards/movieCardProduction2";
 import Swal from "sweetalert2";
 import LoadingDiv from "../../external_components/loading";
+import AddMovie from "../modals/addMovie";
 
 export default function AllMovies() {
     let [movieData, setMovieData] = useState([]);
@@ -158,8 +159,9 @@ export default function AllMovies() {
                    headers: {"x-auth-token":userToken}
                }).then((res)=> {
                    showAlerts(1, "Movie Deleted successfully")
-                   fetchAllShowTimes(movieId)
-                   getAllMovies()
+                   // fetchAllShowTimes(movieId)
+                   // getAllMovies()
+                   window.location.reload()
                }).catch((err) => {
                    alert(err);
                })
@@ -190,9 +192,13 @@ export default function AllMovies() {
                     method: 'DELETE',
                     headers: {"x-auth-token":userToken}
                 }).then((res)=> {
-                    console.log("aaa")
-                }).catch((err) => {
-                    alert(err);
+                    //console.log("aaa")
+                }).catch(async (err) => {
+                    await Swal.fire({
+                         icon: 'error',
+                         title: 'Oops...',
+                         text: 'Something went wrong!',
+                     })
                 })
             })
 
@@ -222,7 +228,8 @@ export default function AllMovies() {
         <div className="AllMovies">
             <h1 className="Nowshow">NOW SHOWING</h1>
             <br/>
-            <button type="button" className="btn btn-lg ADD">Add Movies</button>
+
+            <AddMovie/>
             <br/><br/>
 
             <div className="main">
@@ -286,7 +293,7 @@ export default function AllMovies() {
             <br/>
             <h1 className="Nowshow">COMING SOON</h1>
             <br/>
-            <button type="button" className="btn btn-lg ADD">Add Movies</button>
+
             <br/><br/>
 
             <div className="main">

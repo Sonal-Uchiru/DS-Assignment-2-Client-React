@@ -154,11 +154,11 @@ export default function AddMovie() {
         <div className="addMov">
             <button
                 type="button"
-                className="btn btn-primary"
+                className="btn btn-lg ADD"
                 data-toggle="modal"
                 data-target="#exampleModal"
             >
-                Launch demo modal
+                Add Movies
             </button>
             <div
                 className="modal fade"

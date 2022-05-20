@@ -91,3 +91,11 @@
     }
 }
 
+.MovieCardProduction .imdb-container-dropdown{
+    margin-bottom: 45px;
+    margin-right: 10px
+}
+
+.MovieCardProduction .container-dropdown-imdb{
+    margin-right: 150px;
+}

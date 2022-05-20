@@ -214,7 +214,7 @@ export default function UpdateMovie() {
                         </div>
                         <div className="modal-footer border-0">
                             <button type="button" className="btn5">Delete</button>
-                            <button type="button" className="btn6">Update</button>
+                            <button type="button" className="btn5">Update</button>
                         </div>
                     </div>
                 </div>

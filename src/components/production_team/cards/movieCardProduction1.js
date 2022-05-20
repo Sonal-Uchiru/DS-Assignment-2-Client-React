@@ -22,16 +22,20 @@ export default function MovieCardProduction1(props) {
 
     const token =
         'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng'
-    const [hours, setHours] = useState(0)
-    const [minutes, setMinutes] = useState(0)
+    const [hours, setHours] = useState(
+        parseInt(movieDetails.duration.split('h', 1)[0])
+    )
+    const [minutes, setMinutes] = useState(
+        parseInt(movieDetails.duration.split('h', 2)[1].split('min', 1)[0])
+    )
 
-    const [name, setName] = useState('')
-    const [image, setImage] = useState('./../images/clapperboard.png')
-    const [genre, setGenre] = useState('')
-    const [story_line, setStoryLine] = useState('')
-    const [language, setLanguage] = useState('')
-    const [imdb_key, setImdbKey] = useState('')
-    const [showing, setShowings] = useState('')
+    const [name, setName] = useState(movieDetails.name)
+    const [image, setImage] = useState(movieDetails.image)
+    const [genre, setGenre] = useState(movieDetails.genre)
+    const [story_line, setStoryLine] = useState(movieDetails.story_line)
+    const [language, setLanguage] = useState(movieDetails.language)
+    const [imdb_key, setImdbKey] = useState(movieDetails.imdb_key)
+    const [showing, setShowings] = useState(movieDetails.showing)
     const [imdbRating, setImdbRating] = useState('0')
     const [imdbLoading, setImdbLoading] = useState(true)
     const [saveMovieDBLoading, setSaveMovieDBLoading] = useState(true)
@@ -39,6 +43,7 @@ export default function MovieCardProduction1(props) {
     const [file, setFile] = useState()
 
     const [imdbMovies, setImdbMovies] = useState([])
+
     function handleDecrement() {
         if (hours > 0) {
             setHours((prevCount) => prevCount - 1)
@@ -61,7 +66,7 @@ export default function MovieCardProduction1(props) {
         }
     }
 
-    async function addMovie(e) {
+    async function updateMovie(e) {
         e.preventDefault()
 
         await Swal.fire({
@@ -82,11 +87,6 @@ export default function MovieCardProduction1(props) {
     }
 
     async function saveMovieDB() {
-        if (image === '' || imdb_key === '') {
-            setSaveMovieDBLoading(true)
-            await Swal.fire('Select Movie from the IMDB', '', 'warning')
-            return
-        }
 
         const content = {
             name,
@@ -96,11 +96,11 @@ export default function MovieCardProduction1(props) {
             story_line,
             language,
             imdb_key,
-            showing: showing === 'Now Showing',
+            showing: document.getElementById('status').value === 'Now Showing',
         }
         axios({
-            url: 'http://localhost:8093/api/movies',
-            method: 'POST',
+            url: 'http://localhost:8093/api/movies/'+movieDetails.id,
+            method: 'PUT',
             headers: {
                 'x-auth-token': token,
             },
@@ -108,7 +108,7 @@ export default function MovieCardProduction1(props) {
         })
             .then(async (res) => {
                 setSaveMovieDBLoading(true)
-                await Swal.fire('Saved!', '', 'success')
+                await Swal.fire('Updated!', '', 'success')
             })
             .catch(async (err) => {
                 await Swal.fire({
@@ -160,85 +160,78 @@ export default function MovieCardProduction1(props) {
     }
 
     return (
+        <div className="MovieCardProduction">
+            <div className="card">
+                <img
+                    src={movieDetails.image}
+                    className="card-img-top"
+                    alt="..."
+                />
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col-8">
+                            <h4 className="card-title">{props.details.name}</h4>
+                        </div>
 
-            <div className="MovieCardProduction">
-                <div className="card">
-                    <img
-                        src={movieDetails.image}
-                        className="card-img-top"
-                        alt="..."
-                    />
-                    <div className="card-body">
-                        <div className="row">
-                            <div className="col-8">
-                                <h4 className="card-title">
-                                    {props.details.name}
-                                </h4>
-                            </div>
-
-                            <div className="col-4">
-                                <img
-                                    src="./../images/imdb.png"
-                                    className="imdb"
-                                />
-                                <div className="row">
-                                    <div className="col">
-                                        <img
-                                            src="./../images/star.png"
-                                            className="star"
-                                        />
-                                    </div>
-                                    <div className="col">
-                                        <h6 className="rating">{ratings}/10</h6>
-                                    </div>
+                        <div className="col-4">
+                            <img src="./../images/imdb.png" className="imdb" />
+                            <div className="row">
+                                <div className="col">
+                                    <img
+                                        src="./../images/star.png"
+                                        className="star"
+                                    />
+                                </div>
+                                <div className="col">
+                                    <h6 className="rating">{ratings}/10</h6>
                                 </div>
                             </div>
                         </div>
-
-                        {props.details.showing ? (
-                            <p className="status">Now Showing</p>
-                        ) : (
-                            <p className="status">Coming Soon</p>
-                        )}
-                        <br />
                     </div>
-                    <div className="text-center">
-                        <div
-                            className="btn-group"
-                            role="group"
-                            aria-label="Basic example"
-                        >
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    props.functiondelete(props.details.id)
-                                }
-                                className="btn grp1"
-                            >
-                                <img
-                                    src="./../images/delete.png"
-                                    className="icon"
-                                    alt="..."
-                                />
-                            </button>
 
-                            <button
-                                type="button"
-                                className="btn  grp1"
-                                data-toggle="modal"
-                                data-target={`#${props.details.id}`}
-                            >
-                                <img
-                                    src="./../images/edit (1).png"
-                                    className="icon"
-                                    alt="..."
-                                />
-                            </button>
-                        </div>
-                    </div>
+                    {props.details.showing ? (
+                        <p className="status">Now Showing</p>
+                    ) : (
+                        <p className="status">Coming Soon</p>
+                    )}
                     <br />
                 </div>
+                <div className="text-center">
+                    <div
+                        className="btn-group"
+                        role="group"
+                        aria-label="Basic example"
+                    >
+                        <button
+                            type="button"
+                            onClick={() =>
+                                props.functiondelete(props.details.id)
+                            }
+                            className="btn grp1"
+                        >
+                            <img
+                                src="./../images/delete.png"
+                                className="icon"
+                                alt="..."
+                            />
+                        </button>
 
+                        <button
+                            type="button"
+                            className="btn  grp1"
+                            data-toggle="modal"
+                            data-target={`#${props.details.id}`}
+                        >
+                            <img
+                                src="./../images/edit (1).png"
+                                className="icon"
+                                alt="..."
+                            />
+                        </button>
+                    </div>
+                </div>
+                <br />
+            </div>
 
             <div className="addMov">
                 <div
@@ -259,7 +252,7 @@ export default function MovieCardProduction1(props) {
                                     className="modal-title"
                                     id="exampleModalLabel"
                                 >
-                                    Add Movie
+                                    Edit Movie
                                 </h2>
                                 <button
                                     type="button"
@@ -272,14 +265,14 @@ export default function MovieCardProduction1(props) {
                             </div>
                             <div className="modal-body">
                                 <div className="container">
-                                    <form id="addMovie" onSubmit={addMovie}>
+                                    <form id="updateForm" onSubmit={updateMovie}>
                                         <span>
                                             <center>
                                                 <div className="box">
                                                     <img
                                                         className="z-depth-2 Img1"
                                                         alt="movie_image"
-                                                        src={image}
+                                                        src={movieDetails.image}
                                                         id="movieImage"
                                                         data-holder-rendered="true"
                                                     />
@@ -299,6 +292,7 @@ export default function MovieCardProduction1(props) {
                                                 className="form-control"
                                                 id="Mname"
                                                 placeholder="Toy Story"
+                                                Value={movieDetails.name}
                                                 onChange={(e) =>
                                                     setName(e.target.value)
                                                 }
@@ -406,15 +400,20 @@ export default function MovieCardProduction1(props) {
                                                 readOnly
                                             />
                                         </div>
-                                        <div className="mb-3">
+                                        <div className="imdb-container-dropdown">
                                             <label
                                                 htmlFor="rating"
                                                 className="form-label rate"
                                             >
                                                 Ratings
                                             </label>
-                                            <br/><br/><br/>
-                                            <div className="dropdown" id="drop">
+                                            <br />
+                                            <br />
+                                            <br />
+                                            <div
+                                                className="dropdown container-dropdown-imdb"
+                                                id="drop"
+                                            >
                                                 <button
                                                     className="btn dropdown-toggle"
                                                     type="button"
@@ -436,16 +435,22 @@ export default function MovieCardProduction1(props) {
                                                     aria-labelledby="dropdownMenuButton"
                                                 >
                                                     <div className="container d-flex justify-content-center">
-                                                        <div hidden={imdbLoading}>
+                                                        <div
+                                                            hidden={imdbLoading}
+                                                        >
                                                             <Example
                                                                 type={'bars'}
-                                                                color={'#ECB365'}
+                                                                color={
+                                                                    '#ECB365'
+                                                                }
                                                                 height={'50px'}
                                                                 width={'50px'}
                                                             />
                                                         </div>
                                                         <div
-                                                            hidden={noResultStatus}
+                                                            hidden={
+                                                                noResultStatus
+                                                            }
                                                         >
                                                             <h5 className="text-danger">
                                                                 No Result Found!
@@ -457,7 +462,9 @@ export default function MovieCardProduction1(props) {
                                                             return (
                                                                 <li
                                                                     className="dropdown-item"
-                                                                    key={movie.id}
+                                                                    key={
+                                                                        movie.id
+                                                                    }
                                                                     onClick={() => {
                                                                         setImdbKey(
                                                                             movie.id
@@ -465,7 +472,9 @@ export default function MovieCardProduction1(props) {
                                                                         setImage(
                                                                             movie.image
                                                                         )
-                                                                        displaySelectedMovieRatings(movie.id)
+                                                                        displaySelectedMovieRatings(
+                                                                            movie.id
+                                                                        )
                                                                     }}
                                                                 >
                                                                     <img
@@ -477,7 +486,9 @@ export default function MovieCardProduction1(props) {
                                                                         className="rounded-circle img2"
                                                                         alt=""
                                                                     />{' '}
-                                                                    {movie.title}
+                                                                    {
+                                                                        movie.title
+                                                                    }
                                                                     <br />
                                                                     {
                                                                         movie.description
@@ -495,7 +506,9 @@ export default function MovieCardProduction1(props) {
                                             type="button"
                                             onClick={getMoviesToTheMovieTitle}
                                         >
-                                            <span className="glyphicon glyphicon-refresh"> </span>{' '}
+                                            <span className="glyphicon glyphicon-refresh">
+                                                {' '}
+                                            </span>{' '}
                                             Refresh
                                         </button>
                                         <div className="ratingContainer">
@@ -529,6 +542,7 @@ export default function MovieCardProduction1(props) {
                                                 name="language"
                                                 id="language"
                                                 required
+                                                defaultValue={movieDetails.language}
                                                 onChange={(e) =>
                                                     setLanguage(e.target.value)
                                                 }
@@ -562,6 +576,7 @@ export default function MovieCardProduction1(props) {
                                                 name="genre"
                                                 id="genre"
                                                 required
+                                                defaultValue={movieDetails.genre}
                                                 onChange={(e) =>
                                                     setGenre(e.target.value)
                                                 }
@@ -594,6 +609,11 @@ export default function MovieCardProduction1(props) {
                                                 className="form-select"
                                                 name="status"
                                                 id="status"
+                                                defaultValue={
+                                                    movieDetails.showing
+                                                        ? 'Now Showing'
+                                                        : 'Coming Soon'
+                                                }
                                                 onChange={(e) =>
                                                     setShowings(e.target.value)
                                                 }
@@ -621,6 +641,9 @@ export default function MovieCardProduction1(props) {
                                             <textarea
                                                 className="form-control"
                                                 placeholder="Story Line"
+                                                defaultValue={
+                                                    movieDetails.story_line
+                                                }
                                                 onChange={(e) =>
                                                     setStoryLine(e.target.value)
                                                 }
@@ -642,13 +665,22 @@ export default function MovieCardProduction1(props) {
                                         />
                                     </div>
                                 </div>
-                                <button
-                                    form="addMovie"
-                                    type="submit"
-                                    className="btn5"
-                                >
-                                    Add
-                                </button>
+                                <div className="modal-footer border-0">
+                                    <button
+                                        type="button"
+                                        className="btn5"
+                                        onClick={() =>
+                                            props.functiondelete(
+                                                props.details.id
+                                            )
+                                        }
+                                    >
+                                        Delete
+                                    </button>
+                                    <button type="submit" form = "updateForm" className="btn5">
+                                        Update
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
