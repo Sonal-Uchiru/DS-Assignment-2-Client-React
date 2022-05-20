@@ -1,45 +1,44 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2'
 import './../css/allTheaters.css'
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 import TheaterCard from '../cards/theaterCard'
+import LoadingDiv from '../../external_components/loading'
 
 export default function AllTheaters() {
-    let navigate = useNavigate();
-    let userToken = localStorage.getItem('moon-cinema-token');
+    let navigate = useNavigate()
+    let userToken = localStorage.getItem('moon-cinema-token')
 
     const [theaters, setTheaters] = useState([])
     const [duplicateTheaters, setDuplicateTheaters] = useState([])
-    let [errorText, setErrorText] = useState("")
+    let [errorText, setErrorText] = useState('')
+    const [loadingStatus, setLoadingStatus] = useState(false)
     useEffect(() => {
         function getTheaters() {
             axios({
                 url: 'http://localhost:8093/api/theaters',
                 method: 'GET',
-                headers: {"x-auth-token":userToken}
-
+                headers: { 'x-auth-token': userToken },
             })
                 .then((res) => {
-                    console.log(res.data)
-
-                    if(res.data.length > 0){
-
-                    }else{
-                        setErrorText("No theaters available")
+                    if (res.data.length > 0) {
+                        setTheaters(res.data)
+                        setDuplicateTheaters(res.data)
+                    } else {
+                        setErrorText('No theaters available')
                     }
 
-                    setTheaters(res.data)
-                    setDuplicateTheaters(res.data)
+                    setLoadingStatus(true)
                 })
-                .catch((err) => {
-                    console.log(err);
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: "Something went wrong! Try again Later!",
-                    });
+                .catch(async (err) => {
+                    await Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong! Try again Later!',
+                    })
+                    setLoadingStatus(true)
                 })
         }
 
@@ -47,17 +46,19 @@ export default function AllTheaters() {
     }, [])
 
     function handleSearch(userIn) {
+        setLoadingStatus(false)
         const result = duplicateTheaters.filter((theater) =>
             theater.name.toLowerCase().includes(userIn.toLowerCase())
         )
-        if(result.length > 0){
-            setTheaters("")
-        }else{
-            setTheaters("No theaters available")
+        if (result.length > 0) {
+            setTheaters(result)
+            setErrorText('')
+        } else {
+            setTheaters(result)
+            setErrorText(`No theaters available by name ${userIn}`)
         }
-        setTheaters(result)
+        setLoadingStatus(true)
     }
-
 
     return (
         <div className="Theaters">
@@ -88,13 +89,34 @@ export default function AllTheaters() {
                 </div>
             </div>
 
+            <div
+                hidden={loadingStatus}
+                className="container justify-content-center"
+            >
+                <center>
+                    <LoadingDiv
+                        type={'bars'}
+                        color={'#ECB365'}
+                        height={'50px'}
+                        width={'50px'}
+                    />
+                </center>
+            </div>
+
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent ">
-                    <center><h4 class = "text-danger">{errorText}</h4></center>
+                    <center>
+                        <h4 class="text-danger">{errorText}</h4>
+                    </center>
                     {theaters.map((theater) => {
                         return (
-                            <div onClick={()=> navigate(`/theater/${theater.id}`)} className="stretched-link col">
-                                <TheaterCard  theater={theater} />
+                            <div
+                                onClick={() =>
+                                    navigate(`/theater/${theater.id}`)
+                                }
+                                className="streched-link col"
+                            >
+                                <TheaterCard theater={theater} />
                             </div>
                         )
                     })}

@@ -20,8 +20,6 @@ import AddMovie from "./components/production_team/modals/addMovie";
 function App() {
     return (
         <Router>
-            {/*<AddMovie/>*/}
-            {/*<AllMovies/>*/}
             <Routes>
                 {/*authentication routes*/}
                 <Route path="/" element={<AuthenticationSignIn/>} />
