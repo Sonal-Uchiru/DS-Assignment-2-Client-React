@@ -4,6 +4,7 @@ import "./../css/selectedMovieCard.css"
 import BuyTicket from "../modals/buyTickets";
 import Swal from "sweetalert2";
 import "./../css/buyTickets.css"
+import StripeCheckout from 'react-stripe-checkout';
 
 export default function SelectedMovieCard(props) {
     let theaterDetails = props.dataObject.theater
@@ -114,32 +115,7 @@ export default function SelectedMovieCard(props) {
     }
 
     async function buyTicket() {
-
-        var payment = {
-            // whether it is a testing environment or not
-            sandbox: true,
-            merchant_id: "1213098", // Replace your Merchant ID
-            return_url: "http://localhost:3000/selectedMovie", // Important
-            cancel_url: "http://localhost:3000/selectedMovie", // Important
-            notify_url: "http://sample.com/notify",
-            order_id: "MT" + new Date().valueOf(),
-            items: "movieObj.movieName",
-            amount: "2000",
-            currency: "USD",
-            first_name: "DS",
-            email: "asdasd@gmail.com",
-            phone: "DS",
-            address: "",
-            city: "",
-            delivery_address: "",
-            delivery_city: "",
-            delivery_country: "",
-            custom_1: "",
-            custom_2: "",
-        };
-
-        // Show the payhere.js popup, when "PayHere Pay" is clicked
-        window.payhere.startPayment(payment);
+        document.getElementById('stripeBtn').click()
     }
     window.payhere.onCompleted = function onCompleted(orderId) {
         // postOrder(orderId);
@@ -156,12 +132,22 @@ export default function SelectedMovieCard(props) {
         });
     };
 
+
     function assignModalData(showtime, showTimeID){
         setAdultTicketPrice(theaterDetails.adult_ticket_price)
         setChildTicketPrice(theaterDetails.child_ticket_price)
         setShowTime(showtime)
         setShowTimeID(showTimeID)
     }
+
+
+    function checkPayment(token, address) {
+        console.log(token)
+        console.log(address)
+
+    }
+
+
     return (
         <div className="SelectedMovieCard">
             <div id="accordion">
@@ -281,12 +267,28 @@ export default function SelectedMovieCard(props) {
                             <div className="modal-footer border-0">
                                 <div className="row text-center">
                                     <div className="col">
-                                        <button onClick={() => buyTicket(true)} type="button" className="btn5 btn-lg">Buy
-                                            Tickets
-                                        </button>
+
+
+                                        <StripeCheckout
+                                            hidden
+                                            id = "stripeBtn"
+                                            stripeKey = "pk_test_51L1Q3MGgPBz98WbHVedHKSt0NiFFnu71L0y8uBIcX9hU2s5m1YjAbvsCffwvuHnNd8so8Bj1OY6SZ5hxMFyeQi7s00VUaKLWpk"
+                                            token = {handleToken}
+                                            name="Moon Cinemas." // the pop-in header title
+                                            image="../../../images/footer.svg" // the pop-in header image (default none)
+                                            ComponentClass="div"
+                                            panelLabel="Pay"
+                                            description="Enter your card details"
+                                            amount = {totalPrice / 360}
+                                            // cardno = 4242 4242 4242 4242
+                                            // date = 04 / 24
+                                            // cvc = 424
+                                        >
+                                            <button type="button" className="btn5 btn-lg">Buy Ticket</button>
+                                        </StripeCheckout>
                                     </div>
                                     <div className="col">
-                                        <button onClick={() => checkValidity(1)} type="button" className="btn6 btn-lg">Add
+                                        <button onClick={() => checkPayment(1)} type="button" className="btn6 btn-lg">Add
                                             to Cart
                                         </button>
 
