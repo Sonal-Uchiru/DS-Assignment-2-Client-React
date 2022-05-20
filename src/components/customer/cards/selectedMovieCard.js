@@ -273,7 +273,7 @@ export default function SelectedMovieCard(props) {
                                             hidden
                                             id = "stripeBtn"
                                             stripeKey = "pk_test_51L1Q3MGgPBz98WbHVedHKSt0NiFFnu71L0y8uBIcX9hU2s5m1YjAbvsCffwvuHnNd8so8Bj1OY6SZ5hxMFyeQi7s00VUaKLWpk"
-                                            token = {handleToken}
+                                            token = {checkPayment}
                                             name="Moon Cinemas." // the pop-in header title
                                             image="../../../images/footer.svg" // the pop-in header image (default none)
                                             ComponentClass="div"
@@ -288,7 +288,7 @@ export default function SelectedMovieCard(props) {
                                         </StripeCheckout>
                                     </div>
                                     <div className="col">
-                                        <button onClick={() => checkPayment(1)} type="button" className="btn6 btn-lg">Add
+                                        <button onClick={() => checkValidity(1)} type="button" className="btn6 btn-lg">Add
                                             to Cart
                                         </button>
 
