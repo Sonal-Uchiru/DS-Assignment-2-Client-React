@@ -5,6 +5,8 @@ import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import './authenticationSignUp.css'
 import { useNavigate, Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import LoadingDiv from "../external_components/loading";
 
 const eye = <FontAwesomeIcon icon={faEye} />
 const sleye = <FontAwesomeIcon icon={faEyeSlash} />
@@ -23,7 +25,8 @@ export default function AuthenticationSignUp() {
     const [mobilePhoneNumber, setMobilePhoneNumber] = useState('')
     const [address, setAddress] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-
+    const [submitBtnStatus, setSubmitBtnStatus] = useState(true)
+    const [loadingStatus,setLoadingStatus] = useState(true);
     // Password toggle handler
     const togglePasswordVisibility = () => {
         setPasswordShown(!passwordShown)
@@ -33,41 +36,67 @@ export default function AuthenticationSignUp() {
         setCpasswordShown(!CpasswordShown)
     }
 
-    function handleSignUp(e) {
+    async function handleSignUp(e) {
         e.preventDefault()
-        console.log('GG')
-        const newUser = {
-            username,
-            password,
-            firstName,
-            lastName,
-            email,
-            gender,
-            nic,
-            mobilePhoneNumber,
-            address,
-            role: 'user',
+        setLoadingStatus(false)
+        if (!document.getElementById('check').checked) {
+            setLoadingStatus(true)
+            return
         }
 
-        //API call
+        if (password === confirmPassword) {
+            const newUser = {
+                username,
+                password,
+                firstName,
+                lastName,
+                email,
+                gender,
+                nic,
+                mobilePhoneNumber,
+                address,
+                role: 'user',
+            }
+           saveUserDB(newUser)
+        } else {
+            setLoadingStatus(true)
+            await Swal.fire('Passwords Mismatch!')
+        }
+    }
 
+    function allowSubmit() {
+        if (document.getElementById('check').checked) {
+            setSubmitBtnStatus(false)
+        } else {
+            setSubmitBtnStatus(true)
+        }
+    }
+
+    function saveUserDB(content) {
         axios({
             url: 'http://localhost:8093/api/signup',
             method: 'POST',
-            data: newUser,
+            data: content,
         })
             .then((res) => {
-                console.log(res.data)
-                // don't remove
                 navigate('/')
+                setLoadingStatus(true)
             })
-            .catch((err) => {
-                console.log(err)
+            .catch(async (err) => {
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Username or Password Already exists',
+                })
+                setLoadingStatus(true)
             })
-
-        console.log(newUser)
     }
 
+    const preventWhiteSpace = (e) => {
+        if (e.key === ' ') {
+            e.preventDefault()
+        }
+    }
     return (
         <div className="CusRegister">
             <section className="">
@@ -96,12 +125,14 @@ export default function AuthenticationSignUp() {
                                             </label>
                                             <input
                                                 type="text"
+                                                onKeyUp = {preventWhiteSpace}
                                                 id="firstname"
                                                 className="form-control"
                                                 placeholder="First Name"
                                                 onChange={(e) => {
                                                     setFirstName(e.target.value)
                                                 }}
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -117,8 +148,10 @@ export default function AuthenticationSignUp() {
                                             <input
                                                 type="text"
                                                 id="lastname"
+                                                onKeyUp = {preventWhiteSpace}
                                                 className="form-control"
                                                 placeholder="Last Name"
+                                                required
                                                 onChange={(e) => {
                                                     setLastName(e.target.value)
                                                 }}
@@ -143,6 +176,7 @@ export default function AuthenticationSignUp() {
                                         onChange={(e) => {
                                             setEmail(e.target.value)
                                         }}
+                                        required
                                     />
                                 </div>
 
@@ -160,6 +194,7 @@ export default function AuthenticationSignUp() {
                                         onChange={(e) => {
                                             setGender(e.target.value)
                                         }}
+                                        required
                                     >
                                         <option>Select Your Gender</option>
                                         <option value="male">Male</option>
@@ -171,17 +206,20 @@ export default function AuthenticationSignUp() {
                                     <label
                                         className="form-label"
                                         htmlFor="form3Example3"
+
                                     >
                                         NIC Number
                                     </label>
                                     <input
                                         type="text"
                                         id="nic"
+                                        onKeyUp = {preventWhiteSpace}
                                         className="form-control form-control-lg"
                                         placeholder="999285xxxxxx"
                                         onChange={(e) => {
                                             setNic(e.target.value)
                                         }}
+                                        required
                                     />
                                 </div>
 
@@ -201,6 +239,7 @@ export default function AuthenticationSignUp() {
                                         onChange={(e) => {
                                             setAddress(e.target.value)
                                         }}
+                                        required
                                     />
                                 </div>
 
@@ -214,11 +253,13 @@ export default function AuthenticationSignUp() {
                                     <input
                                         type="text"
                                         id="mobile"
+                                        onKeyUp = {preventWhiteSpace}
                                         className="form-control form-control-lg"
                                         placeholder="0765581xxx"
                                         onChange={(e) => {
                                             setMobilePhoneNumber(e.target.value)
                                         }}
+                                        required
                                     />
                                 </div>
 
@@ -235,9 +276,11 @@ export default function AuthenticationSignUp() {
                                         className="form-control form-control-lg"
                                         placeholder="Username"
                                         id="username"
+                                        onKeyUp = {preventWhiteSpace}
                                         onChange={(e) => {
                                             setUserName(e.target.value)
                                         }}
+                                        required
                                     />
                                 </div>
 
@@ -253,12 +296,14 @@ export default function AuthenticationSignUp() {
                                         id="form3Example4"
                                         className="form-control form-control-lg"
                                         placeholder="Password"
+                                        onKeyUp = {preventWhiteSpace}
                                         type={
                                             passwordShown ? 'text' : 'password'
                                         }
                                         onChange={(e) => {
                                             setPassword(e.target.value)
                                         }}
+                                        required
                                     />
                                     <span className="p-viewer">
                                         <i
@@ -285,6 +330,7 @@ export default function AuthenticationSignUp() {
                                     </label>
                                     <input
                                         id="form3Example4"
+                                        onKeyUp = {preventWhiteSpace}
                                         className="form-control form-control-lg"
                                         placeholder="Confirm Password"
                                         type={
@@ -293,6 +339,7 @@ export default function AuthenticationSignUp() {
                                         onChange={(e) => {
                                             setConfirmPassword(e.target.value)
                                         }}
+                                        required
                                     />
                                     <span className="p-viewer">
                                         <i
@@ -314,6 +361,7 @@ export default function AuthenticationSignUp() {
                                         type="checkbox"
                                         className="form-check-input"
                                         id="check"
+                                        onChange={() => allowSubmit()}
                                     />
                                     <label
                                         className="form-check-label"
@@ -325,11 +373,16 @@ export default function AuthenticationSignUp() {
                                         </a>
                                     </label>
                                 </div>
-
+                                <div   hidden = {loadingStatus} className="justify-content-center">
+                                    <center>
+                                        <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
+                                    </center>
+                                </div>
                                 <button
                                     type="submit"
                                     className="btn rounded signUp"
                                     form="signupf"
+                                    disabled={submitBtnStatus}
                                 >
                                     Sign Up
                                 </button>
