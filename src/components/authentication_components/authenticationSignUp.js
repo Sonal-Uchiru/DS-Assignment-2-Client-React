@@ -6,7 +6,8 @@ import { faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import './authenticationSignUp.css'
 import { useNavigate, Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
-import LoadingDiv from "../external_components/loading";
+import LoadingDiv from '../external_components/loading'
+import PasswordStrengthIndicator from '../external_components/passwordStrengthIndicator'
 
 const eye = <FontAwesomeIcon icon={faEye} />
 const sleye = <FontAwesomeIcon icon={faEyeSlash} />
@@ -26,7 +27,15 @@ export default function AuthenticationSignUp() {
     const [address, setAddress] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [submitBtnStatus, setSubmitBtnStatus] = useState(true)
-    const [loadingStatus,setLoadingStatus] = useState(true);
+    const [loadingStatus, setLoadingStatus] = useState(true)
+
+    const [passwordValidity, setPasswordValidity] = useState({
+        minChar: null,
+        number: null,
+        specialChar: null,
+    })
+    const isNumberRegx = /\d/
+    const specialCharacterRegx = /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
     // Password toggle handler
     const togglePasswordVisibility = () => {
         setPasswordShown(!passwordShown)
@@ -44,6 +53,12 @@ export default function AuthenticationSignUp() {
             return
         }
 
+        if (!validatePassword()) {
+            setLoadingStatus(true)
+            await Swal.fire('Please Enter a Strong Password')
+            return
+        }
+
         if (password === confirmPassword) {
             const newUser = {
                 username,
@@ -57,7 +72,7 @@ export default function AuthenticationSignUp() {
                 address,
                 role: 'user',
             }
-           saveUserDB(newUser)
+            saveUserDB(newUser)
         } else {
             setLoadingStatus(true)
             await Swal.fire('Passwords Mismatch!')
@@ -97,6 +112,17 @@ export default function AuthenticationSignUp() {
             e.preventDefault()
         }
     }
+
+    function validatePassword() {
+        if (
+            passwordValidity.minChar &&
+            passwordValidity.number &&
+            passwordValidity.specialChar
+        ) {
+            return true
+        }
+    }
+
     return (
         <div className="CusRegister">
             <section className="">
@@ -125,7 +151,7 @@ export default function AuthenticationSignUp() {
                                             </label>
                                             <input
                                                 type="text"
-                                                onKeyUp = {preventWhiteSpace}
+                                                onKeyUp={preventWhiteSpace}
                                                 id="firstname"
                                                 className="form-control"
                                                 placeholder="First Name"
@@ -148,7 +174,7 @@ export default function AuthenticationSignUp() {
                                             <input
                                                 type="text"
                                                 id="lastname"
-                                                onKeyUp = {preventWhiteSpace}
+                                                onKeyUp={preventWhiteSpace}
                                                 className="form-control"
                                                 placeholder="Last Name"
                                                 required
@@ -206,14 +232,13 @@ export default function AuthenticationSignUp() {
                                     <label
                                         className="form-label"
                                         htmlFor="form3Example3"
-
                                     >
                                         NIC Number
                                     </label>
                                     <input
                                         type="text"
                                         id="nic"
-                                        onKeyUp = {preventWhiteSpace}
+                                        onKeyUp={preventWhiteSpace}
                                         className="form-control form-control-lg"
                                         placeholder="999285xxxxxx"
                                         onChange={(e) => {
@@ -253,7 +278,7 @@ export default function AuthenticationSignUp() {
                                     <input
                                         type="text"
                                         id="mobile"
-                                        onKeyUp = {preventWhiteSpace}
+                                        onKeyUp={preventWhiteSpace}
                                         className="form-control form-control-lg"
                                         placeholder="0765581xxx"
                                         onChange={(e) => {
@@ -276,7 +301,7 @@ export default function AuthenticationSignUp() {
                                         className="form-control form-control-lg"
                                         placeholder="Username"
                                         id="username"
-                                        onKeyUp = {preventWhiteSpace}
+                                        onKeyUp={preventWhiteSpace}
                                         onChange={(e) => {
                                             setUserName(e.target.value)
                                         }}
@@ -296,12 +321,23 @@ export default function AuthenticationSignUp() {
                                         id="form3Example4"
                                         className="form-control form-control-lg"
                                         placeholder="Password"
-                                        onKeyUp = {preventWhiteSpace}
+                                        onKeyUp={preventWhiteSpace}
                                         type={
                                             passwordShown ? 'text' : 'password'
                                         }
                                         onChange={(e) => {
                                             setPassword(e.target.value)
+                                            setPasswordValidity({
+                                                minChar:
+                                                    e.target.value.length >= 8,
+                                                number: isNumberRegx.test(
+                                                    e.target.value
+                                                ),
+                                                specialChar:
+                                                    specialCharacterRegx.test(
+                                                        e.target.value
+                                                    ),
+                                            })
                                         }}
                                         required
                                     />
@@ -319,7 +355,9 @@ export default function AuthenticationSignUp() {
                                         </i>
                                     </span>
                                 </div>
-
+                                <PasswordStrengthIndicator
+                                    validity={passwordValidity}
+                                />
                                 <div className="form-outline mb-3">
                                     <label
                                         className="form-label"
@@ -330,7 +368,7 @@ export default function AuthenticationSignUp() {
                                     </label>
                                     <input
                                         id="form3Example4"
-                                        onKeyUp = {preventWhiteSpace}
+                                        onKeyUp={preventWhiteSpace}
                                         className="form-control form-control-lg"
                                         placeholder="Confirm Password"
                                         type={
@@ -373,10 +411,16 @@ export default function AuthenticationSignUp() {
                                         </a>
                                     </label>
                                 </div>
-                                <div   hidden = {loadingStatus} className="justify-content-center">
-                                    <center>
-                                        <LoadingDiv type={"bars"} color={"#ECB365"} height={"50px"} width={"50px"}/>
-                                    </center>
+                                <div
+                                    hidden={loadingStatus}
+                                    className="justify-content-center"
+                                >
+                                    <LoadingDiv
+                                        type={'bars'}
+                                        color={'#ECB365'}
+                                        height={'50px'}
+                                        width={'50px'}
+                                    />
                                 </div>
                                 <button
                                     type="submit"

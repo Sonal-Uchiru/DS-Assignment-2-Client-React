@@ -11,7 +11,7 @@ export default function AllMovies() {
     let [movieData, setMovieData] = useState([]);
     let [noNowShowingText, setNoNowShowingText] = useState("");
     let [noComingSoonText, setNoComingSoonText] = useState("");
-    let userToken = "eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTI1MDQ5MzU2ODYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImRheU9mWWVhciI6MTMxLCJkYXlPZldlZWsiOiJXRURORVNEQVkiLCJtb250aCI6Ik1BWSIsImRheU9mTW9udGgiOjExLCJ5ZWFyIjoyMDIyLCJtb250aFZhbHVlIjo1LCJob3VyIjoyMiwibWludXRlIjozOCwic2Vjb25kIjo1NSwibmFubyI6Njg1MDAwMDAwLCJjaHJvbm9sb2d5Ijp7ImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEiLCJpZCI6IklTTyJ9fX0.xDzxVpPzvzwi7SjrW1UUazAjGdfEOgtvlEilX5eZjnjGYPkWWdLqnkInzpQVnOxYn9zdfwcXc8z7NRIjSYxDDw";
+    let userToken = localStorage.getItem('moon-cinema-token')
 
     let [nowShowing, setNowShowing] = useState([]);
     let [nowShowingDataHolder, setNowShowingDataHolder] = useState([]);
@@ -42,8 +42,8 @@ export default function AllMovies() {
     }
 
     function filterMovies(data){
-        var nowShowing = [];
-        var comingSoon = [];
+        let nowShowing = [];
+        let comingSoon = [];
         data.map((post) => {
             if(post.showing){
                 nowShowing.push(post)
@@ -67,7 +67,7 @@ export default function AllMovies() {
 
     function filterByGenre(e, type){
         let genreText = e;
-        if(type == 1){
+        if(type === 1){
             let filteredContent = nowShowingDataHolder.filter((post) =>
                 post.genre.toLowerCase().includes(genreText.toLowerCase())
             )
@@ -105,7 +105,7 @@ export default function AllMovies() {
     function searchMovie(e, type){
         let searchText = e;
 
-        if(type == 1){
+        if(type === 1){
             let filteredContent = nowShowingDataHolder.filter((post) =>
                 post.name.toLowerCase().includes(searchText.toLowerCase())
             )

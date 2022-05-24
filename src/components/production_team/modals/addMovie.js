@@ -327,7 +327,10 @@ export default function AddMovie() {
                                         >
                                             Ratings
                                         </label>
-                                        <div className="dropdown" id="drop">
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <div className="dropdown custom-dropdown" id="drop">
                                             <button
                                                 className="btn dropdown-toggle"
                                                 type="button"
@@ -402,7 +405,7 @@ export default function AddMovie() {
                                             </ul>
                                         </div>
                                     </div>
-
+                                    <br/>
                                     <button
                                         className="btn-sm refresh-btn"
                                         type="button"

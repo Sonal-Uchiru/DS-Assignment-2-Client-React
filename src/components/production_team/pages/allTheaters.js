@@ -114,7 +114,7 @@ export default function AllTheaters() {
                                 onClick={() =>
                                     navigate(`/theater/${theater.id}`)
                                 }
-                                className="streched-link col"
+                                className="stretched-link col"
                             >
                                 <TheaterCard theater={theater} />
                             </div>

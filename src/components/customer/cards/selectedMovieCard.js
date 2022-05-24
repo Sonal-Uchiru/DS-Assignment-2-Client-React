@@ -33,7 +33,6 @@ export default function SelectedMovieCard(props) {
 
     let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
 
-    //Payhere
 
 
     useEffect(()=> {
@@ -47,18 +46,18 @@ export default function SelectedMovieCard(props) {
 
 
 
-    function showAlerts(type, text){
+    async function showAlerts(type, text){
         // type 1 = success, type 2 = error, type 3 = update success
-        if(type == 1){
-            Swal.fire({
+        if(type === 1){
+            await Swal.fire({
                 position: "center",
                 icon: "success",
                 title: text,
                 showConfirmButton: false,
                 timer: 1500,
             });
-        }else if(type == 2){
-            Swal.fire({
+        }else if(type === 2){
+           await Swal.fire({
                 icon: "error",
                 title: "Oops...",
                 text: text,
@@ -76,11 +75,11 @@ export default function SelectedMovieCard(props) {
 
 
     function checkValidity(type){
-        if(adultTicket == ""){
+        if(adultTicket === ""){
             setErrorText("You should buy at least one adult ticket")
         }else{
             setErrorText("")
-            if(type == 1)
+            if(type === 1)
                 addToCart()
             else
                 buyTicket()

@@ -15,7 +15,6 @@ import SelectedMovie from './components/customer/pages/selectedMovie'
 import {Private} from './private/protected_route'
 import Footer from "./components/navigation/footer";
 import AuthenticationSignIn from "./components/authentication_components/authenticationSignIn";
-import AddMovie from "./components/production_team/modals/addMovie";
 
 function App() {
     return (
