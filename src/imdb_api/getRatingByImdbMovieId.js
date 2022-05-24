@@ -3,7 +3,7 @@ import axios from 'axios'
 export default function GetRatingByImdbMovieId(imdb_id) {
     return new Promise((resolve, reject) => {
         axios({
-            url: 'https://imdb-api.com/en/API/UserRatings/k_2mwz5ful/'+imdb_id,
+            url: 'https://imdb-api.com/en/API/UserRatings/k_nwjqjhqf/'+imdb_id,
             method: 'GET',
         })
             .then((res) => {

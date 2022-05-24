@@ -7,7 +7,7 @@ import Example from '../../external_components/loading'
 import LoadingDiv from '../../external_components/loading'
 import StripeCheckout from 'react-stripe-checkout'
 import Swal from 'sweetalert2'
-import {ticketConfirmationEmail} from "../../../email_service/emailServices";
+import { ticketConfirmationEmail } from '../../../email_service/emailServices'
 
 export default function MovieCart() {
     const [cartItems, setCartItems] = useState([])
@@ -17,7 +17,7 @@ export default function MovieCart() {
     const [totalPrice, setTotalPrice] = useState(0)
     const [loadingStatus, setLoadingStatus] = useState(false)
     const [noShowingTxt, setNoShowingTxt] = useState('')
-    const [emptyCartStatus,setEmptyCartStatus] = useState(true)
+    const [emptyCartStatus, setEmptyCartStatus] = useState(true)
     useEffect(() => {
         axios({
             url: 'http://localhost:8093/api/carts',
@@ -26,15 +26,13 @@ export default function MovieCart() {
         })
             .then((res) => {
                 setLoadingStatus(true)
-                if(res.data.length > 0) {
+                if (res.data.length > 0) {
                     setCartItems(res.data)
                     setDuplicateCartItems(res.data)
                     calculateTotal(res.data)
-                }else{
+                } else {
                     setEmptyCartStatus(false)
                 }
-
-
             })
             .catch((err) => {
                 console.log(err)
@@ -42,7 +40,7 @@ export default function MovieCart() {
     }, [])
 
     function handleSearch(userIn) {
-        if(cartItems.length > 0){
+        if (cartItems.length > 0) {
             setLoadingStatus(false)
             setNoShowingTxt('')
             const result = duplicateCartItems.filter(
@@ -62,7 +60,6 @@ export default function MovieCart() {
             setLoadingStatus(true)
             setCartItems(result)
         }
-
     }
 
     function calculateTotal(cartItems) {
@@ -106,10 +103,10 @@ export default function MovieCart() {
             headers: { 'x-auth-token': userToken },
         })
             .then(async (res) => {
-                res.data.map(async (item,index) => {
+                res.data.map(async (item, index) => {
                     await saveReservationDB(item)
                     await removeItemFromCart(item)
-                    if(res.data.length === index + 1) {
+                    if (res.data.length === index + 1) {
                         window.location.reload()
                     }
                 })
@@ -118,7 +115,6 @@ export default function MovieCart() {
                 console.log(err)
             })
     }
-
 
     function saveReservationDB(item) {
         const date = new Date()
@@ -170,7 +166,7 @@ export default function MovieCart() {
     function removeItemFromCart(item) {
         return new Promise(async (resolve, reject) => {
             await axios({
-                url: 'http://localhost:8093/api/carts/'+item.cart.id,
+                url: 'http://localhost:8093/api/carts/' + item.cart.id,
                 method: 'DELETE',
                 headers: { 'x-auth-token': userToken },
             })
@@ -187,12 +183,10 @@ export default function MovieCart() {
     async function sendConfirmationEmail() {
         const emailContent = {
             email: 'sonal123326@gmail.com',
-            totalPrice
+            totalPrice,
         }
         await ticketConfirmationEmail(emailContent)
-            .then((res) => {
-
-            })
+            .then((res) => {})
             .catch((err) => {
                 console.log(err)
             })
@@ -256,12 +250,16 @@ export default function MovieCart() {
 
             <div hidden={emptyCartStatus}>
                 <div className="d-flex justify-content-center">
-                    <img src="https://i.pinimg.com/originals/81/c4/fc/81c4fc9a4c06cf57abf23606689f7426.jpg" alt = "emptyCartIcon"/>
+                    <img
+                        src="https://i.pinimg.com/originals/81/c4/fc/81c4fc9a4c06cf57abf23606689f7426.jpg"
+                        alt="emptyCartIcon"
+                    />
                 </div>
 
-                <h4 className="text-danger text-center"><b>Your Cart is Empty</b></h4>
+                <h4 className="text-danger text-center">
+                    <b>Your Cart is Empty</b>
+                </h4>
             </div>
-
 
             <div className="containerrrr d-flex justify-content-center flex-nowrap">
                 <div className="row parent">

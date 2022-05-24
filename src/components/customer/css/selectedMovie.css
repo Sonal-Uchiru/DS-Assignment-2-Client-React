@@ -12,6 +12,13 @@
 .SelectedMovie .batman{
     width: 100%;
     height: 600px;
+    object-fit: contain;
+
+}
+
+.SelectedMovie .custom-container{
+    background-color: #000023;
+    border-radius: 10px;
 }
 
 .SelectedMovie .story{

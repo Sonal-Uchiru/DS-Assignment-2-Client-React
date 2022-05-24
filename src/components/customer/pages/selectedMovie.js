@@ -100,7 +100,10 @@ export default function SelectedMovie() {
         <div className="SelectedMovie">
 
             <h1 className="movieName">{movieData.name}</h1>
-            <img src={mainImage} className="img-fluid batman" alt="Responsive image"/>
+            <div className= "container custom-container">
+                <img src={mainImage} className="img-fluid batman" alt="Responsive image"/>
+            </div>
+
 
             <div hidden = {!loadingStatus}  >
                 <h2 className="story"> Story Line</h2>

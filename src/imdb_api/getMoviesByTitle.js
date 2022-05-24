@@ -3,7 +3,7 @@ import axios from 'axios'
 export function GetMoviesByTitle(title) {
     return new Promise((resolve, reject) => {
         axios({
-            url: 'https://imdb-api.com/en/API/SearchTitle/k_2mwz5ful/' + title,
+            url: 'https://imdb-api.com/en/API/SearchTitle/k_nwjqjhqf/' + title,
             method: 'GET',
         })
             .then((res) => {

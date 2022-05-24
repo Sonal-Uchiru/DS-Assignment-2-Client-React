@@ -79,13 +79,14 @@ export default function SelectedMovieCard(props) {
         }
     }
 
-    function addToCart() {
+    async function addToCart() {
         let cartObj = {
             show_time_id: showTimeID,
             child_tickets: childTicket,
             adult_tickets: adultTicket,
         }
-        axios({
+
+        await axios({
             url: 'http://localhost:8093/api/carts',
             method: 'POST',
             headers: { 'x-auth-token': userToken },
@@ -113,9 +114,31 @@ export default function SelectedMovieCard(props) {
         setShowTimeID(showTimeID)
     }
 
-    function checkPayment(token, address) {
-        console.log(token)
-        console.log(address)
+    async function checkPayment(token, address) {
+        await addToReservation()
+    }
+
+    async function addToReservation() {
+        let date = new Date()
+        const content = {
+            show_time_id: showTimeID,
+            reserved_date: date.toString(),
+            reserved_on: date.toString(),
+            child_tickets: childTicket,
+            adult_tickets: adultTicket,
+        }
+        await axios({
+            url: 'http://localhost:8093/api/reservations',
+            method: 'POST',
+            headers: { 'x-auth-token': userToken },
+            data: content,
+        })
+            .then((res) => {
+                showAlerts(1, 'Payment Successful!')
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     return (
@@ -208,7 +231,7 @@ export default function SelectedMovieCard(props) {
                                                     onClick={() =>
                                                         assignModalData(
                                                             post.show_time,
-                                                            post.show_time
+                                                            post.id
                                                         )
                                                     }
                                                 >
