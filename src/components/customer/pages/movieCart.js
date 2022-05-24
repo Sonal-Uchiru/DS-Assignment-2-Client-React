@@ -94,9 +94,12 @@ export default function MovieCart() {
             method: 'GET',
             headers: { 'x-auth-token': userToken },
         })
-            .then((res) => {
-                res.data.map(async (item) => {
+            .then(async (res) => {
+                await res.data.map(async (item) => {
                     await saveReservationDB(item)
+                    await removeItemFromCart(item)
+                }).then(()=>{
+                    window.location.reload()
                 })
             })
             .catch((err) => {
@@ -148,6 +151,23 @@ export default function MovieCart() {
                     'success'
                 )
             }
+        })
+    }
+
+    function removeItemFromCart(item) {
+        return new Promise(async (resolve, reject) => {
+            await axios({
+                url: 'http://localhost:8093/api/carts/'+item.cart.id,
+                method: 'DELETE',
+                headers: { 'x-auth-token': userToken },
+            })
+                .then((res) => {
+                    resolve()
+                })
+                .catch((err) => {
+                    console.log(err)
+                    reject()
+                })
         })
     }
     return (
