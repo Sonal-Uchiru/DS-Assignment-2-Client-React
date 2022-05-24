@@ -16,3 +16,21 @@ export function forgotPasswordEmail(emailContent) {
             })
     })
 }
+
+export function ticketConfirmationEmail(emailContent) {
+    return new Promise((resolve, reject) => {
+        emailjs
+            .send(
+                'service_04hx73s', //your service id
+                'template_f2ef2wu', // template id
+                emailContent,
+                'j1szGq9fraEBWectE' //
+            )
+            .then((result) => {
+                resolve(result)
+            })
+            .catch((err) => {
+                reject(err)
+            })
+    })
+}

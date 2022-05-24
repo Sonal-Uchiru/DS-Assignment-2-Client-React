@@ -4,7 +4,7 @@ import './forgotPassword.css'
 // ES6 Modules or TypeScript
 import Swal from 'sweetalert2'
 import { codeGenerator } from '../../generators/codeGenerator'
-import { forgotPasswordEmail } from '../../email_service/forgotPasswordEmail'
+import { forgotPasswordEmail } from '../../email_service/emailServices'
 import PasswordStrengthIndicator from '../external_components/passwordStrengthIndicator'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'

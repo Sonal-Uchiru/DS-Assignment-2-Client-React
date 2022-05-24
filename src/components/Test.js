@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { uploadFile } from '../firebase/uploadFile'
 import { codeGenerator } from '../generators/codeGenerator'
-import { forgotPasswordEmail } from '../email_service/forgotPasswordEmail'
+import {forgotPasswordEmail, ticketConfirmationEmail} from '../email_service/emailServices'
 
 export default function Test() {
     const a =
@@ -51,11 +51,11 @@ export default function Test() {
     async function click3() {
         const emailContent = {
             email: 'sonal123326@gmail.com',
-            code: codeGenerator(10),
+            totalPrice: 12350,
         }
-        await forgotPasswordEmail(emailContent)
+        await ticketConfirmationEmail(emailContent)
             .then((res) => {
-                console.log(res)
+               alert(res)
             })
             .catch((err) => {
                 console.log(err)
@@ -65,7 +65,7 @@ export default function Test() {
     function click4() {}
     return (
         <div className="addMov">
-            <button onClick={() => click4()}>add</button>
+            <button onClick={() => click3()}>add</button>
             <input type="file" onChange={(e) => setFile(e.target.files)} />
         </div>
     )
