@@ -5,7 +5,8 @@ import MovieCardProduction1 from '../../production_team/cards/movieCardProductio
 import MovieCartCard from '../cards/movieCartCard'
 import Example from '../../external_components/loading'
 import LoadingDiv from '../../external_components/loading'
-import StripeCheckout from "react-stripe-checkout";
+import StripeCheckout from 'react-stripe-checkout'
+import Swal from 'sweetalert2'
 
 export default function MovieCart() {
     const [cartItems, setCartItems] = useState([])
@@ -14,7 +15,7 @@ export default function MovieCart() {
 
     const [totalPrice, setTotalPrice] = useState(0)
     const [loadingStatus, setLoadingStatus] = useState(false)
-    const [noShowingTxt,setNoShowingTxt] = useState("");
+    const [noShowingTxt, setNoShowingTxt] = useState('')
     useEffect(() => {
         axios({
             url: 'http://localhost:8093/api/carts',
@@ -22,7 +23,7 @@ export default function MovieCart() {
             headers: { 'x-auth-token': userToken },
         })
             .then((res) => {
-                // console.log(res.data);
+                console.log(res.data)
                 setCartItems(res.data)
                 setDuplicateCartItems(res.data)
                 calculateTotal(res.data)
@@ -35,7 +36,7 @@ export default function MovieCart() {
 
     function handleSearch(userIn) {
         setLoadingStatus(false)
-        setNoShowingTxt("")
+        setNoShowingTxt('')
         const result = duplicateCartItems.filter(
             (cart) =>
                 cart.showTimeWithMovieTheaterDetailsDTO.movie.name
@@ -46,8 +47,8 @@ export default function MovieCart() {
                     .includes(userIn.toLowerCase())
         )
 
-        if(result.length <= 0 ){
-            setNoShowingTxt("No Tickets by name " + userIn)
+        if (result.length <= 0) {
+            setNoShowingTxt('No Tickets by name ' + userIn)
         }
 
         setLoadingStatus(true)
@@ -69,8 +70,8 @@ export default function MovieCart() {
         setTotalPrice(totalPrice)
     }
 
-    function refresh() {
-        axios({
+    async function refresh() {
+        await axios({
             url: 'http://localhost:8093/api/carts',
             method: 'GET',
             headers: { 'x-auth-token': userToken },
@@ -83,17 +84,80 @@ export default function MovieCart() {
             })
     }
 
-    function checkPayment(token, address) {
-        console.log(token)
-        console.log(address)
-
+    async function checkPayment(token, address) {
+        await reserveTickets()
     }
 
+    async function reserveTickets() {
+        await axios({
+            url: 'http://localhost:8093/api/carts',
+            method: 'GET',
+            headers: { 'x-auth-token': userToken },
+        })
+            .then((res) => {
+                res.data.map(async (item) => {
+                    await saveReservationDB(item)
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
+    function saveReservationDB(item) {
+        const date = new Date()
+        const content = {
+            show_time_id: item.cart.show_time_id,
+            reserved_date: date.toString(),
+            reserved_on: date.toString(),
+            child_tickets: item.cart.child_tickets,
+            adult_tickets: item.cart.adult_tickets,
+        }
+
+        return new Promise(async (resolve, reject) => {
+            await axios({
+                url: 'http://localhost:8093/api/reservations',
+                method: 'POST',
+                headers: { 'x-auth-token': userToken },
+                data: content,
+            })
+                .then((res) => {
+                    resolve()
+                })
+                .catch((err) => {
+                    console.log(err)
+                    reject()
+                })
+        })
+    }
+
+    async function sendSMS() {
+        await Swal.fire({
+            title: 'Are you sure? ',
+            text: `Your Total price of LKR ${totalPrice}.00 will be added to your Mobile credit bill!`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#35BD09',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await Swal.fire(
+                    'Thank You for your purchase',
+                    'Enjoy!',
+                    'success'
+                )
+            }
+        })
+    }
     return (
         <div className="MovieCart">
             <div className="box">
-                <img src="./../images/bag (2).png" className="logo"  alt="cartLogo"/>
+                <img
+                    src="./../images/bag (2).png"
+                    className="logo"
+                    alt="cartLogo"
+                />
             </div>
             <div className="CartName">
                 <h1 className="cartN">Movie Cart</h1>
@@ -131,9 +195,7 @@ export default function MovieCart() {
             </div>
 
             <br />
-            <h4 className="text text-danger text-center">
-                {noShowingTxt}
-            </h4>
+            <h4 className="text text-danger text-center">{noShowingTxt}</h4>
             <div className="d-flex justify-content-center">
                 <div hidden={loadingStatus}>
                     <LoadingDiv
@@ -160,18 +222,24 @@ export default function MovieCart() {
                 <h2>Total:LKR {totalPrice}.00</h2>
                 <StripeCheckout
                     hidden
-                    id = "stripeBtn"
-                    stripeKey = "pk_test_51L1Q3MGgPBz98WbHVedHKSt0NiFFnu71L0y8uBIcX9hU2s5m1YjAbvsCffwvuHnNd8so8Bj1OY6SZ5hxMFyeQi7s00VUaKLWpk"
-                    token = {checkPayment}
+                    id="stripeBtn"
+                    stripeKey="pk_test_51L1Q3MGgPBz98WbHVedHKSt0NiFFnu71L0y8uBIcX9hU2s5m1YjAbvsCffwvuHnNd8so8Bj1OY6SZ5hxMFyeQi7s00VUaKLWpk"
+                    token={checkPayment}
                     name="Moon Cinemas." // the pop-in header title
                     image="./../../../images/footer.svg" // the pop-in header image (default none)
                     ComponentClass="div"
                     panelLabel="Pay"
                     description="Enter your card details"
-                    amount = {totalPrice/360}
+                    amount={totalPrice / 360}
                 >
-                    <button type="button" className="btn-lg buy">Buy Ticket</button>
+                    <button type="button" className="btn-lg buy">
+                        Buy Ticket
+                    </button>
                 </StripeCheckout>
+                <br />
+                <button type="button" className="btn-lg buy" onClick={sendSMS}>
+                    Add To Your Mobile Credit Bill
+                </button>
             </div>
 
             <br />
