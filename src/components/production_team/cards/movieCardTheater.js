@@ -13,7 +13,6 @@ export default function MovieCardTheater(props) {
     let movieDetails = props.movieDetails;
     let showTimeDetails = props.showTimeDetails;
     let [showTimeStatus, setShowTimeStatus] = useState('');
-    let [mainImage, setMainImage] = useState("https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg")
     let [ratings, setRatings] = useState("")
 
 
@@ -34,7 +33,6 @@ export default function MovieCardTheater(props) {
 
         getMovieDetails()
         setMovieObj()
-        setMainImage(movieDetails.image)
     }, [])
 
     useEffect(()=> {
@@ -59,8 +57,6 @@ export default function MovieCardTheater(props) {
                 }).then((res) => {
                     showAlerts(1, "Show time deleted successfully")
                     props.getDetailsFunction2()
-
-
                 }).catch(async (err) => {
                     await showAlerts(2, err)
 
@@ -243,12 +239,13 @@ export default function MovieCardTheater(props) {
                 data:  movieObj
             }).then((res)=>{
                 showAlerts(1, "Show time updated successfully")
-                document.getElementById('closeModalBtn2').click()
                 props.getDetailsFunction2()
             }).catch((err) => {
                 alert(err);
                 showAlerts(2, err)
             })
+            // document.getElementById('closeModalBtn2').click()
+
         }
 
         if(selectedMovie == ""){
@@ -283,11 +280,12 @@ export default function MovieCardTheater(props) {
         <div className="MovieCardTheater">
             <div className="card">
                 <h3 className="text-center time">{showTimeDetails.show_time}</h3>
-                <img src={mainImage} className="card-img-top" alt="..."/>
+                <img src={movieDetails.image} className="card-img-top" alt="..."/>
                 <div className="card-body">
                     <div className="row">
                         <div className="col-8">
                             <h4 className="card-title">{movieDetails.name}</h4>
+
                         </div>
 
                         <div className="col-4">

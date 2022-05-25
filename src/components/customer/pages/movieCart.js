@@ -107,6 +107,7 @@ export default function MovieCart() {
                     await saveReservationDB(item)
                     await removeItemFromCart(item)
                     if (res.data.length === index + 1) {
+                        showAlerts(1, 'Payment successfull')
                         window.location.reload()
                     }
                 })
@@ -114,6 +115,26 @@ export default function MovieCart() {
             .catch((err) => {
                 console.log(err)
             })
+    }
+
+    function showAlerts(type, text){
+        // type 1 = success, type 2 = error, type 3 = update success
+        if(type == 1){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: text,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }else if(type == 2){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: text,
+                footer: '<p style = "color : #D0193A">Currently unavailable!',
+            });
+        }
     }
 
     function saveReservationDB(item) {

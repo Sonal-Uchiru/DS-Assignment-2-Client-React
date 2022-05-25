@@ -41,6 +41,20 @@ export default function MovieCardProduction1(props) {
 
     const [imdbMovies, setImdbMovies] = useState([])
 
+    useEffect(()=> {
+        getImdbRatings(movieDetails.imdb_key)
+    })
+
+    async function getImdbRatings(key){
+        await GetRating(key).then((res)=>{
+            console.log(res)
+            setRatings(res)
+        }).catch((err)=> {
+            showAlerts(2, err)
+        })
+    }
+
+
     function handleDecrement() {
         if (hours > 0) {
             setHours((prevCount) => prevCount - 1)
@@ -153,6 +167,26 @@ export default function MovieCardProduction1(props) {
                     text: 'Something went wrong!',
                 })
             })
+    }
+
+    function showAlerts(type, text){
+        // type 1 = success, type 2 = error, type 3 = update success
+        if(type == 1){
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: text,
+                showConfirmButton: false,
+                timer: 1500,
+            });
+        }else if(type == 2){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: text,
+                footer: '<p style = "color : #D0193A">Currently unavailable!',
+            });
+        }
     }
 
     return (

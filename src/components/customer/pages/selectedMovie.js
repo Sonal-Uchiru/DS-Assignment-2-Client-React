@@ -66,6 +66,7 @@ export default function SelectedMovie() {
             console.log(res.data)
             if(res.data.length > 0){
                 setTheaterDetails(res.data)
+                console.log(res.data)
                 setNoShowTime("")
             }else{
                 setNoShowTime("No showtimes available")

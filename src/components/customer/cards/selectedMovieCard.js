@@ -36,7 +36,7 @@ export default function SelectedMovieCard(props) {
     )
 
     useEffect(() => {
-        setMainImage(movieDetails.image)
+        setMainImage(theaterDetails.image)
     }, [])
 
     useEffect(() => {
@@ -157,7 +157,7 @@ export default function SelectedMovieCard(props) {
                         <div className="col-md-8">
                             <div className="card-body">
                                 <h2 className="card-title">
-                                    {movieDetails.name}
+                                    {theaterDetails.name}
                                 </h2>
                                 <br />
                                 <h4 className="location">
@@ -214,33 +214,45 @@ export default function SelectedMovieCard(props) {
                             </div>
                             <div className="row parent">
                                 {showTimeDetails.map((post) => {
+
                                     return (
-                                        <div key={post.id} className="columns">
-                                            <div className="crd">
-                                                <p className="dtil">
-                                                    Screen Time:{' '}
-                                                    {post.show_time}
-                                                </p>
-                                                <p className="dtil">
-                                                    Available Seats: 50
-                                                </p>
-                                                <button
-                                                    type="button"
-                                                    className="btn btn-primary btnB"
-                                                    data-toggle="modal"
-                                                    data-target="#exampleModal"
-                                                    onClick={() =>
-                                                        assignModalData(
-                                                            post.show_time,
-                                                            post.id
-                                                        )
-                                                    }
-                                                >
-                                                    Buy Ticket
-                                                </button>
-                                                {/*<button type="button" className="btnB">Buy tickets</button>*/}
+                                        post.status === 1?
+                                            <div key={post.id} className="columns">
+                                                <div className="crd">
+                                                    <p className="dtil">
+                                                        Screen Time:{' '}
+                                                        {post.show_time}
+                                                    </p>
+                                                    <p className="dtil">
+                                                        Available Seats: 50
+                                                    </p>
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-primary btnB"
+                                                        data-toggle="modal"
+                                                        data-target="#exampleModal"
+                                                        onClick={() =>
+                                                            assignModalData(
+                                                                post.show_time,
+                                                                post.id
+                                                            )
+                                                        }
+                                                    >
+                                                        Buy Ticket
+                                                    </button>
+
+                                                </div>
                                             </div>
-                                        </div>
+                                            :
+                                            <div key={post.id} className="columns">
+                                                <div className="crd">
+                                                    <p className="dtil text-danger">
+                                                        Movie at {post.show_time} is not available right now!
+                                                    </p>
+
+                                                </div>
+                                            </div>
+
                                     )
                                 })}
                             </div>

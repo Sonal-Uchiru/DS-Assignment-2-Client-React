@@ -20,6 +20,12 @@ export default function Reservation() {
                 headers: { 'x-auth-token': userToken },
             })
                 .then((res) => {
+
+                    if(res.data.length >0){
+                        setSearchError('')
+                    }else{
+                        setSearchError('No reservations available')
+                    }
                     setReservedMovies(res.data)
                     setDuplicateMovies(res.data)
                     setLoadingStatus(true)
