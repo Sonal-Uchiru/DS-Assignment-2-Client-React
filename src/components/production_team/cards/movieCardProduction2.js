@@ -384,7 +384,8 @@ export default function MovieCardProduction2(props) {
                                                 readOnly
                                             />
                                         </div>
-                                        <div className="imdb-container-dropdown">
+
+                                        <div className="imdb-container-dropdown container-dropdown-imdb">
                                             <label
                                                 htmlFor="rating"
                                                 className="form-label rate"
@@ -484,7 +485,8 @@ export default function MovieCardProduction2(props) {
                                                 </ul>
                                             </div>
                                         </div>
-
+                                        <br />
+                                        <br />
                                         <button
                                             className="btn-sm refresh-btn"
                                             type="button"
@@ -495,6 +497,7 @@ export default function MovieCardProduction2(props) {
                                             </span>{' '}
                                             Refresh
                                         </button>
+
                                         <div className="ratingContainer">
                                             <img
                                                 src="./../images/imdb.png"

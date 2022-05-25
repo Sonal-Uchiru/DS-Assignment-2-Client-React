@@ -224,12 +224,17 @@ export default function AllMovies() {
         }
     }
 
+    async function refresh(){
+        setLoadingStatus(false)
+        await getAllMovies();
+    }
+
     return (
         <div className="AllMovies">
             <h1 className="Nowshow">NOW SHOWING</h1>
             <br/>
 
-            <AddMovie/>
+            <AddMovie refreshFunction = {refresh}/>
             <br/><br/>
 
             <div className="main">
