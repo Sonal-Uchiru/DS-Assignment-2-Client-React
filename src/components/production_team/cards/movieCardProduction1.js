@@ -12,16 +12,13 @@ import Example from '../../external_components/loading'
 
 export default function MovieCardProduction1(props) {
     let movieDetails = props.details
-    let userToken =
-        'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng'
-
+    let userToken = localStorage.getItem('moon-cinema-token')
     let [movieImage, setMovieImage] = useState(
         'https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg'
     )
     let [ratings, setRatings] = useState('')
 
-    const token =
-        'eyJhbGciOiJIUzUxMiJ9.eyJ0b2tlbl9leHBpcmF0aW9uX2RhdGUiOjE2NTIyMzYyMTAxNzYsInVzZXJJRCI6IjYyNzc4OTc0NWUwZmUzMWFjMjhmODkyMyIsInVzZXJuYW1lIjoiSGltYWFtYXNzc3NzZCIsInRva2VuX2NyZWF0ZV9kYXRlIjp7ImhvdXIiOjIwLCJtaW51dGUiOjAsInNlY29uZCI6MTAsIm5hbm8iOjE3NTAwMDAwMCwiZGF5T2ZZZWFyIjoxMjgsImRheU9mV2VlayI6IlNVTkRBWSIsIm1vbnRoIjoiTUFZIiwiZGF5T2ZNb250aCI6OCwieWVhciI6MjAyMiwibW9udGhWYWx1ZSI6NSwiY2hyb25vbG9neSI6eyJpZCI6IklTTyIsImNhbGVuZGFyVHlwZSI6Imlzbzg2MDEifX19.pXjKM7rAsmc3Zj2TifZeLYRQ5FrSBJ1qdBrfCmrbbPzitO_F1drMBgPnKlvL1FkMa1u7rB_17M84EDSLrQn5Ng'
+    const token = localStorage.getItem('moon-cinema-token')
     const [hours, setHours] = useState(
         parseInt(movieDetails.duration.split('h', 1)[0])
     )
@@ -87,7 +84,6 @@ export default function MovieCardProduction1(props) {
     }
 
     async function saveMovieDB() {
-
         const content = {
             name,
             image,
@@ -99,7 +95,7 @@ export default function MovieCardProduction1(props) {
             showing: document.getElementById('status').value === 'Now Showing',
         }
         axios({
-            url: 'http://localhost:8093/api/movies/'+movieDetails.id,
+            url: 'http://localhost:8093/api/movies/' + movieDetails.id,
             method: 'PUT',
             headers: {
                 'x-auth-token': token,
@@ -265,7 +261,10 @@ export default function MovieCardProduction1(props) {
                             </div>
                             <div className="modal-body">
                                 <div className="container">
-                                    <form id="updateForm" onSubmit={updateMovie}>
+                                    <form
+                                        id="updateForm"
+                                        onSubmit={updateMovie}
+                                    >
                                         <span>
                                             <center>
                                                 <div className="box">
@@ -542,7 +541,9 @@ export default function MovieCardProduction1(props) {
                                                 name="language"
                                                 id="language"
                                                 required
-                                                defaultValue={movieDetails.language}
+                                                defaultValue={
+                                                    movieDetails.language
+                                                }
                                                 onChange={(e) =>
                                                     setLanguage(e.target.value)
                                                 }
@@ -576,7 +577,9 @@ export default function MovieCardProduction1(props) {
                                                 name="genre"
                                                 id="genre"
                                                 required
-                                                defaultValue={movieDetails.genre}
+                                                defaultValue={
+                                                    movieDetails.genre
+                                                }
                                                 onChange={(e) =>
                                                     setGenre(e.target.value)
                                                 }
@@ -677,7 +680,11 @@ export default function MovieCardProduction1(props) {
                                     >
                                         Delete
                                     </button>
-                                    <button type="submit" form = "updateForm" className="btn5">
+                                    <button
+                                        type="submit"
+                                        form="updateForm"
+                                        className="btn5"
+                                    >
                                         Update
                                     </button>
                                 </div>

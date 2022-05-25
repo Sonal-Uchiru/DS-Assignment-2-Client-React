@@ -13,6 +13,7 @@ export default function SelectedMovieCard(props) {
     let movieDetails = props.movieDetails
     let userToken = localStorage.getItem('moon-cinema-token')
 
+
     let [showTime, setShowTime] = useState('')
     let [viewMore, setviewMore] = useState(false)
     let [viewMoreHidden, setViewMoreHidden] = useState(true)
