@@ -40,7 +40,7 @@ export default function MovieCart() {
     }, [])
 
     function handleSearch(userIn) {
-        if (cartItems.length > 0) {
+        if (cartItems.length >= 0) {
             setLoadingStatus(false)
             setNoShowingTxt('')
             const result = duplicateCartItems.filter(
@@ -55,7 +55,11 @@ export default function MovieCart() {
 
             if (result.length <= 0) {
                 setNoShowingTxt('No Tickets by name ' + userIn)
+            }else {
+                setNoShowingTxt('')
+
             }
+
 
             setLoadingStatus(true)
             setCartItems(result)
@@ -117,23 +121,23 @@ export default function MovieCart() {
             })
     }
 
-    function showAlerts(type, text){
+    function showAlerts(type, text) {
         // type 1 = success, type 2 = error, type 3 = update success
-        if(type == 1){
+        if (type == 1) {
             Swal.fire({
-                position: "center",
-                icon: "success",
+                position: 'center',
+                icon: 'success',
                 title: text,
                 showConfirmButton: false,
                 timer: 1500,
-            });
-        }else if(type == 2){
+            })
+        } else if (type == 2) {
             Swal.fire({
-                icon: "error",
-                title: "Oops...",
+                icon: 'error',
+                title: 'Oops...',
                 text: text,
                 footer: '<p style = "color : #D0193A">Currently unavailable!',
-            });
+            })
         }
     }
 

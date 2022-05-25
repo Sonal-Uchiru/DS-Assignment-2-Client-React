@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import './../css/theaterCard.css'
+import {useNavigate} from "react-router-dom";
 
 export default function TheaterCard({ theater }) {
+    let navigate = useNavigate()
     return (
         <div className="TheaterCard">
             <div className="card">
@@ -15,7 +17,14 @@ export default function TheaterCard({ theater }) {
                     </div>
                     <p className="text">{theater.location}</p>
                 </div>
+                <button
+                    className="btn btn-warning text-light"
+                    onClick={() => navigate(`/theater/${theater.id}`)}
+                >
+                    <b>View More</b>
+                </button>
             </div>
+
         </div>
     )
 }

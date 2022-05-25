@@ -101,7 +101,7 @@ export default function AuthenticationSignUp() {
                 await Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Username or Password Already exists',
+                    text: 'Username or Email Already exists',
                 })
                 setLoadingStatus(true)
             })
@@ -244,6 +244,7 @@ export default function AuthenticationSignUp() {
                                         onChange={(e) => {
                                             setNic(e.target.value)
                                         }}
+                                        maxLength={12}
                                         required
                                     />
                                 </div>
@@ -276,7 +277,7 @@ export default function AuthenticationSignUp() {
                                         Mobile Number
                                     </label>
                                     <input
-                                        type="text"
+                                        type="number"
                                         id="mobile"
                                         onKeyUp={preventWhiteSpace}
                                         className="form-control form-control-lg"
@@ -285,6 +286,7 @@ export default function AuthenticationSignUp() {
                                             setMobilePhoneNumber(e.target.value)
                                         }}
                                         required
+                                        maxLength = {10}
                                     />
                                 </div>
 

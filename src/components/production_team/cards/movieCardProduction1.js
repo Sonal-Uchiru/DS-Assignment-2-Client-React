@@ -12,7 +12,6 @@ import Example from '../../external_components/loading'
 
 export default function MovieCardProduction1(props) {
     let movieDetails = props.details
-    let userToken = localStorage.getItem('moon-cinema-token')
     let [movieImage, setMovieImage] = useState(
         'https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image.jpg'
     )
@@ -41,19 +40,20 @@ export default function MovieCardProduction1(props) {
 
     const [imdbMovies, setImdbMovies] = useState([])
 
-    useEffect(()=> {
+    useEffect(() => {
         getImdbRatings(movieDetails.imdb_key)
     })
 
-    async function getImdbRatings(key){
-        await GetRating(key).then((res)=>{
-            console.log(res)
-            setRatings(res)
-        }).catch((err)=> {
-            showAlerts(2, err)
-        })
+    async function getImdbRatings(key) {
+        await GetRating(key)
+            .then((res) => {
+               // console.log(res)
+                setRatings(res)
+            })
+            .catch((err) => {
+                showAlerts(2, err)
+            })
     }
-
 
     function handleDecrement() {
         if (hours > 0) {
@@ -98,17 +98,18 @@ export default function MovieCardProduction1(props) {
     }
 
     async function saveMovieDB() {
-        const content = {
+        let content = {
             name,
             image,
-            duration: document.getElementById('duration').value,
+            'duration': `${hours}h ${minutes}min`,
             genre,
             story_line,
             language,
             imdb_key,
-            showing: document.getElementById('status').value === 'Now Showing',
+            'showing' : true,
         }
-        axios({
+        console.log(content)
+        await axios({
             url: 'http://localhost:8093/api/movies/' + movieDetails.id,
             method: 'PUT',
             headers: {
@@ -119,6 +120,7 @@ export default function MovieCardProduction1(props) {
             .then(async (res) => {
                 setSaveMovieDBLoading(true)
                 await Swal.fire('Updated!', '', 'success')
+                props.functionReload()
             })
             .catch(async (err) => {
                 await Swal.fire({
@@ -169,23 +171,23 @@ export default function MovieCardProduction1(props) {
             })
     }
 
-    function showAlerts(type, text){
+    function showAlerts(type, text) {
         // type 1 = success, type 2 = error, type 3 = update success
-        if(type == 1){
+        if (type == 1) {
             Swal.fire({
-                position: "center",
-                icon: "success",
+                position: 'center',
+                icon: 'success',
                 title: text,
                 showConfirmButton: false,
                 timer: 1500,
-            });
-        }else if(type == 2){
+            })
+        } else if (type == 2) {
             Swal.fire({
-                icon: "error",
-                title: "Oops...",
+                icon: 'error',
+                title: 'Oops...',
                 text: text,
                 footer: '<p style = "color : #D0193A">Currently unavailable!',
-            });
+            })
         }
     }
 
@@ -424,7 +426,7 @@ export default function MovieCardProduction1(props) {
                                                 type="text"
                                                 className="form-control"
                                                 id="duration"
-                                                Value={
+                                                value={
                                                     hours +
                                                     'h ' +
                                                     minutes +

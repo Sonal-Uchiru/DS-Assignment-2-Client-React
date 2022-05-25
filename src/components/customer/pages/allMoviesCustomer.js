@@ -244,8 +244,7 @@ export default function AllMoviesCustomer() {
                         return (
                             <div
                                 key={post.id}
-                                className="columns stretched-link"
-                                onClick={() => navigate('/movie/' + post.id)}
+                                className="columns"
                             >
                                 <h4 hidden>{post.id}</h4>
                                 <MovieCardCustomer1 details={post} />
@@ -361,10 +360,8 @@ export default function AllMoviesCustomer() {
                     </h4>
                     {comingSoon.map((post) => {
                         return (
-                            <div key={post.id}  onClick={() => navigate('/movie/' + post.id)}  className="stretched-link columns">
+                            <div key={post.id}  className="columns">
                                 <MovieCardCustomer2 details={post} />
-                                <h4 hidden>{post.id}</h4>
-
                             </div>
                         )
                     })}

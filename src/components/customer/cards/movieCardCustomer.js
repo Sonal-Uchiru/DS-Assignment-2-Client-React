@@ -3,9 +3,11 @@ import axios from "axios";
 import "./../css/movieCardCustomer.css"
 import GetRating from "./../../../imdb_api/getRatingByImdbMovieId"
 import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
 
 export default function MovieCardCustomer1(props) {
     let [ratings, setRatings] = useState("")
+    let navigate = useNavigate()
 
     useEffect(()=> {
         getImdbRatings(props.details.imdb_key)
@@ -63,6 +65,12 @@ export default function MovieCardCustomer1(props) {
                     <br/>
                 </div>
                 <br/>
+                <button
+                    className="btn btn-warning text-light"
+                    onClick={() => navigate('/movie/' + props.details.id)}
+                >
+                    <b>View More</b>
+                </button>
             </div>
         </div>
 
